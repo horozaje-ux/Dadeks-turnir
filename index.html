@@ -306,7 +306,7 @@
       btn.classList.add('active');
     }
 
-    // linkovi za svako godište
+    // LINKOVI ZA SVAKO GODIŠTE
     const GEN_URLS = {
       "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
       "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
@@ -315,11 +315,11 @@
     };
 
     function changeGeneration(gen) {
-      // tekst
+      // promijeni tekst
       var txt = document.getElementById('selected-gen-text');
       txt.innerHTML = 'Odabrano godište: <strong>' + gen + '</strong>';
 
-      // promjena iframe linka
+      // promijeni iframe src
       var iframe = document.getElementById('teams-iframe');
       iframe.src = GEN_URLS[gen];
     }
