@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dadeks turnir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d4ed8, #020617);
+      color: #f9fafb;
+    }
+
+    .app {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    header img.logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: #020617;
+      padding: 4px;
+    }
+
+    header h1 {
+      margin: 0 0 4px;
+      font-size: 26px;
+    }
+
+    header p.sub {
+      margin: 0;
+      opacity: 0.85;
+      font-size: 14px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #020617;
+      font-size: 13px;
+      border: 1px solid #1d4ed8;
+    }
+
+    /* TABOVI */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 24px 0 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #1d4ed8;
+      color: #f9fafb;
+      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.3);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* KARTICA S IFRAMOM */
+    .card {
+      background: #020617;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(37, 99, 235, 0.6);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #cbd5f5;
+      margin-bottom: 10px;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: 460px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Red ispod za info */
+    .helper-text {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 12px;
+    }
+
+    /* Select za godište */
+    .gen-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    select {
+      background: #020617;
+      color: #e5e7eb;
+      border-radius: 999px;
+      border: 1px solid #1d4ed8;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .iframe-wrapper {
+        height: 380px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <img src="logo.png" alt="Dadeks turnir logo" class="logo" />
+      <div>
+        <h1>Dadeks Turnir</h1>
+        <p class="sub">Tradicionalni turnir povodom Dana oslobođenja Podgorice</p>
+        <div class="pill-row">
+          <span class="pill">📅 19–21. decembar</span>
+          <span class="pill">📍 Podgorica</span>
+          <span class="pill">📞 069 313 817</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAV TABOVI -->
+    <nav class="tabs">
+      <button class="tab-btn active" onclick="openTab('info', this)">Info</button>
+      <button class="tab-btn" onclick="openTab('raspored', this)">Raspored</button>
+      <button class="tab-btn" onclick="openTab('rezultati', this)">Rezultati</button>
+      <button class="tab-btn" onclick="openTab('tabele', this)">Tabele</button>
+      <button class="tab-btn" onclick="openTab('timovi', this)">Timovi</button>
+      <button class="tab-btn" onclick="openTab('lokacije', this)">Lokacije</button>
+      <button class="tab-btn" onclick="openTab('kontakt', this)">Kontakt</button>
+    </nav>
+
+    <!-- INFO -->
+    <section class="tab-content active" id="info">
+      <div class="card">
+        <h2>Osnovne informacije</h2>
+        <p>Dobrodošli na <strong>Dadeks turnir</strong> povodom Dana oslobođenja Podgorice. Na jednom mjestu okupljamo najbolje ekipe mlađih kategorija.</p>
+        <p class="helper-text">Koristi tabove iznad da pogledaš raspored, rezultate, tabele i timove po godištima.</p>
+      </div>
+    </section>
+
+    <!-- RASPORED -->
+    <section class="tab-content" id="raspored">
+      <div class="card">
+        <h2>Raspored utakmica</h2>
+        <div class="iframe-wrapper">
+          <iframe
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=0&single=true&widget=true&headers=false">
+          </iframe>
+        </div>
+        <p class="helper-text">Raspored uređuješ u Google Sheets dokumentu (list „Raspored“). Svaka promjena se odmah vidi ovdje.</p>
+      </div>
+    </section>
+
+    <!-- REZULTATI -->
+    <section class="tab-content" id="rezultati">
+      <div class="card">
+        <h2>Rezultati</h2>
+        <div class="iframe-wrapper">
+          <iframe
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=2133224638&single=true&widget=true&headers=false">
+          </iframe>
+        </div>
+        <p class="helper-text">Rezultate unosiš u Google Sheets (list „Rezultati“).</p>
+      </div>
+    </section>
+
+    <!-- TABELE -->
+    <section class="tab-content" id="tabele">
+      <div class="card">
+        <h2>Tabele</h2>
+        <p>Ovde po želji možeš dodati tabele ili ostaviti prazno ako se ne koristi.</p>
+      </div>
+    </section>
+
+    <!-- TIMOVI – SVAKO GODIŠTE SVOJ SHEET -->
+    <section class="tab-content" id="timovi">
+      <div class="card">
+        <h2>Timovi po godištima</h2>
+
+        <div class="gen-row">
+          <p class="hint" id="selected-gen-text">Odabrano godište: <strong>2015</strong></p>
+
+          <label class="hint">
+            Izaberi godište:
+            <select id="gen-select" onchange="changeGeneration(this.value)">
+              <option value="2015" selected>2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="iframe-wrapper">
+          <!-- početni iframe za 2015 -->
+          <iframe
+            id="teams-iframe"
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false">
+          </iframe>
+        </div>
+
+        <p class="helper-text">
+          Timove dodaješ u Google Sheets (listovi „Godiste 2015“, „Godiste 2016“, „Godiste 2017“, „Godiste 2018“).
+          Svaka promjena se automatski vidi u aplikaciji.
+        </p>
+      </div>
+    </section>
+
+    <!-- LOKACIJE -->
+    <section class="tab-content" id="lokacije">
+      <div class="card">
+        <h2>Lokacije turnira</h2>
+        <p>Ovde možeš dodati mapu ili opis terena (Dadeks, FSCG, Kamp, itd.).</p>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="tab-content" id="kontakt">
+      <div class="card">
+        <h2>Kontakt</h2>
+        <p>Za sve informacije o turniru: <br>
+          📞 069 313 817 <br>
+          📧 horozaje@hotmail.com
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // prebacivanje tabova
+    function openTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(function (el) {
+        el.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+
+      document.querySelectorAll('.tab-btn').forEach(function (b) {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
+    }
+
+    // linkovi za svako godište (OVDE MIJENJAŠ gid= ZA 2016/2017/2018 KAD OBJAVIŠ TE SHEETOVE)
+    const GEN_URLS = {
+      "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+
+      // kad u Google Sheets uradiš Publish to web za „Godiste 2016“,
+      // samo ZAMIJENI OVAJ LINK onim novim (biće isti 2PACX, ali drugi gid=...)
+      "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+
+      // isto za 2017
+      "2017": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+
+      // i za 2018
+      "2018": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
+    };
+
+    function changeGeneration(gen) {
+      // tekst
+      var txt = document.getElementById('selected-gen-text');
+      txt.innerHTML = 'Odabrano godište: <strong>' + gen + '</strong>';
+
+      // promjena iframe linka
+      var iframe = document.getElementById('teams-iframe');
+      iframe.src = GEN_URLS[gen];
+    }
+  </script>
+</body>
+</html>
