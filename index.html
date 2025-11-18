@@ -8,8 +8,9 @@
   <style>
     :root {
       --bg-dark: #020617;
-      --blue: #1d4ed8;
-      --blue-light: #3b82f6;
+      --bg-card: #020617;
+      --accent: #1d4ed8;
+      --accent-soft: rgba(37, 99, 235, 0.6);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
     }
@@ -21,41 +22,26 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d4ed8, #020617);
       color: var(--text-main);
-      background: radial-gradient(circle at top, #1e40af, #020617);
-      min-height: 100vh;
-      animation: gradient-move 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes gradient-move {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 100% 50%; }
     }
 
     .app {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 16px 12px 32px;
     }
-
-    /* HEADER */
 
     header {
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-bottom: 24px;
-      animation: header-fade 0.8s ease-out;
-    }
-
-    @keyframes header-fade {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      margin-bottom: 20px;
     }
 
     header img.logo {
-      width: 72px;
-      height: 72px;
+      width: 68px;
+      height: 68px;
       border-radius: 18px;
       background: var(--bg-dark);
       padding: 4px;
@@ -64,19 +50,19 @@
 
     header h1 {
       margin: 0 0 4px;
-      font-size: 26px;
+      font-size: 24px;
     }
 
     header p.sub {
       margin: 0;
-      opacity: 0.85;
-      font-size: 14px;
+      opacity: 0.9;
+      font-size: 13px;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
       margin-top: 10px;
     }
 
@@ -84,114 +70,113 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 6px 11px;
       border-radius: 999px;
-      background: rgba(2, 6, 23, 0.9);
-      font-size: 13px;
-      border: 1px solid rgba(59, 130, 246, 0.7);
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.7);
+      background: rgba(2, 6, 23, 0.85);
+      font-size: 12px;
+      border: 1px solid var(--accent-soft);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.9);
+      white-space: nowrap;
     }
 
     /* TABOVI */
-
     .tabs {
       display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 8px;
-      margin: 24px 0 16px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
-      padding-bottom: 8px;
-      scrollbar-width: none;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 20px 0 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      padding-bottom: 6px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.96), transparent);
+      padding-top: 4px;
     }
-    .tabs::-webkit-scrollbar { display: none; }
 
     .tab-btn {
       border: none;
       background: transparent;
       color: #e5e7eb;
-      padding: 8px 14px;
+      padding: 7px 13px;
       border-radius: 999px;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.15s ease, transform 0.12s ease;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
     }
 
     .tab-btn:hover {
-      background: rgba(30, 64, 175, 0.4);
+      background: rgba(37, 99, 235, 0.3);
       transform: translateY(-1px);
     }
 
     .tab-btn.active {
-      background: var(--blue);
+      background: var(--accent);
       color: var(--text-main);
-      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.5),
-                  0 10px 30px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.45), 0 10px 28px rgba(15, 23, 42, 0.9);
     }
 
     .tab-content {
       display: none;
-      animation: tab-fade 0.2s ease-out;
+      opacity: 0;
+      transform: translateY(6px);
     }
 
     .tab-content.active {
       display: block;
+      animation: fadeIn 0.26s ease-out forwards;
     }
 
-    @keyframes tab-fade {
-      from { opacity: 0; transform: translateY(4px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* KARTICE */
-
+    /* KARTICA */
     .card {
-      background: rgba(2, 6, 23, 0.98);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.28), rgba(15, 23, 42, 0.98));
       border-radius: 18px;
-      padding: 16px;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(37, 99, 235, 0.6);
-      backdrop-filter: blur(10px);
+      padding: 14px 14px 16px;
+      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--accent-soft);
     }
 
     .card h2 {
       margin-top: 0;
       margin-bottom: 8px;
-      font-size: 20px;
+      font-size: 19px;
     }
 
     .hint {
-      font-size: 13px;
+      font-size: 12px;
       color: #cbd5f5;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .iframe-wrapper {
       position: relative;
       width: 100%;
-      height: 460px;
+      height: 430px;
       border-radius: 12px;
       overflow: hidden;
-      background: #020617;
+      background: var(--bg-dark);
     }
 
     .iframe-wrapper iframe {
       width: 100%;
       height: 100%;
       border: none;
+      background: var(--bg-dark);
     }
 
     .helper-text {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
-    /* REDOVI SA SELECT-om */
-
-    .gen-row,
-    .tables-row {
+    /* Select za godište */
+    .gen-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -201,61 +186,90 @@
     }
 
     select {
-      background: #020617;
+      background: rgba(2, 6, 23, 0.95);
       color: #e5e7eb;
       border-radius: 999px;
-      border: 1px solid #1d4ed8;
-      padding: 6px 12px;
-      font-size: 14px;
-      max-width: 100%;
+      border: 1px solid var(--accent-soft);
+      padding: 6px 11px;
+      font-size: 13px;
+      outline: none;
+      min-width: 120px;
     }
 
-    .badge-live {
-      display: inline-flex;
+    /* Faza eliminacije (live/QF/SF/F) */
+    .phase-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .phase-buttons {
+      display: flex;
+      flex-wrap: wrap;
       gap: 6px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: rgba(220, 38, 38, 0.15);
-      border: 1px solid rgba(248, 113, 113, 0.7);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
-    .dot-live {
-      width: 8px;
-      height: 8px;
+    .phase-btn {
+      border: none;
       border-radius: 999px;
-      background: #ef4444;
-      animation: pulse 1.2s infinite;
+      padding: 6px 10px;
+      font-size: 12px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
     }
 
-    @keyframes pulse {
-      0%   { transform: scale(1);   opacity: 1; }
-      50%  { transform: scale(1.6); opacity: 0.4; }
-      100% { transform: scale(1);   opacity: 1; }
+    .phase-btn:hover {
+      background: rgba(37, 99, 235, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .phase-btn.active {
+      background: var(--accent);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.9);
     }
 
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
+      .app {
+        padding: 10px 10px 24px;
       }
+
+      header {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 21px;
+      }
+
       .iframe-wrapper {
         height: 380px;
       }
     }
 
-    @media (max-width: 480px) {
-      .app {
-        padding: 16px 10px 32px;
+    @media (max-width: 540px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
       }
-      header h1 {
-        font-size: 22px;
+
+      .pill-row {
+        gap: 5px;
       }
+
+      .tabs {
+        position: static;
+        border-bottom: none;
+        margin-top: 14px;
+      }
+
       .iframe-wrapper {
-        height: 320px;
+        height: 360px;
       }
     }
   </style>
@@ -280,8 +294,9 @@
       <button class="tab-btn active" onclick="openTab('info', this)">Info</button>
       <button class="tab-btn" onclick="openTab('raspored', this)">Raspored</button>
       <button class="tab-btn" onclick="openTab('rezultati', this)">Rezultati</button>
-      <button class="tab-btn" onclick="openTab('tabele', this)">Tabele / završnica</button>
+      <button class="tab-btn" onclick="openTab('tabele', this)">Tabele</button>
       <button class="tab-btn" onclick="openTab('timovi', this)">Timovi</button>
+      <button class="tab-btn" onclick="openTab('live', this)">Live score</button>
       <button class="tab-btn" onclick="openTab('lokacije', this)">Lokacije</button>
       <button class="tab-btn" onclick="openTab('kontakt', this)">Kontakt</button>
     </nav>
@@ -295,7 +310,7 @@
           Na jednom mjestu okupljamo najbolje ekipe mlađih kategorija.
         </p>
         <p class="helper-text">
-          Koristi tabove iznad da pogledaš raspored, rezultate, tabele, završnicu turnira i timove po godištima.
+          Koristi tabove iznad da pogledaš raspored, rezultate, tabele, timove po godištima i uživo praćenje završnice turnira.
         </p>
       </div>
     </section>
@@ -315,7 +330,7 @@
       </div>
     </section>
 
-    <!-- REZULTATI (klasični rezultati po grupama / kolu) -->
+    <!-- REZULTATI -->
     <section class="tab-content" id="rezultati">
       <div class="card">
         <h2>Rezultati</h2>
@@ -330,52 +345,17 @@
       </div>
     </section>
 
-    <!-- TABELE / LIVE SCORE / QF / SF / F -->
+    <!-- TABELE (grupna faza ili što god treba) -->
     <section class="tab-content" id="tabele">
       <div class="card">
-        <h2>Tabele i završnica</h2>
-
-        <div class="tables-row">
-          <p class="hint" id="selected-table-text">
-            Trenutni prikaz: <strong>Grupe (sve generacije)</strong>
-          </p>
-
-          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-            <label class="hint" style="display:flex;align-items:center;gap:6px;">
-              Izaberi prikaz:
-              <select id="table-select" onchange="changeTableView(this.value)">
-                <option value="groups" selected>Grupe (tabele)</option>
-                <option value="live">Live score</option>
-                <option value="qf">Četvrtfinale (QF)</option>
-                <option value="sf">Polufinale (SF)</option>
-                <option value="f">Finale (F)</option>
-              </select>
-            </label>
-
-            <span class="badge-live">
-              <span class="dot-live"></span>
-              live score
-            </span>
-          </div>
-        </div>
-
-        <div class="iframe-wrapper">
-          <!-- početni prikaz: grupne tabele -->
-          <iframe
-            id="tables-iframe"
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=2133224638&single=true&widget=true&headers=false">
-          </iframe>
-        </div>
-
+        <h2>Tabele</h2>
         <p class="helper-text">
-          • „Grupe“ prikazuje sve tabele po generacijama. <br>
-          • „Live score“ je live modul – rezultat se osvježava čim promijeniš podatke u Google Sheets „Live score“. <br>
-          • QF / SF / F su posebne tabele za četvrtfinale, polufinale i finale svih generacija.
+          Po potrebi ovdje možeš dodati posebne tabele (na primjer ukupni poredak po generacijama).
         </p>
       </div>
     </section>
 
-    <!-- TIMOVI – GODIŠTA 2015–2018 -->
+    <!-- TIMOVI – SVAKO GODIŠTE SVOJ SHEET -->
     <section class="tab-content" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -395,7 +375,6 @@
         </div>
 
         <div class="iframe-wrapper">
-          <!-- početni iframe za 2015 -->
           <iframe
             id="teams-iframe"
             src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false">
@@ -404,7 +383,34 @@
 
         <p class="helper-text">
           Timove dodaješ u Google Sheets (listovi „Godiste 2015“, „Godiste 2016“, „Godiste 2017“, „Godiste 2018“).
-          Svaka promjena se automatski vidi u aplikaciji.
+          Kad izmijeniš podatke u tabelama, sve se automatski osvježava ovdje.
+        </p>
+      </div>
+    </section>
+
+    <!-- LIVE SCORE + QF/SF/F -->
+    <section class="tab-content" id="live">
+      <div class="card">
+        <div class="phase-row">
+          <h2>Live score i završnica turnira</h2>
+          <div class="phase-buttons">
+            <button class="phase-btn active" onclick="changePhase('live', this)">Live score</button>
+            <button class="phase-btn" onclick="changePhase('qf', this)">Četvrtfinale</button>
+            <button class="phase-btn" onclick="changePhase('sf', this)">Polufinale</button>
+            <button class="phase-btn" onclick="changePhase('f', this)">Finale</button>
+          </div>
+        </div>
+
+        <div class="iframe-wrapper">
+          <iframe
+            id="live-iframe"
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1224715353&single=true&widget=true&headers=false">
+          </iframe>
+        </div>
+
+        <p class="helper-text">
+          Svi rezultati završnice (live score, četvrtfinala, polufinala i finala) unose se u posebne listove
+          „Live score“, „QF“, „SF“ i „F“ u istom Google Sheets dokumentu.
         </p>
       </div>
     </section>
@@ -413,7 +419,9 @@
     <section class="tab-content" id="lokacije">
       <div class="card">
         <h2>Lokacije turnira</h2>
-        <p>Ovde možeš dodati mapu ili opis terena (Dadeks, FSCG, Kamp, itd.).</p>
+        <p>
+          Ovde možeš dodati mapu ili opis terena (Dadeks, FSCG, Kamp i ostalo).
+        </p>
       </div>
     </section>
 
@@ -422,8 +430,8 @@
       <div class="card">
         <h2>Kontakt</h2>
         <p>
-          Za sve informacije o turniru: <br>
-          📞 069 313 817 <br>
+          Za sve informacije o turniru: <br />
+          📞 069 313 817<br />
           📧 horozaje@hotmail.com
         </p>
       </div>
@@ -444,16 +452,12 @@
       btn.classList.add('active');
     }
 
-    // TIMOVI – linkovi za svako godište
+    // URL-ovi za timove po godištima
     const GEN_URLS = {
-      "2015":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-      "2016":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
-      "2017":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
-      "2018":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false"
+      "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+      "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
+      "2017": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
+      "2018": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false"
     };
 
     function changeGeneration(gen) {
@@ -464,34 +468,22 @@
       iframe.src = GEN_URLS[gen];
     }
 
-    // TABELE / LIVE SCORE / QF / SF / F
-    const TABLE_URLS = {
-      "groups":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=2133224638&single=true&widget=true&headers=false",
-      "live":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1224715353&single=true&widget=true&headers=false",
-      "qf":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true&widget=true&headers=false",
-      "sf":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true&widget=true&headers=false",
-      "f":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=533875103&single=true&widget=true&headers=false"
+    // URL-ovi za live / QF / SF / F
+    const PHASE_URLS = {
+      "live": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1224715353&single=true&widget=true&headers=false",
+      "qf":   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true&widget=true&headers=false",
+      "sf":   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true&widget=true&headers=false",
+      "f":    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=533875103&single=true&widget=true&headers=false"
     };
 
-    const TABLE_LABELS = {
-      "groups": "Grupe (sve generacije)",
-      "live": "Live score",
-      "qf": "Četvrtfinale (QF)",
-      "sf": "Polufinale (SF)",
-      "f": "Finale (F)"
-    };
+    function changePhase(phase, btn) {
+      var iframe = document.getElementById('live-iframe');
+      iframe.src = PHASE_URLS[phase];
 
-    function changeTableView(key) {
-      var iframe = document.getElementById('tables-iframe');
-      iframe.src = TABLE_URLS[key];
-
-      var txt = document.getElementById('selected-table-text');
-      txt.innerHTML = 'Trenutni prikaz: <strong>' + TABLE_LABELS[key] + '</strong>';
+      document.querySelectorAll('.phase-btn').forEach(function (b) {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
     }
   </script>
 </body>
