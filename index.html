@@ -9,16 +9,15 @@
     :root {
       --bg-dark: #020617;
       --bg-card: #020617;
-      --accent: #1d4ed8;
-      --accent-soft: rgba(37, 99, 235, 0.6);
+      --primary: #1d4ed8;
+      --primary-soft: rgba(37, 99, 235, 0.6);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
+      --pill-bg: #020617;
     }
-
-    * {
+ {
       box-sizing: border-box;
-    }
-
+    } 
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -37,15 +36,18 @@
       align-items: center;
       gap: 16px;
       margin-bottom: 20px;
+      animation: slideDown 0.6s ease-out;
     }
 
     header img.logo {
-      width: 68px;
-      height: 68px;
+      width: 70px;
+      height: 70px;
       border-radius: 18px;
-      background: var(--bg-dark);
+      background: #020617;
       padding: 4px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.6),
+                  0 10px 25px rgba(15, 23, 42, 0.8);
+      object-fit: contain;
     }
 
     header h1 {
@@ -55,118 +57,89 @@
 
     header p.sub {
       margin: 0;
-      opacity: 0.9;
-      font-size: 13px;
+      opacity: 0.85;
+      font-size: 14px;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 8px;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 11px;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(2, 6, 23, 0.85);
+      background: var(--pill-bg);
       font-size: 12px;
-      border: 1px solid var(--accent-soft);
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--primary);
       white-space: nowrap;
     }
 
-    /* TABOVI */
+    /* TABOVI /
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin: 20px 0 14px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+      gap: 8px;
+      margin: 18px 0 12px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
       padding-bottom: 6px;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.96), transparent);
-      padding-top: 4px;
     }
 
     .tab-btn {
       border: none;
       background: transparent;
       color: #e5e7eb;
-      padding: 7px 13px;
+      padding: 8px 12px;
       border-radius: 999px;
       font-size: 13px;
       cursor: pointer;
-      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      transition: background 0.2s, transform 0.1s;
     }
 
     .tab-btn:hover {
-      background: rgba(37, 99, 235, 0.3);
+      background: rgba(37, 99, 235, 0.25);
       transform: translateY(-1px);
     }
 
     .tab-btn.active {
-      background: var(--accent);
+      background: var(--primary);
       color: var(--text-main);
-      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.45), 0 10px 28px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.3);
     }
 
     .tab-content {
       display: none;
-      opacity: 0;
-      transform: translateY(6px);
+      animation: fadeIn 0.25s ease-out;
     }
 
     .tab-content.active {
       display: block;
-      animation: fadeIn 0.26s ease-out forwards;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* KARTICA */
+    / KARTICE /
     .card {
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.28), rgba(15, 23, 42, 0.98));
+      background: var(--bg-card);
       border-radius: 18px;
-      padding: 14px 14px 16px;
-      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--accent-soft);
+      padding: 14px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--primary-soft);
     }
 
     .card h2 {
       margin-top: 0;
       margin-bottom: 8px;
-      font-size: 19px;
+      font-size: 18px;
     }
 
     .hint {
-      font-size: 12px;
+      font-size: 13px;
       color: #cbd5f5;
       margin-bottom: 8px;
-    }
-
-    .iframe-wrapper {
-      position: relative;
-      width: 100%;
-      height: 430px;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-dark);
-    }
-
-    .iframe-wrapper iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      background: var(--bg-dark);
     }
 
     .helper-text {
@@ -175,316 +148,213 @@
       margin-top: 10px;
     }
 
-    /* Select za godište */
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: 430px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #020617;
+      margin-top: 4px;
+    }
+
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    / LIVE SCORE LAYOUT /
+    .live-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr);
+      gap: 12px;
+    }
+
+    .live-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .live-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .match-list {
+      max-height: 240px;
+      overflow: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 6px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .match-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 4px;
+      border-radius: 6px;
+    }
+
+    .match-item:nth-child(2n) {
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .match-item label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .match-name {
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .match-score {
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .match-status {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      cursor: pointer;
+    }
+
+    / SUB TABOVI ZA QF/SF/F /
+    .sub-tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .sub-tab-btn {
+      border: none;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .sub-tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary-soft);
+    }
+
+    .sub-tab-pane {
+      display: none;
+    }
+
+    .sub-tab-pane.active {
+      display: block;
+    }
+
+    / SELECT GODIŠTE /
     .gen-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
 
     select {
-      background: rgba(2, 6, 23, 0.95);
+      background: #020617;
       color: #e5e7eb;
       border-radius: 999px;
-      border: 1px solid var(--accent-soft);
-      padding: 6px 11px;
+      border: 1px solid #1d4ed8;
+      padding: 6px 12px;
       font-size: 13px;
-      outline: none;
-      min-width: 120px;
     }
 
-    /* Faza eliminacije (live/QF/SF/F) */
-    .phase-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .phase-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .phase-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      cursor: pointer;
-      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .phase-btn:hover {
-      background: rgba(37, 99, 235, 0.4);
-      transform: translateY(-1px);
-    }
-
-    .phase-btn.active {
-      background: var(--accent);
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.9);
-    }
-
-    @media (max-width: 768px) {
-      .app {
-        padding: 10px 10px 24px;
-      }
-
+    / RESPONSIVE */
+    @media (max-width: 600px) {
       header {
         flex-direction: row;
         align-items: center;
       }
 
-      header h1 {
-        font-size: 21px;
-      }
-
-      .iframe-wrapper {
-        height: 380px;
-      }
-    }
-
-    @media (max-width: 540px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .pill-row {
-        gap: 5px;
-      }
-
-      .tabs {
-        position: static;
-        border-bottom: none;
-        margin-top: 14px;
+      .app {
+        padding: 12px 10px 24px;
       }
 
       .iframe-wrapper {
         height: 360px;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="app">
-    <header>
-      <img src="logo.png" alt="Dadeks turnir logo" class="logo" />
-      <div>
-        <h1>Dadeks Turnir</h1>
-        <p class="sub">Tradicionalni turnir povodom Dana oslobođenja Podgorice</p>
-        <div class="pill-row">
-          <span class="pill">📅 19–21. decembar</span>
-          <span class="pill">📍 Podgorica</span>
-          <span class="pill">📞 069 313 817</span>
-        </div>
-      </div>
-    </header>
 
-    <!-- NAV TABOVI -->
-    <nav class="tabs">
-      <button class="tab-btn active" onclick="openTab('info', this)">Info</button>
-      <button class="tab-btn" onclick="openTab('raspored', this)">Raspored</button>
-      <button class="tab-btn" onclick="openTab('rezultati', this)">Rezultati</button>
-      <button class="tab-btn" onclick="openTab('tabele', this)">Tabele</button>
-      <button class="tab-btn" onclick="openTab('timovi', this)">Timovi</button>
-      <button class="tab-btn" onclick="openTab('live', this)">Live score</button>
-      <button class="tab-btn" onclick="openTab('lokacije', this)">Lokacije</button>
-      <button class="tab-btn" onclick="openTab('kontakt', this)">Kontakt</button>
-    </nav>
+      .live-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
 
-    <!-- INFO -->
-    <section class="tab-content active" id="info">
-      <div class="card">
-        <h2>Osnovne informacije</h2>
-        <p>
-          Dobrodošli na <strong>Dadeks turnir</strong> povodom Dana oslobođenja Podgorice.
-          Na jednom mjestu okupljamo najbolje ekipe mlađih kategorija.
-        </p>
-        <p class="helper-text">
-          Koristi tabove iznad da pogledaš raspored, rezultate, tabele, timove po godištima i uživo praćenje završnice turnira.
-        </p>
-      </div>
-    </section>
-
-    <!-- RASPORED -->
-    <section class="tab-content" id="raspored">
-      <div class="card">
-        <h2>Raspored utakmica</h2>
-        <div class="iframe-wrapper">
-          <iframe
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=0&single=true&widget=true&headers=false">
-          </iframe>
-        </div>
-        <p class="helper-text">
-          Raspored uređuješ u Google Sheets dokumentu (list „Raspored“). Svaka promjena se odmah vidi ovdje.
-        </p>
-      </div>
-    </section>
-
-    <!-- REZULTATI -->
-    <section class="tab-content" id="rezultati">
-      <div class="card">
-        <h2>Rezultati</h2>
-        <div class="iframe-wrapper">
-          <iframe
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=2133224638&single=true&widget=true&headers=false">
-          </iframe>
-        </div>
-        <p class="helper-text">
-          Rezultate unosiš u Google Sheets (list „Rezultati“).
-        </p>
-      </div>
-    </section>
-
-    <!-- TABELE (grupna faza ili što god treba) -->
-    <section class="tab-content" id="tabele">
-      <div class="card">
-        <h2>Tabele</h2>
-        <p class="helper-text">
-          Po potrebi ovdje možeš dodati posebne tabele (na primjer ukupni poredak po generacijama).
-        </p>
-      </div>
-    </section>
-
-    <!-- TIMOVI – SVAKO GODIŠTE SVOJ SHEET -->
-    <section class="tab-content" id="timovi">
-      <div class="card">
-        <h2>Timovi po godištima</h2>
-
-        <div class="gen-row">
-          <p class="hint" id="selected-gen-text">Odabrano godište: <strong>2015</strong></p>
-
-          <label class="hint">
-            Izaberi godište:
-            <select id="gen-select" onchange="changeGeneration(this.value)">
-              <option value="2015" selected>2015</option>
-              <option value="2016">2016</option>
-              <option value="2017">2017</option>
-              <option value="2018">2018</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="iframe-wrapper">
-          <iframe
-            id="teams-iframe"
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false">
-          </iframe>
-        </div>
-
-        <p class="helper-text">
-          Timove dodaješ u Google Sheets (listovi „Godiste 2015“, „Godiste 2016“, „Godiste 2017“, „Godiste 2018“).
-          Kad izmijeniš podatke u tabelama, sve se automatski osvježava ovdje.
-        </p>
-      </div>
-    </section>
-
-    <!-- LIVE SCORE + QF/SF/F -->
-    <section class="tab-content" id="live">
-      <div class="card">
-        <div class="phase-row">
-          <h2>Live score i završnica turnira</h2>
-          <div class="phase-buttons">
-            <button class="phase-btn active" onclick="changePhase('live', this)">Live score</button>
-            <button class="phase-btn" onclick="changePhase('qf', this)">Četvrtfinale</button>
-            <button class="phase-btn" onclick="changePhase('sf', this)">Polufinale</button>
-            <button class="phase-btn" onclick="changePhase('f', this)">Finale</button>
-          </div>
-        </div>
-
-        <div class="iframe-wrapper">
-          <iframe
-            id="live-iframe"
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1224715353&single=true&widget=true&headers=false">
-          </iframe>
-        </div>
-
-        <p class="helper-text">
-          Svi rezultati završnice (live score, četvrtfinala, polufinala i finala) unose se u posebne listove
-          „Live score“, „QF“, „SF“ i „F“ u istom Google Sheets dokumentu.
-        </p>
-      </div>
-    </section>
-
-    <!-- LOKACIJE -->
-    <section class="tab-content" id="lokacije">
-      <div class="card">
-        <h2>Lokacije turnira</h2>
-        <p>
-          Ovde možeš dodati mapu ili opis terena (Dadeks, FSCG, Kamp i ostalo).
-        </p>
-      </div>
-    </section>
-
-    <!-- KONTAKT -->
-    <section class="tab-content" id="kontakt">
-      <div class="card">
-        <h2>Kontakt</h2>
-        <p>
-          Za sve informacije o turniru: <br />
-          📞 069 313 817<br />
-          📧 horozaje@hotmail.com
-        </p>
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // TABOVI
-    function openTab(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(function (el) {
-        el.classList.remove('active');
-      });
-      document.getElementById(tabId).classList.add('active');
-
-      document.querySelectorAll('.tab-btn').forEach(function (b) {
-        b.classList.remove('active');
-      });
-      btn.classList.add('active');
+      .match-list {
+        max-height: 210px;
+      }
     }
 
-    // URL-ovi za timove po godištima
-    const GEN_URLS = {
-      "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-      "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
-      "2017": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
-      "2018": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false"
-    };
-
-    function changeGeneration(gen) {
-      var txt = document.getElementById('selected-gen-text');
-      txt.innerHTML = 'Odabrano godište: <strong>' + gen + '</strong>';
-
-      var iframe = document.getElementById('teams-iframe');
-      iframe.src = GEN_URLS[gen];
+    @keyframes slideDown {
+      from {
+        transform: translateY(-12px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
-    // URL-ovi za live / QF / SF / F
-    const PHASE_URLS = {
-      "live": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1224715353&single=true&widget=true&headers=false",
-      "qf":   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true&widget=true&headers=false",
-      "sf":   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true&widget=true&headers=false",
-      "f":    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=533875103&single=true&widget=true&headers=false"
-    };
-
-    function changePhase(phase, btn) {
-      var iframe = document.getElementById('live-iframe');
-      iframe.src = PHASE_URLS[phase];
-
-      document.querySelectorAll('.phase-btn').forEach(function (b) {
-        b.classList.remove('active');
-      });
-      btn.classList.add('active');
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-  </script>
-</body>
-</html>
+  </
