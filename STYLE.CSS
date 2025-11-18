@@ -1,0 +1,211 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #083d7d 0, #020816 55%, #000000 100%);
+  color: #f5f7ff;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 16px 12px 40px;
+}
+
+.header-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #0c4fa8, #041529);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+  margin-bottom: 12px;
+}
+
+.logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: radial-gradient(circle at top, #1fa2ff, #0b4ea2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-right: 12px;
+}
+
+.logo-circle img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.header-text h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.header-text p {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.subline {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 2px 14px;
+}
+
+.chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(12, 80, 180, 0.85);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #f5f7ff;
+  text-decoration: none;
+}
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding-bottom: 4px;
+}
+
+.tab {
+  flex: 1;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 6px;
+  font-size: 12px;
+  background: rgba(8, 35, 90, 0.8);
+  color: #c6d4ff;
+}
+
+.tab.active {
+  background: #1f6fff;
+  color: #fff;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card {
+  background: rgba(5, 20, 50, 0.95);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+}
+
+.pill-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.pill {
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(31, 111, 255, 0.9);
+  font-size: 12px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 6px 4px;
+}
+
+.table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+
+.hint {
+  font-size: 12px;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.footer {
+  margin-top: 18px;
+  font-size: 11px;
+  opacity: 0.7;
+  text-align: center;
+}
+.gen-box {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px;
+}
+
+.gen-box ul {
+  margin-top: 6px;
+  padding-left: 18px;
+}
+
+.gen-box li {
+  margin-bottom: 3px;
+}
+
+/* aktivna generacija – da se vidi koju si kliknuo */
+.gen-pill-active {
+  background: #1f6fff;
+  color: #ffffff;
+}
+​Sansa Rozaje​
+.sheet-wrapper {
+  margin-top: 10px;
+  background: rgba(5, 15, 40, 0.95);
+  border-radius: 14px;
+  border: 1px solid #1f355a;
+  overflow: hidden;
+  height: 380px; /* možeš povećati ako hoćeš veću tabelu */
+}
+
+.sheet-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
