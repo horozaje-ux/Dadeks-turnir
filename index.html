@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -16,14 +20,14 @@
     .app {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 16px 12px 32px;
     }
 
     header {
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     header img.logo {
@@ -41,7 +45,7 @@
 
     header p.sub {
       margin: 0;
-      opacity: 0.85;
+      opacity: 0.9;
       font-size: 14px;
     }
 
@@ -49,7 +53,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .pill {
@@ -58,19 +62,26 @@
       gap: 6px;
       padding: 6px 12px;
       border-radius: 999px;
-      background: #020617;
+      background: rgba(15, 23, 42, 0.95);
       font-size: 13px;
       border: 1px solid #1d4ed8;
+      box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
     }
 
     /* TABOVI */
+    .tabs-wrapper {
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin: 16px -12px 0;
+    }
+
     .tabs {
-      display: flex;
-      flex-wrap: wrap;
+      display: inline-flex;
+      flex-wrap: nowrap;
       gap: 8px;
-      margin: 24px 0 16px;
+      padding: 0 12px 8px;
       border-bottom: 1px solid rgba(148, 163, 184, 0.4);
-      padding-bottom: 8px;
+      min-width: 100%;
     }
 
     .tab-btn {
@@ -81,29 +92,39 @@
       border-radius: 999px;
       font-size: 14px;
       cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .tab-btn:hover {
+      background: rgba(15, 23, 42, 0.9);
+      transform: translateY(-1px);
     }
 
     .tab-btn.active {
       background: #1d4ed8;
       color: #f9fafb;
-      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.3);
+      box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.3),
+                  0 10px 25px rgba(15, 23, 42, 0.8);
     }
 
     .tab-content {
       display: none;
+      margin-top: 16px;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    /* KARTICA S IFRAMOM */
+    /* KARTICA */
     .card {
       background: #020617;
       border-radius: 18px;
       padding: 16px;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(37, 99, 235, 0.6);
+      animation: fadeInUp 0.35s ease-out;
     }
 
     .card h2 {
@@ -115,7 +136,7 @@
     .hint {
       font-size: 13px;
       color: #cbd5f5;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .iframe-wrapper {
@@ -127,6 +148,10 @@
       background: #020617;
     }
 
+    .iframe-wrapper.small {
+      height: 260px;
+    }
+
     .iframe-wrapper iframe {
       width: 100%;
       height: 100%;
@@ -136,10 +161,9 @@
     .helper-text {
       font-size: 12px;
       color: #9ca3af;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
-    /* Select za godište */
     .gen-row {
       display: flex;
       flex-wrap: wrap;
@@ -156,15 +180,80 @@
       border: 1px solid #1d4ed8;
       padding: 6px 12px;
       font-size: 14px;
+      max-width: 100%;
     }
 
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      color: #cbd5f5;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #b91c1c;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #fecaca;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    /* MOBILNI */
     @media (max-width: 600px) {
+      header {
+        flex-direction: row;
+        align-items: center;
+      }
+      header h1 {
+        font-size: 22px;
+      }
+      .app {
+        padding: 12px 10px 28px;
+      }
+      .iframe-wrapper {
+        height: 360px;
+      }
+    }
+
+    @media (max-width: 420px) {
       header {
         flex-direction: column;
         align-items: flex-start;
       }
+      .pill-row {
+        gap: 6px;
+      }
       .iframe-wrapper {
-        height: 380px;
+        height: 320px;
       }
     }
   </style>
@@ -185,22 +274,26 @@
     </header>
 
     <!-- NAV TABOVI -->
-    <nav class="tabs">
-      <button class="tab-btn active" onclick="openTab('info', this)">Info</button>
-      <button class="tab-btn" onclick="openTab('raspored', this)">Raspored</button>
-      <button class="tab-btn" onclick="openTab('rezultati', this)">Rezultati</button>
-      <button class="tab-btn" onclick="openTab('tabele', this)">Tabele</button>
-      <button class="tab-btn" onclick="openTab('timovi', this)">Timovi</button>
-      <button class="tab-btn" onclick="openTab('lokacije', this)">Lokacije</button>
-      <button class="tab-btn" onclick="openTab('kontakt', this)">Kontakt</button>
-    </nav>
+    <div class="tabs-wrapper">
+      <nav class="tabs">
+        <button class="tab-btn active" onclick="openTab('info', this)">Info</button>
+        <button class="tab-btn" onclick="openTab('raspored', this)">Raspored</button>
+        <button class="tab-btn" onclick="openTab('rezultati', this)">Rezultati</button>
+        <button class="tab-btn" onclick="openTab('tabele', this)">Tabele</button>
+        <button class="tab-btn" onclick="openTab('timovi', this)">Timovi</button>
+        <button class="tab-btn" onclick="openTab('zavrsnica', this)">Završnica</button>
+        <button class="tab-btn" onclick="openTab('live', this)">Live score</button>
+        <button class="tab-btn" onclick="openTab('lokacije', this)">Lokacije</button>
+        <button class="tab-btn" onclick="openTab('kontakt', this)">Kontakt</button>
+      </nav>
+    </div>
 
     <!-- INFO -->
     <section class="tab-content active" id="info">
       <div class="card">
         <h2>Osnovne informacije</h2>
         <p>Dobrodošli na <strong>Dadeks turnir</strong> povodom Dana oslobođenja Podgorice. Na jednom mjestu okupljamo najbolje ekipe mlađih kategorija.</p>
-        <p class="helper-text">Koristi tabove iznad da pogledaš raspored, rezultate, tabele i timove po godištima.</p>
+        <p class="helper-text">Koristi tabove iznad da pogledaš raspored, rezultate, tabele i timove po godištima, kao i završnicu turnira.</p>
       </div>
     </section>
 
@@ -230,11 +323,11 @@
       </div>
     </section>
 
-    <!-- TABELE -->
+    <!-- TABELE (grupna faza, po želji) -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabele</h2>
-        <p>Ovde po želji možeš dodati tabele ili ostaviti prazno ako se ne koristi.</p>
+        <p>Ovde možeš dodati tabele grupne faze ili dodatne statistike (poseban Google Sheet iframe po želji).</p>
       </div>
     </section>
 
@@ -272,6 +365,76 @@
       </div>
     </section>
 
+    <!-- ZAVRŠNICA – četvrtfinale / polufinale / finale -->
+    <section class="tab-content" id="zavrsnica">
+      <div class="card">
+        <h2>Završnica turnira</h2>
+        <p class="hint" id="knock-selected-text">
+          Odabrano: <strong>2015 – Četvrtfinale</strong>
+        </p>
+
+        <div class="gen-row">
+          <label>
+            Godište:
+            <select id="knock-gen" onchange="changeKnockout()">
+              <option value="2015" selected>2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
+          </label>
+
+          <label>
+            Faza:
+            <select id="knock-phase" onchange="changeKnockout()">
+              <option value="qf">Četvrtfinale</option>
+              <option value="sf">Polufinale</option>
+              <option value="f">Finale</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="iframe-wrapper">
+          <iframe
+            id="knock-iframe"
+            src="PUT_URL_2015_QF_OVDJE">
+          </iframe>
+        </div>
+
+        <p class="helper-text">
+          Napravi poseban Google Sheet za završnicu (ili više listova) i ovdje nalijepi linkove za svako godište i fazu.
+          Kad izmijeniš nešto u tabeli – odmah se vidi i ovdje.
+        </p>
+      </div>
+    </section>
+
+    <!-- LIVE SCORE -->
+    <section class="tab-content" id="live">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+          <h2 style="margin-bottom:4px;">Live score</h2>
+          <span class="live-badge">
+            <span class="live-dot"></span> Live
+          </span>
+        </div>
+
+        <p class="hint">
+          Rezultati uživo svih utakmica. Kad ažuriraš rezultat u Google Sheets dokumentu – nakon osvježavanja stranice vidi se i ovdje.
+        </p>
+
+        <div class="iframe-wrapper small">
+          <iframe
+            id="live-iframe"
+            src="PUT_LIVE_SCORE_SHEET_URL_OVDJE">
+          </iframe>
+        </div>
+
+        <p class="helper-text">
+          Napravi jedan Google Sheet npr. „Live score“ (tereni, vrijeme, timovi, rezultat) i koristi <em>Publish to web</em>, pa ovdje nalijepi iframe link.
+        </p>
+      </div>
+    </section>
+
     <!-- LOKACIJE -->
     <section class="tab-content" id="lokacije">
       <div class="card">
@@ -293,7 +456,7 @@
   </div>
 
   <script>
-    // prebacivanje tabova
+    // TABOVI
     function openTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(function (el) {
         el.classList.remove('active');
@@ -306,7 +469,7 @@
       btn.classList.add('active');
     }
 
-    // LINKOVI ZA SVAKO GODIŠTE
+    // LINKOVI ZA TIMOVE PO GODIŠTIMA
     const GEN_URLS = {
       "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
       "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
@@ -315,14 +478,53 @@
     };
 
     function changeGeneration(gen) {
-      // promijeni tekst
       var txt = document.getElementById('selected-gen-text');
       txt.innerHTML = 'Odabrano godište: <strong>' + gen + '</strong>';
 
-      // promijeni iframe src
       var iframe = document.getElementById('teams-iframe');
       iframe.src = GEN_URLS[gen];
     }
+
+    // ZAVRŠNICA – OVDE UBACIŠ SVOJE URL-ove KAD IH NAPRAVIŠ
+    const KNOCK_URLS = {
+      "2015": {
+        "qf": "PUT_URL_2015_QF_OVDJE",
+        "sf": "PUT_URL_2015_SF_OVDJE",
+        "f":  "PUT_URL_2015_F_OVDJE"
+      },
+      "2016": {
+        "qf": "PUT_URL_2016_QF_OVDJE",
+        "sf": "PUT_URL_2016_SF_OVDJE",
+        "f":  "PUT_URL_2016_F_OVDJE"
+      },
+      "2017": {
+        "qf": "PUT_URL_2017_QF_OVDJE",
+        "sf": "PUT_URL_2017_SF_OVDJE",
+        "f":  "PUT_URL_2017_F_OVDJE"
+      },
+      "2018": {
+        "qf": "PUT_URL_2018_QF_OVDJE",
+        "sf": "PUT_URL_2018_SF_OVDJE",
+        "f":  "PUT_URL_2018_F_OVDJE"
+      }
+    };
+
+    function changeKnockout() {
+      var gen = document.getElementById('knock-gen').value;
+      var phase = document.getElementById('knock-phase').value;
+
+      var textPhase = phase === 'qf' ? 'Četvrtfinale' :
+                      phase === 'sf' ? 'Polufinale' : 'Finale';
+
+      document.getElementById('knock-selected-text').innerHTML =
+        'Odabrano: <strong>' + gen + ' – ' + textPhase + '</strong>';
+
+      var iframe = document.getElementById('knock-iframe');
+      iframe.src = KNOCK_URLS[gen][phase] || "about:blank";
+    }
+
+    // inicijalno podešavanje za završnicu
+    changeKnockout();
   </script>
 </body>
 </html>
