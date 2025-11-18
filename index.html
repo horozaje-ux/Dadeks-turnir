@@ -133,7 +133,6 @@
       border: none;
     }
 
-    /* Red ispod za info */
     .helper-text {
       font-size: 12px;
       color: #9ca3af;
@@ -250,10 +249,10 @@
           <label class="hint">
             Izaberi godište:
             <select id="gen-select" onchange="changeGeneration(this.value)">
-              <option value="2015" selected>https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true</option>
-              <option value="2016">https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true</option>
-              <option value="2017">https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true</option>
-              <option value="2018">https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true</option>
+              <option value="2015" selected>2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
             </select>
           </label>
         </div>
@@ -307,19 +306,12 @@
       btn.classList.add('active');
     }
 
-    // linkovi za svako godište (OVDE MIJENJAŠ gid= ZA 2016/2017/2018 KAD OBJAVIŠ TE SHEETOVE)
+    // linkovi za svako godište
     const GEN_URLS = {
       "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-
-      // kad u Google Sheets uradiš Publish to web za „Godiste 2016“,
-      // samo ZAMIJENI OVAJ LINK onim novim (biće isti 2PACX, ali drugi gid=...)
-      "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-
-      // isto za 2017
-      "2017": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-
-      // i za 2018
-      "2018": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
+      "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
+      "2017": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
+      "2018": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false"
     };
 
     function changeGeneration(gen) {
@@ -334,4 +326,3 @@
   </script>
 </body>
 </html>
-
