@@ -499,39 +499,17 @@
       </div>
     </section>
 
-    <!-- TIMOVI – GODIŠTA 2015–2018 -->
-    <section class="tab-content" id="timovi">
-      <div class="card">
-        <h2>Timovi po godištima</h2>
-
-        <div class="gen-row">
-          <p class="hint" id="selected-gen-text">Odabrano godište: <strong>2015</strong></p>
-
-          <label class="hint">
-            Izaberi godište:
-            <select id="gen-select" onchange="changeGeneration(this.value)">
-              <option value="2015" selected>2015</option>
-              <option value="2016">2016</option>
-              <option value="2017">2017</option>
-              <option value="2018">2018</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="iframe-wrapper">
-          <!-- početni iframe za 2015 -->
-          <iframe
-            id="teams-iframe"
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false">
-          </iframe>
-        </div>
-
-        <p class="helper-text">
-          Timove dodaješ u Google Sheets (listovi „Godiste 2015“, „Godiste 2016“, „Godiste 2017“, „Godiste 2018“).
-          Svaka promjena se automatski vidi u aplikaciji.
-        </p>
-      </div>
-    </section>
+   // TIMOVI – LINKOVI PO GODIŠTU
+const GEN_URLS = {
+  "2015":
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false",
+  "2016":
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1814233139&single=true&widget=true&headers=false",
+  "2017":
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1898316737&single=true&widget=true&headers=false",
+  "2018":
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1999108339&single=true&widget=true&headers=false",
+};
 
     <!-- LOKACIJE -->
     <section class="tab-content" id="lokacije">
@@ -822,4 +800,5 @@
   </script>
 </body>
 </html>
+
 
