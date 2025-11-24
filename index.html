@@ -162,6 +162,7 @@
     #live-table td {
       border-bottom: 1px solid #1f2937;
       padding: 6px 4px;
+      text-align: left;
     }
 
     #live-table thead {
@@ -367,17 +368,10 @@
     // ------------------------------
     //  LIVE SCORE – CSV IZ SHEETS
     // ------------------------------
-    // Tvoj novi list za live score: gid=1224715353
-    // Koristimo CSV izlaz (output=csv)
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
-    // osvježavanje na 5 sekundi
-    const REFRESH_MS = 5000;
-
-    let audioContext = null;
-    let soundEnabled = true;
-    let liveTimer = null;
+    const REFRESH_MS = 5000; // 5 sekundi
 
     const tableBody = document.getElementById("live-tbody");
     const statusDot = document.getElementById("status-dot");
@@ -390,22 +384,19 @@
     }
 
     function renderLiveScore(rows) {
-      // pretpostavljamo da je prvi red header
-      const dataRows = rows.slice(1);
+      const dataRows = rows.slice(1); // preskoči header
       tableBody.innerHTML = "";
 
       dataRows.forEach((r, i) => {
         const tr = document.createElement("tr");
 
-        const [time, field, year, home, away, result, phase] = [
-          r[0] || "",
-          r[1] || "",
-          r[2] || "",
-          r[3] || "",
-          r[4] || "",
-          r[5] || "",
-          r[6] || "",
-        ];
+        const time = r[0] || "";
+        const field = r[1] || "";
+        const year = r[2] || "";
+        const home = r[3] || "";
+        const away = r[4] || "";
+        const result = r[5] || "";
+        const phase = r[6] || "";
 
         tr.innerHTML = `
           <td>${i + 1}</td>
@@ -421,42 +412,12 @@
 
       statusDot.style.background = "#22c55e";
       statusText.textContent =
-        "Posljednje osvježavanje: " +
-        new Date().toLocaleTimeString("sr-RS");
-    }
-
-    function playGoalSound() {
-      try {
-        if (!audioContext) {
-          audioContext =
-            new (window.AudioContext || window.webkitAudioContext)();
-        }
-
-        const ctx = audioContext;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = "triangle";
-        osc.frequency.value = 880;
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        const now = ctx.currentTime;
-        gain.gain.setValueAtTime(0.001, now);
-        gain.gain.exponentialRampToValueAtTime(0.25, now + 0.03);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-
-        osc.start(now);
-        osc.stop(now + 0.45);
-      } catch (e) {
-        // ako audio ne radi, ignorišemo
-      }
+        "Posljednje osvježavanje: " + new Date().toLocaleTimeString("sr-RS");
     }
 
     async function loadLiveScore() {
       try {
-        statusDot.style.background = "#f97316"; // narandžasto dok učitava
+        statusDot.style.background = "#f97316";
         statusText.textContent = "Učitavanje...";
         errorEl.style.display = "none";
 
@@ -487,9 +448,8 @@
     }
 
     function startLiveScore() {
-      if (liveTimer) clearInterval(liveTimer);
       loadLiveScore();
-      liveTimer = setInterval(loadLiveScore, REFRESH_MS);
+      setInterval(loadLiveScore, REFRESH_MS);
     }
 
     document.addEventListener("DOMContentLoaded", startLiveScore);
