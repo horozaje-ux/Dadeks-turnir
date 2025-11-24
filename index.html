@@ -17,8 +17,8 @@
         margin: 0;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
-        background: #020617;
-        color: #e5e7eb;
+        background: #ffffff;
+        color: #111827;
       }
 
       a {
@@ -26,14 +26,18 @@
       }
 
       .page {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 16px;
       }
 
       header {
-        text-align: center;
-        padding: 10px 0 18px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 8px 0 16px;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 12px;
       }
 
       header h1 {
@@ -41,41 +45,38 @@
         font-size: 1.8rem;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #38bdf8;
+        color: #1d4ed8;
       }
 
       header p {
         margin: 4px 0 0;
         font-size: 0.9rem;
-        color: #9ca3af;
+        color: #6b7280;
+        text-align: right;
       }
 
       /* TABOVI */
 
       .tabs {
         display: flex;
-        flex-wrap: wrap;
         gap: 6px;
-        margin-bottom: 12px;
+        margin-bottom: 16px;
       }
 
       .tab-btn {
-        flex: 1 1 120px;
-        padding: 8px 10px;
-        border-radius: 999px;
-        border: 1px solid #1f2937;
-        background: #020617;
-        color: #e5e7eb;
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        background: #f9fafb;
+        color: #111827;
         font-size: 0.85rem;
         cursor: pointer;
-        text-align: center;
-        transition: all 0.15s ease-out;
       }
 
       .tab-btn.active {
-        background: linear-gradient(135deg, #0ea5e9, #22c55e);
-        border-color: transparent;
-        color: #020617;
+        background: #1d4ed8;
+        border-color: #1d4ed8;
+        color: #ffffff;
         font-weight: 600;
       }
 
@@ -88,22 +89,20 @@
       }
 
       .card {
-        background: radial-gradient(circle at top left, #0f172a, #020617 55%);
-        border-radius: 16px;
-        border: 1px solid #1f2937;
-        padding: 14px 14px 18px;
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        padding: 12px 12px 16px;
       }
 
       h2 {
         margin: 0 0 8px;
         font-size: 1.2rem;
-        color: #e5e7eb;
       }
 
       .hint {
-        font-size: 0.8rem;
-        color: #9ca3af;
+        font-size: 0.85rem;
+        color: #6b7280;
       }
 
       .gen-row {
@@ -112,23 +111,23 @@
         align-items: center;
         justify-content: space-between;
         gap: 8px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
       select {
         padding: 4px 8px;
-        border-radius: 999px;
-        border: 1px solid #1f2937;
-        background: #020617;
-        color: #e5e7eb;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        background: #ffffff;
+        color: #111827;
         font-size: 0.85rem;
       }
 
       iframe {
         width: 100%;
-        min-height: 480px;
-        border: none;
-        background: #020617;
+        min-height: 420px;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
       }
 
       /* LIVE SCORE */
@@ -144,12 +143,12 @@
         width: 10px;
         height: 10px;
         border-radius: 999px;
-        background: #64748b;
+        background: #9ca3af;
       }
 
       #status-text {
         font-size: 0.8rem;
-        color: #9ca3af;
+        color: #6b7280;
       }
 
       #live-table {
@@ -160,28 +159,36 @@
 
       #live-table th,
       #live-table td {
-        border-bottom: 1px solid #1f2937;
+        border-bottom: 1px solid #e5e7eb;
         padding: 6px 4px;
+        text-align: left;
       }
 
       #live-table thead {
-        background: rgba(15, 23, 42, 0.9);
+        background: #f3f4f6;
       }
 
       #live-table tbody tr:nth-child(even) {
-        background: rgba(15, 23, 42, 0.55);
+        background: #f9fafb;
       }
 
       #live-error {
         display: none;
         margin-top: 8px;
         font-size: 0.8rem;
-        color: #f97316;
+        color: #b91c1c;
       }
 
       @media (max-width: 640px) {
+        header {
+          justify-content: center;
+          text-align: center;
+        }
+        header p {
+          text-align: center;
+        }
         iframe {
-          min-height: 420px;
+          min-height: 380px;
         }
       }
     </style>
@@ -190,8 +197,10 @@
   <body>
     <div class="page">
       <header>
-        <h1>Dadeks turnir 2025</h1>
-        <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
+        <div>
+          <h1>DADEKS TURNIR 2025</h1>
+          <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
+        </div>
       </header>
 
       <!-- TAB NAV -->
@@ -257,7 +266,6 @@
             </label>
           </div>
 
-          <!-- iframe sa tabelom -->
           <iframe
             id="table-iframe"
             src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false"
@@ -271,8 +279,8 @@
         <div class="card">
           <h2>Live score</h2>
           <p class="hint">
-            Rezultati se automatski osvježavaju svakih 15 sekundi (CSV iz
-            Google Sheets).
+            Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google
+            Sheets).
           </p>
 
           <div id="live-status">
@@ -290,7 +298,7 @@
                   <th>Godište</th>
                   <th>Utakmica</th>
                   <th>Rezultat</th>
-                  <th>Grupe / Faza</th>
+                  <th>Grupa / Faza</th>
                 </tr>
               </thead>
               <tbody id="live-tbody"></tbody>
@@ -369,11 +377,11 @@
       // ------------------------------
       //  LIVE SCORE – CSV IZ SHEETS
       // ------------------------------
-      // OVDE UBACI SVOJ STARI CSV LINK ZA LIVE SCORE:
+      // novi CSV link (na bazi tvog pubhtml linka)
       const LIVE_SCORE_CSV_URL =
-        "STAVI_OVDE_SVOJ_CSV_LINK_IZ_GOOGLE_SHEETS"; // npr. .../pub?output=csv
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
-      const REFRESH_MS = 15000; // 15 sekundi
+      const REFRESH_MS = 5000; // 5 sekundi
 
       let audioContext = null;
       let soundEnabled = true;
@@ -390,22 +398,20 @@
       }
 
       function renderLiveScore(rows) {
-        // pretpostavljamo da prvi red u CSV-u je header
-        const dataRows = rows.slice(1);
+        const dataRows = rows.slice(1); // preskoči header
         tableBody.innerHTML = "";
 
         dataRows.forEach((r, i) => {
           const tr = document.createElement("tr");
 
-          const [time, field, year, home, away, result, phase] = [
-            r[0] || "",
-            r[1] || "",
-            r[2] || "",
-            r[3] || "",
-            r[4] || "",
-            r[5] || "",
-            r[6] || "",
-          ];
+          // prilagodi redosljed kolona ako je drugačiji
+          const time = r[0] || "";
+          const field = r[1] || "";
+          const year = r[2] || "";
+          const home = r[3] || "";
+          const away = r[4] || "";
+          const result = r[5] || "";
+          const phase = r[6] || "";
 
           tr.innerHTML = `
             <td>${i + 1}</td>
@@ -419,47 +425,13 @@
           tableBody.appendChild(tr);
         });
 
-        statusDot.style.background = "#22c55e";
-        statusText.textContent = "Posljednje osvježavanje: " + new Date().toLocaleTimeString("sr-RS");
-      }
-
-      function playGoalSound() {
-        try {
-          if (!audioContext) {
-            audioContext =
-              new (window.AudioContext || window.webkitAudioContext)();
-          }
-
-          const ctx = audioContext;
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-
-          osc.type = "triangle";
-          osc.frequency.value = 880;
-
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-
-          const now = ctx.currentTime;
-          gain.gain.setValueAtTime(0.001, now);
-          gain.gain.exponentialRampToValueAtTime(0.25, now + 0.03);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-
-          osc.start(now);
-          osc.stop(now + 0.45);
-        } catch (e) {
-          // ako ne može audio, ignorišemo
-        }
+        statusDot.style.background = "#16a34a";
+        statusText.textContent =
+          "Posljednje osvježavanje: " +
+          new Date().toLocaleTimeString("sr-RS");
       }
 
       async function loadLiveScore() {
-        if (!LIVE_SCORE_CSV_URL || LIVE_SCORE_CSV_URL.startsWith("STAVI_")) {
-          // ako nisi još stavio link, samo nemoj da pokušavaš fetch
-          statusDot.style.background = "#64748b";
-          statusText.textContent = "Live score link još nije podešen.";
-          return;
-        }
-
         try {
           statusDot.style.background = "#f97316";
           statusText.textContent = "Učitavanje...";
