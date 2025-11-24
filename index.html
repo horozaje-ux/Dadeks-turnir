@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Dadeks turnir 2025</title>
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
   <style>
     * {
@@ -162,7 +159,6 @@
     #live-table td {
       border-bottom: 1px solid #1f2937;
       padding: 6px 4px;
-      text-align: left;
     }
 
     #live-table thead {
@@ -226,7 +222,6 @@
           </label>
         </div>
 
-        <!-- OVO SU STARI LINKOVI ZA TIMOVE KOJI SU RADILI DOBRO -->
         <iframe
           id="teams-iframe"
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
@@ -235,7 +230,7 @@
       </div>
     </section>
 
-    <!-- TABELE – GODIŠTA 2015–2018 (NOVI LINKOVI KOJE SI POSLAO) -->
+    <!-- TABELE – GODIŠTA 2015–2018 -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -261,7 +256,7 @@
 
         <iframe
           id="table-iframe"
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false"
           loading="lazy"
         ></iframe>
       </div>
@@ -273,6 +268,7 @@
         <h2>Live score</h2>
         <p class="hint">
           Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google Sheets).
+          Google ponekad kasni 1–2 minuta sa objavom nove verzije tabele.
         </p>
 
         <div id="live-status">
@@ -298,18 +294,13 @@
         </div>
 
         <p id="live-error">Greška pri učitavanju live podataka.</p>
-
-        <p class="hint" style="margin-top:10px;">
-          Napomena: Google ponekad kasni 1–2 minuta dok objavi novu verziju tabele – to ne zavisi od sajta nego od Google-a.
-        </p>
       </div>
     </section>
   </div>
 
   <script>
     // ------------------------------
-    //  TIMOVI – LINKOVI PO GODIŠTU
-    //  (ISTO KAO RANIJE, OVO JE RADILO)
+    // TIMOVI – LINKOVI PO GODIŠTU
     // ------------------------------
     const GEN_URLS = {
       "2015":
@@ -331,19 +322,17 @@
     }
 
     // ------------------------------
-    //  TABELE – LINKOVI PO GODIŠTU
-    //  (NOVI LINKOVI KOJE SI POSLAO)
+    // TABELE – LINKOVI PO GODIŠTU
     // ------------------------------
     const TABLE_URLS = {
       "2015":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false",
       "2016":
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1814233139&single=true&widget=true&headers=false",
       "2017":
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1898316737&single=true&widget=true&headers=false",
       "2018":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1898316737&single=true&widget=true&headers=false"
-        // ako ima poseban gid za 2018, ovdje samo promijeni broj
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1999108339&single=true&widget=true&headers=false",
     };
 
     function changeGenerationTables(gen) {
@@ -355,7 +344,7 @@
     }
 
     // ------------------------------
-    //  TABOVI
+    // TABOVI
     // ------------------------------
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -374,7 +363,7 @@
     });
 
     // ------------------------------
-    //  LIVE SCORE – CSV IZ SHEETS
+    // LIVE SCORE – CSV IZ SHEETS
     // ------------------------------
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
@@ -394,20 +383,18 @@
     }
 
     function renderLiveScore(rows) {
-      // prvi red je header
-      const dataRows = rows.slice(1);
+      const dataRows = rows.slice(1); // preskoči header
       tableBody.innerHTML = "";
 
       dataRows.forEach((r, i) => {
         const tr = document.createElement("tr");
 
-        // A: Utakmica, B: Domacin, C: Gost, D: Rezultat, E: Status, F: Godiste
         const utakmica = r[0] || "";
-        const domacin  = r[1] || "";
-        const gost     = r[2] || "";
+        const domacin = r[1] || "";
+        const gost = r[2] || "";
         const rezultat = r[3] || "";
-        const status   = r[4] || "";
-        const godiste  = r[5] || "";
+        const status = r[4] || "";
+        const godiste = r[5] || "";
 
         tr.innerHTML = `
           <td>${i + 1}</td>
@@ -433,10 +420,9 @@
         statusText.textContent = "Učitavanje...";
         errorEl.style.display = "none";
 
-        const resp = await fetch(
-          LIVE_SCORE_CSV_URL + "&_=" + Date.now(),
-          { cache: "no-store" }
-        );
+        const resp = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now(), {
+          cache: "no-store",
+        });
         const text = await resp.text();
         const rows = parseCsv(text);
 
