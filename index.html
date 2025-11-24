@@ -12,8 +12,7 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #020617;
       color: #e5e7eb;
     }
@@ -48,7 +47,6 @@
     }
 
     /* TABOVI */
-
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -129,7 +127,6 @@
     }
 
     /* LIVE SCORE */
-
     #live-status {
       display: flex;
       align-items: center;
@@ -187,7 +184,7 @@
 <body>
   <div class="page">
     <header>
-      <h1>Dadeks turnir 2025</h1>
+      <h1>DADEKS TURNIR 2025</h1>
       <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
     </header>
 
@@ -198,7 +195,7 @@
       <button class="tab-btn" data-target="live">Live score</button>
     </div>
 
-    <!-- TIMOVI – GODIŠTA 2015–2018 -->
+    <!-- TIMOVI – GODIŠTA 2015–2018 (KAO PRIJE) -->
     <section class="tab-content active" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -210,10 +207,7 @@
 
           <label class="hint">
             Izaberi godište:
-            <select
-              id="gen-select"
-              onchange="changeGenerationTeams(this.value)"
-            >
+            <select id="gen-select" onchange="changeGenerationTeams(this.value)">
               <option value="2015" selected>2015</option>
               <option value="2016">2016</option>
               <option value="2017">2017</option>
@@ -225,12 +219,12 @@
         <iframe
           id="teams-iframe"
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
-          loading="lazy"
-        ></iframe>
+          loading="lazy">
+        </iframe>
       </div>
     </section>
 
-    <!-- TABELE – GODIŠTA 2015–2018 -->
+    <!-- TABELE – GODIŠTA 2015–2018 (KAO PRIJE) -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -242,10 +236,7 @@
 
           <label class="hint">
             Izaberi godište:
-            <select
-              id="table-gen-select"
-              onchange="changeGenerationTables(this.value)"
-            >
+            <select id="table-gen-select" onchange="changeGenerationTables(this.value)">
               <option value="2015" selected>2015</option>
               <option value="2016">2016</option>
               <option value="2017">2017</option>
@@ -257,18 +248,17 @@
         <iframe
           id="table-iframe"
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false"
-          loading="lazy"
-        ></iframe>
+          loading="lazy">
+        </iframe>
       </div>
     </section>
 
-    <!-- LIVE SCORE -->
+    <!-- LIVE SCORE – NOVO -->
     <section class="tab-content" id="live">
       <div class="card">
         <h2>Live score</h2>
         <p class="hint">
           Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google Sheets).
-          Google ponekad kasni 1–2 minuta sa objavom nove verzije tabele.
         </p>
 
         <div id="live-status">
@@ -300,7 +290,7 @@
 
   <script>
     // ------------------------------
-    // TIMOVI – LINKOVI PO GODIŠTU
+    // TIMOVI – LINKOVI PO GODIŠTU (STARI KOJI SU RADILI)
     // ------------------------------
     const GEN_URLS = {
       "2015":
@@ -322,7 +312,7 @@
     }
 
     // ------------------------------
-    // TABELE – LINKOVI PO GODIŠTU
+    // TABELE – LINKOVI PO GODIŠTU (STARI KOJI SU RADILI)
     // ------------------------------
     const TABLE_URLS = {
       "2015":
@@ -370,8 +360,6 @@
 
     const REFRESH_MS = 5000; // 5 sekundi
 
-    let liveTimer = null;
-
     const tableBody = document.getElementById("live-tbody");
     const statusDot = document.getElementById("status-dot");
     const statusText = document.getElementById("status-text");
@@ -383,12 +371,14 @@
     }
 
     function renderLiveScore(rows) {
-      const dataRows = rows.slice(1); // preskoči header
+      // prvi red je header
+      const dataRows = rows.slice(1);
       tableBody.innerHTML = "";
 
       dataRows.forEach((r, i) => {
         const tr = document.createElement("tr");
 
+        // A: Utakmica, B: Domacin, C: Gost, D: Rezultat, E: Status, F: Godiste
         const utakmica = r[0] || "";
         const domacin = r[1] || "";
         const gost = r[2] || "";
@@ -446,9 +436,8 @@
     }
 
     function startLiveScore() {
-      if (liveTimer) clearInterval(liveTimer);
       loadLiveScore();
-      liveTimer = setInterval(loadLiveScore, REFRESH_MS);
+      setInterval(loadLiveScore, REFRESH_MS);
     }
 
     document.addEventListener("DOMContentLoaded", startLiveScore);
