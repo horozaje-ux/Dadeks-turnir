@@ -284,11 +284,11 @@
               <tr>
                 <th>#</th>
                 <th>Utakmica</th>
-                <th>Domacin</th>
+                <th>Domaćin</th>
                 <th>Gost</th>
                 <th>Rezultat</th>
                 <th>Status</th>
-                <th>Godiste</th>
+                <th>Godište</th>
               </tr>
             </thead>
             <tbody id="live-tbody"></tbody>
@@ -302,7 +302,7 @@
 
   <script>
     // ------------------------------
-    // TIMOVI – LINKOVI PO GODIŠTU
+    //  TIMOVI – LINKOVI PO GODIŠTU
     // ------------------------------
     const GEN_URLS = {
       "2015":
@@ -324,7 +324,7 @@
     }
 
     // ------------------------------
-    // TABELE – LINKOVI PO GODIŠTU
+    //  TABELE – LINKOVI PO GODIŠTU
     // ------------------------------
     const TABLE_URLS = {
       "2015":
@@ -346,7 +346,7 @@
     }
 
     // ------------------------------
-    // TABOVI
+    //  TABOVI
     // ------------------------------
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -365,15 +365,13 @@
     });
 
     // ------------------------------
-    // LIVE SCORE – CSV IZ SHEETS
+    //  LIVE SCORE – CSV IZ SHEETS
     // ------------------------------
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
-    const REFRESH_MS = 5000; // 5 sekundi
+    const REFRESH_MS = 5000;
 
-    let audioContext = null;
-    let soundEnabled = true;
     let liveTimer = null;
 
     const tableBody = document.getElementById("live-tbody");
@@ -391,24 +389,22 @@
       tableBody.innerHTML = "";
 
       dataRows.forEach((r, i) => {
-        const tr = document.createElement("tr");
-
-        // A: Utakmica, B: Domacin, C: Gost, D: Rezultat, E: Status, F: Godiste
-        const match = r[0] || "";
-        const home = r[1] || "";
-        const away = r[2] || "";
-        const result = r[3] || "";
+        const utakmica = r[0] || "";
+        const domacin = r[1] || "";
+        const gost = r[2] || "";
+        const rezultat = r[3] || "";
         const status = r[4] || "";
-        const year = r[5] || "";
+        const godiste = r[5] || "";
 
+        const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${i + 1}</td>
-          <td>${match}</td>
-          <td>${home}</td>
-          <td>${away}</td>
-          <td>${result}</td>
+          <td>${utakmica}</td>
+          <td>${domacin}</td>
+          <td>${gost}</td>
+          <td>${rezultat}</td>
           <td>${status}</td>
-          <td>${year}</td>
+          <td>${godiste}</td>
         `;
         tableBody.appendChild(tr);
       });
