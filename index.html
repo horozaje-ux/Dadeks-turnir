@@ -1,474 +1,472 @@
 <!DOCTYPE html>
 <html lang="sr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dadeks turnir 2025</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <title>Dadeks turnir 2025</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"
+  />
 
-    <style>
-      * {
-        box-sizing: border-box;
-      }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-      body {
-        margin: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-        background: #ffffff;
-        color: #111827;
-      }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #ffffff;
+      color: #111827;
+    }
 
-      a {
-        color: inherit;
-      }
+    a {
+      color: inherit;
+    }
 
-      .page {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 16px;
-      }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
 
+    header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 8px 0 16px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #1d4ed8;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      font-size: 0.9rem;
+      color: #6b7280;
+      text-align: right;
+    }
+
+    /* TABOVI */
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: #111827;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      padding: 12px 12px 16px;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .hint {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .gen-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    select {
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #111827;
+      font-size: 0.85rem;
+    }
+
+    iframe {
+      width: 100%;
+      min-height: 420px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+
+    /* LIVE SCORE */
+
+    #live-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    #status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    #status-text {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    #live-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    #live-table th,
+    #live-table td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 6px 4px;
+      text-align: left;
+    }
+
+    #live-table thead {
+      background: #f3f4f6;
+    }
+
+    #live-table tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    #live-error {
+      display: none;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: #b91c1c;
+    }
+
+    @media (max-width: 640px) {
       header {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 8px 0 16px;
-        border-bottom: 1px solid #e5e7eb;
-        margin-bottom: 12px;
+        justify-content: center;
+        text-align: center;
       }
-
-      header h1 {
-        margin: 0;
-        font-size: 1.8rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: #1d4ed8;
-      }
-
       header p {
-        margin: 4px 0 0;
-        font-size: 0.9rem;
-        color: #6b7280;
-        text-align: right;
+        text-align: center;
       }
-
-      /* TABOVI */
-
-      .tabs {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 16px;
-      }
-
-      .tab-btn {
-        padding: 6px 10px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
-        background: #f9fafb;
-        color: #111827;
-        font-size: 0.85rem;
-        cursor: pointer;
-      }
-
-      .tab-btn.active {
-        background: #1d4ed8;
-        border-color: #1d4ed8;
-        color: #ffffff;
-        font-weight: 600;
-      }
-
-      .tab-content {
-        display: none;
-      }
-
-      .tab-content.active {
-        display: block;
-      }
-
-      .card {
-        background: #ffffff;
-        border-radius: 8px;
-        border: 1px solid #e5e7eb;
-        padding: 12px 12px 16px;
-      }
-
-      h2 {
-        margin: 0 0 8px;
-        font-size: 1.2rem;
-      }
-
-      .hint {
-        font-size: 0.85rem;
-        color: #6b7280;
-      }
-
-      .gen-row {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-
-      select {
-        padding: 4px 8px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
-        background: #ffffff;
-        color: #111827;
-        font-size: 0.85rem;
-      }
-
       iframe {
-        width: 100%;
-        min-height: 420px;
-        border: 1px solid #e5e7eb;
-        background: #ffffff;
+        min-height: 380px;
       }
+    }
+  </style>
+</head>
 
-      /* LIVE SCORE */
-
-      #live-status {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 10px;
-      }
-
-      #status-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: #9ca3af;
-      }
-
-      #status-text {
-        font-size: 0.8rem;
-        color: #6b7280;
-      }
-
-      #live-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.8rem;
-      }
-
-      #live-table th,
-      #live-table td {
-        border-bottom: 1px solid #e5e7eb;
-        padding: 6px 4px;
-        text-align: left;
-      }
-
-      #live-table thead {
-        background: #f3f4f6;
-      }
-
-      #live-table tbody tr:nth-child(even) {
-        background: #f9fafb;
-      }
-
-      #live-error {
-        display: none;
-        margin-top: 8px;
-        font-size: 0.8rem;
-        color: #b91c1c;
-      }
-
-      @media (max-width: 640px) {
-        header {
-          justify-content: center;
-          text-align: center;
-        }
-        header p {
-          text-align: center;
-        }
-        iframe {
-          min-height: 380px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="page">
-      <header>
-        <div>
-          <h1>DADEKS TURNIR 2025</h1>
-          <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
-        </div>
-      </header>
-
-      <!-- TAB NAV -->
-      <div class="tabs">
-        <button class="tab-btn active" data-target="timovi">Timovi</button>
-        <button class="tab-btn" data-target="tabele">Tabele</button>
-        <button class="tab-btn" data-target="live">Live score</button>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>DADEKS TURNIR 2025</h1>
+        <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
       </div>
+    </header>
 
-      <!-- TIMOVI – GODIŠTA 2015–2018 -->
-      <section class="tab-content active" id="timovi">
-        <div class="card">
-          <h2>Timovi po godištima</h2>
-
-          <div class="gen-row">
-            <p class="hint" id="selected-gen-text">
-              Odabrano godište: <strong>2015</strong>
-            </p>
-
-            <label class="hint">
-              Izaberi godište:
-              <select
-                id="gen-select"
-                onchange="changeGenerationTeams(this.value)"
-              >
-                <option value="2015" selected>2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-              </select>
-            </label>
-          </div>
-
-          <iframe
-            id="teams-iframe"
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
-            loading="lazy"
-          ></iframe>
-        </div>
-      </section>
-
-      <!-- TABELE – GODIŠTA 2015–2018 -->
-      <section class="tab-content" id="tabele">
-        <div class="card">
-          <h2>Tabela po godištima</h2>
-
-          <div class="gen-row">
-            <p class="hint" id="selected-table-gen-text">
-              Odabrano godište: <strong>2015</strong>
-            </p>
-
-            <label class="hint">
-              Izaberi godište:
-              <select
-                id="table-gen-select"
-                onchange="changeGenerationTables(this.value)"
-              >
-                <option value="2015" selected>2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-              </select>
-            </label>
-          </div>
-
-          <iframe
-            id="table-iframe"
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false"
-            loading="lazy"
-          ></iframe>
-        </div>
-      </section>
-
-      <!-- LIVE SCORE -->
-      <section class="tab-content" id="live">
-        <div class="card">
-          <h2>Live score</h2>
-          <p class="hint">
-            Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google
-            Sheets).
-          </p>
-
-          <div id="live-status">
-            <div id="status-dot"></div>
-            <span id="status-text">Čekam podatke…</span>
-          </div>
-
-          <div style="overflow-x: auto">
-            <table id="live-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Vreme</th>
-                  <th>Teren</th>
-                  <th>Godište</th>
-                  <th>Utakmica</th>
-                  <th>Rezultat</th>
-                  <th>Grupa / Faza</th>
-                </tr>
-              </thead>
-              <tbody id="live-tbody"></tbody>
-            </table>
-          </div>
-
-          <p id="live-error">Greška pri učitavanju live podataka.</p>
-        </div>
-      </section>
+    <!-- TAB NAV -->
+    <div class="tabs">
+      <button class="tab-btn active" data-target="timovi">Timovi</button>
+      <button class="tab-btn" data-target="tabele">Tabele</button>
+      <button class="tab-btn" data-target="live">Live score</button>
     </div>
 
-    <script>
-      // ------------------------------
-      //  TIMOVI – LINKOVI PO GODIŠTU
-      // ------------------------------
-      const GEN_URLS = {
-        "2015":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-        "2016":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
-        "2017":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
-        "2018":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false",
-      };
+    <!-- TIMOVI – GODIŠTA 2015–2018 -->
+    <section class="tab-content active" id="timovi">
+      <div class="card">
+        <h2>Timovi po godištima</h2>
 
-      function changeGenerationTeams(gen) {
-        const txt = document.getElementById("selected-gen-text");
-        txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
+        <div class="gen-row">
+          <p class="hint" id="selected-gen-text">
+            Odabrano godište: <strong>2015</strong>
+          </p>
 
-        const iframe = document.getElementById("teams-iframe");
-        iframe.src = GEN_URLS[gen];
-      }
+          <label class="hint">
+            Izaberi godište:
+            <select
+              id="gen-select"
+              onchange="changeGenerationTeams(this.value)"
+            >
+              <option value="2015" selected>2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
+          </label>
+        </div>
 
-      // ------------------------------
-      //  TABELE – LINKOVI PO GODIŠTU
-      // ------------------------------
-      const TABLE_URLS = {
-        "2015":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false",
-        "2016":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1814233139&single=true&widget=true&headers=false",
-        "2017":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1898316737&single=true&widget=true&headers=false",
-        "2018":
-          "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1999108339&single=true&widget=true&headers=false",
-      };
+        <iframe
+          id="teams-iframe"
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
 
-      function changeGenerationTables(gen) {
-        const txt = document.getElementById("selected-table-gen-text");
-        txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
+    <!-- TABELE – GODIŠTA 2015–2018 -->
+    <section class="tab-content" id="tabele">
+      <div class="card">
+        <h2>Tabela po godištima</h2>
 
-        const iframe = document.getElementById("table-iframe");
-        iframe.src = TABLE_URLS[gen];
-      }
+        <div class="gen-row">
+          <p class="hint" id="selected-table-gen-text">
+            Odabrano godište: <strong>2015</strong>
+          </p>
 
-      // ------------------------------
-      //  TABOVI
-      // ------------------------------
-      document.querySelectorAll(".tab-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const targetId = btn.dataset.target;
+          <label class="hint">
+            Izaberi godište:
+            <select
+              id="table-gen-select"
+              onchange="changeGenerationTables(this.value)"
+            >
+              <option value="2015" selected>2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
+          </label>
+        </div>
 
-          document
-            .querySelectorAll(".tab-btn")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
+        <iframe
+          id="table-iframe"
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
 
-          document
-            .querySelectorAll(".tab-content")
-            .forEach((sec) => sec.classList.remove("active"));
-          document.getElementById(targetId).classList.add("active");
-        });
+    <!-- LIVE SCORE -->
+    <section class="tab-content" id="live">
+      <div class="card">
+        <h2>Live score</h2>
+        <p class="hint">
+          Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google
+          Sheets).
+        </p>
+
+        <div id="live-status">
+          <div id="status-dot"></div>
+          <span id="status-text">Čekam podatke…</span>
+        </div>
+
+        <div style="overflow-x: auto">
+          <table id="live-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Vreme</th>
+                <th>Teren</th>
+                <th>Godište</th>
+                <th>Utakmica</th>
+                <th>Rezultat</th>
+                <th>Grupa / Faza</th>
+              </tr>
+            </thead>
+            <tbody id="live-tbody"></tbody>
+          </table>
+        </div>
+
+        <p id="live-error">Greška pri učitavanju live podataka.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ------------------------------
+    // TIMOVI – LINKOVI PO GODIŠTU
+    // ------------------------------
+    const GEN_URLS = {
+      "2015":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+      "2016":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
+      "2017":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
+      "2018":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false",
+    };
+
+    function changeGenerationTeams(gen) {
+      const txt = document.getElementById("selected-gen-text");
+      txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
+
+      const iframe = document.getElementById("teams-iframe");
+      iframe.src = GEN_URLS[gen];
+    }
+
+    // ------------------------------
+    // TABELE – LINKOVI PO GODIŠTU
+    // ------------------------------
+    const TABLE_URLS = {
+      "2015":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false",
+      "2016":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1814233139&single=true&widget=true&headers=false",
+      "2017":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1898316737&single=true&widget=true&headers=false",
+      "2018":
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1999108339&single=true&widget=true&headers=false",
+    };
+
+    function changeGenerationTables(gen) {
+      const txt = document.getElementById("selected-table-gen-text");
+      txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
+
+      const iframe = document.getElementById("table-iframe");
+      iframe.src = TABLE_URLS[gen];
+    }
+
+    // ------------------------------
+    // TABOVI
+    // ------------------------------
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetId = btn.dataset.target;
+
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((sec) => sec.classList.remove("active"));
+        document.getElementById(targetId).classList.add("active");
+      });
+    });
+
+    // ------------------------------
+    // LIVE SCORE – CSV IZ SHEETS
+    // ------------------------------
+    const LIVE_SCORE_CSV_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
+
+    const REFRESH_MS = 5000; // 5 sekundi
+
+    let audioContext = null;
+    let soundEnabled = true;
+    let liveTimer = null;
+
+    const tableBody = document.getElementById("live-tbody");
+    const statusDot = document.getElementById("status-dot");
+    const statusText = document.getElementById("status-text");
+    const errorEl = document.getElementById("live-error");
+
+    function parseCsv(text) {
+      const lines = text.trim().split(/\r?\n/);
+      return lines.map((line) => line.split(","));
+    }
+
+    function renderLiveScore(rows) {
+      const dataRows = rows.slice(1); // preskoči header
+      tableBody.innerHTML = "";
+
+      dataRows.forEach((r, i) => {
+        const tr = document.createElement("tr");
+
+        const time = r[0] || "";
+        const field = r[1] || "";
+        const year = r[2] || "";
+        const home = r[3] || "";
+        const away = r[4] || "";
+        const result = r[5] || "";
+        const phase = r[6] || "";
+
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${time}</td>
+          <td>${field}</td>
+          <td>${year}</td>
+          <td>${home} – ${away}</td>
+          <td>${result}</td>
+          <td>${phase}</td>
+        `;
+        tableBody.appendChild(tr);
       });
 
-      // ------------------------------
-      //  LIVE SCORE – CSV IZ SHEETS
-      // ------------------------------
-      // novi CSV link (na bazi tvog pubhtml linka)
-      const LIVE_SCORE_CSV_URL =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
+      statusDot.style.background = "#16a34a";
+      statusText.textContent =
+        "Posljednje osvježavanje: " +
+        new Date().toLocaleTimeString("sr-RS");
+    }
 
-      const REFRESH_MS = 5000; // 5 sekundi
+    async function loadLiveScore() {
+      try {
+        statusDot.style.background = "#f97316";
+        statusText.textContent = "Učitavanje...";
+        errorEl.style.display = "none";
 
-      let audioContext = null;
-      let soundEnabled = true;
-      let liveTimer = null;
-
-      const tableBody = document.getElementById("live-tbody");
-      const statusDot = document.getElementById("status-dot");
-      const statusText = document.getElementById("status-text");
-      const errorEl = document.getElementById("live-error");
-
-      function parseCsv(text) {
-        const lines = text.trim().split(/\r?\n/);
-        return lines.map((line) => line.split(","));
-      }
-
-      function renderLiveScore(rows) {
-        const dataRows = rows.slice(1); // preskoči header
-        tableBody.innerHTML = "";
-
-        dataRows.forEach((r, i) => {
-          const tr = document.createElement("tr");
-
-          // prilagodi redosljed kolona ako je drugačiji
-          const time = r[0] || "";
-          const field = r[1] || "";
-          const year = r[2] || "";
-          const home = r[3] || "";
-          const away = r[4] || "";
-          const result = r[5] || "";
-          const phase = r[6] || "";
-
-          tr.innerHTML = `
-            <td>${i + 1}</td>
-            <td>${time}</td>
-            <td>${field}</td>
-            <td>${year}</td>
-            <td>${home} – ${away}</td>
-            <td>${result}</td>
-            <td>${phase}</td>
-          `;
-          tableBody.appendChild(tr);
+        const resp = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now(), {
+          cache: "no-store",
         });
+        const text = await resp.text();
+        const rows = parseCsv(text);
 
-        statusDot.style.background = "#16a34a";
-        statusText.textContent =
-          "Posljednje osvježavanje: " +
-          new Date().toLocaleTimeString("sr-RS");
-      }
-
-      async function loadLiveScore() {
-        try {
-          statusDot.style.background = "#f97316";
-          statusText.textContent = "Učitavanje...";
-          errorEl.style.display = "none";
-
-          const resp = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now(), {
-            cache: "no-store",
-          });
-          const text = await resp.text();
-          const rows = parseCsv(text);
-
-          if (!rows.length) {
-            tableBody.innerHTML = "";
-            errorEl.style.display = "block";
-            errorEl.textContent = "Nema podataka u live score tabeli.";
-            statusDot.style.background = "#ef4444";
-            statusText.textContent = "Nema podataka";
-            return;
-          }
-
-          renderLiveScore(rows);
-        } catch (err) {
-          console.error("Live score error", err);
+        if (!rows.length) {
+          tableBody.innerHTML = "";
           errorEl.style.display = "block";
-          errorEl.textContent = "Greška pri učitavanju live podataka.";
+          errorEl.textContent = "Nema podataka u live score tabeli.";
           statusDot.style.background = "#ef4444";
-          statusText.textContent = "Greška";
+          statusText.textContent = "Nema podataka";
+          return;
         }
-      }
 
-      function startLiveScore() {
-        if (liveTimer) clearInterval(liveTimer);
-        loadLiveScore();
-        liveTimer = setInterval(loadLiveScore, REFRESH_MS);
+        renderLiveScore(rows);
+      } catch (err) {
+        console.error("Live score error", err);
+        errorEl.style.display = "block";
+        errorEl.textContent = "Greška pri učitavanju live podataka.";
+        statusDot.style.background = "#ef4444";
+        statusText.textContent = "Greška";
       }
+    }
 
-      document.addEventListener("DOMContentLoaded", startLiveScore);
-    </script>
-  </body>
+    function startLiveScore() {
+      if (liveTimer) clearInterval(liveTimer);
+      loadLiveScore();
+      liveTimer = setInterval(loadLiveScore, REFRESH_MS);
+    }
+
+    document.addEventListener("DOMContentLoaded", startLiveScore);
+  </script>
+</body>
 </html>
