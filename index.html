@@ -126,7 +126,6 @@
 
     iframe {
       width: 100%;
-      min-height: 480px;
       border: none;
       background: #020617;
     }
@@ -152,31 +151,17 @@
       color: #9ca3af;
     }
 
-    #live-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.8rem;
+    #live-iframe {
+      min-height: 420px;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      background: #020617;
     }
 
-    #live-table th,
-    #live-table td {
-      border-bottom: 1px solid #1f2937;
-      padding: 6px 4px;
-    }
-
-    #live-table thead {
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    #live-table tbody tr:nth-child(even) {
-      background: rgba(15, 23, 42, 0.55);
-    }
-
-    #live-error {
-      display: none;
+    #live-note {
       margin-top: 8px;
       font-size: 0.8rem;
-      color: #f97316;
+      color: #9ca3af;
     }
 
     @media (max-width: 640px) {
@@ -265,12 +250,13 @@
       </div>
     </section>
 
-    <!-- LIVE SCORE -->
+    <!-- LIVE SCORE – SAMO IFRAME -->
     <section class="tab-content" id="live">
       <div class="card">
         <h2>Live score</h2>
         <p class="hint">
-          Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google Sheets).
+          Rezultati se automatski osvježavaju svakih 5 sekundi (Google Sheets
+          objava).
         </p>
 
         <div id="live-status">
@@ -278,24 +264,16 @@
           <span id="status-text">Čekam podatke…</span>
         </div>
 
-        <div style="overflow-x: auto">
-          <table id="live-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Utakmica</th>
-                <th>Domaćin</th>
-                <th>Gost</th>
-                <th>Rezultat</th>
-                <th>Status</th>
-                <th>Godište</th>
-              </tr>
-            </thead>
-            <tbody id="live-tbody"></tbody>
-          </table>
-        </div>
+        <iframe
+          id="live-iframe"
+          src=""
+          loading="lazy"
+        ></iframe>
 
-        <p id="live-error">Greška pri učitavanju live podataka.</p>
+        <p id="live-note">
+          Napomena: Google ponekad kasni 1–2 minuta dok objavi novu verziju
+          tabele – to ne zavisi od sajta već od Google-a.
+        </p>
       </div>
     </section>
   </div>
@@ -365,95 +343,34 @@
     });
 
     // ------------------------------
-    //  LIVE SCORE – CSV IZ SHEETS
+    //  LIVE SCORE – IFRAME
     // ------------------------------
-    const LIVE_SCORE_CSV_URL =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
+    const LIVE_IFRAME_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1224715353&single=true&widget=true&headers=false";
 
-    const REFRESH_MS = 5000;
-
-    let liveTimer = null;
-
-    const tableBody = document.getElementById("live-tbody");
+    const liveIframe = document.getElementById("live-iframe");
     const statusDot = document.getElementById("status-dot");
     const statusText = document.getElementById("status-text");
-    const errorEl = document.getElementById("live-error");
+    const REFRESH_MS = 5000; // 5 sekundi
 
-    function parseCsv(text) {
-      const lines = text.trim().split(/\r?\n/);
-      return lines.map((line) => line.split(","));
+    function reloadLiveIframe() {
+      statusDot.style.background = "#f97316";
+      statusText.textContent = "Učitavanje...";
+
+      // dodamo timestamp da bi zaobišli cache u browseru
+      liveIframe.src = LIVE_IFRAME_URL + "&ts=" + Date.now();
     }
 
-    function renderLiveScore(rows) {
-      const dataRows = rows.slice(1); // preskoči header
-      tableBody.innerHTML = "";
-
-      dataRows.forEach((r, i) => {
-        const utakmica = r[0] || "";
-        const domacin = r[1] || "";
-        const gost = r[2] || "";
-        const rezultat = r[3] || "";
-        const status = r[4] || "";
-        const godiste = r[5] || "";
-
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${i + 1}</td>
-          <td>${utakmica}</td>
-          <td>${domacin}</td>
-          <td>${gost}</td>
-          <td>${rezultat}</td>
-          <td>${status}</td>
-          <td>${godiste}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
-
+    liveIframe.addEventListener("load", () => {
       statusDot.style.background = "#22c55e";
       statusText.textContent =
         "Posljednje osvježavanje: " +
         new Date().toLocaleTimeString("sr-RS");
-    }
+    });
 
-    async function loadLiveScore() {
-      try {
-        statusDot.style.background = "#f97316";
-        statusText.textContent = "Učitavanje...";
-        errorEl.style.display = "none";
-
-        const resp = await fetch(
-          LIVE_SCORE_CSV_URL + "&_=" + Date.now(),
-          { cache: "no-store" }
-        );
-        const text = await resp.text();
-        const rows = parseCsv(text);
-
-        if (!rows.length) {
-          tableBody.innerHTML = "";
-          errorEl.style.display = "block";
-          errorEl.textContent = "Nema podataka u live score tabeli.";
-          statusDot.style.background = "#ef4444";
-          statusText.textContent = "Nema podataka";
-          return;
-        }
-
-        renderLiveScore(rows);
-      } catch (err) {
-        console.error("Live score error", err);
-        errorEl.style.display = "block";
-        errorEl.textContent = "Greška pri učitavanju live podataka.";
-        statusDot.style.background = "#ef4444";
-        statusText.textContent = "Greška";
-      }
-    }
-
-    function startLiveScore() {
-      if (liveTimer) clearInterval(liveTimer);
-      loadLiveScore();
-      liveTimer = setInterval(loadLiveScore, REFRESH_MS);
-    }
-
-    document.addEventListener("DOMContentLoaded", startLiveScore);
+    // start
+    reloadLiveIframe();
+    setInterval(reloadLiveIframe, REFRESH_MS);
   </script>
 </body>
 </html>
