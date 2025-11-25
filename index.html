@@ -88,7 +88,7 @@
       border: 1px solid #1f2937;
       padding: 14px 14px 18px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     h2 {
@@ -174,71 +174,62 @@
       color: #f97316;
     }
 
-    /* FLASH KAD PADNE GOL (PROMJENA REDA) */
-    @keyframes flashBg {
+    /* Highlight kad se rezultat promijeni */
+    .score-flash {
+      animation: scoreFlash 1.2s ease-out;
+    }
+
+    @keyframes scoreFlash {
       0%   { background-color: #facc15; }
-      25%  { background-color: #fbbf24; }
-      50%  { background-color: #0f172a; }
-      75%  { background-color: #facc15; }
-      100% { background-color: #0f172a; }
+      100% { background-color: transparent; }
     }
 
-    #live-table tbody tr.goal-flash {
-      animation: flashBg 1.2s ease-in-out 0s 3;
-    }
-
-    /* SPONZOR – ŠANSABET.com */
+    /* SANSA BET LOGO */
     .sponsor-box {
       margin-top: 24px;
       display: flex;
       justify-content: center;
-      align-items: center;
     }
 
     .sansa-logo {
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      gap: 10px;
-      padding: 10px 22px;
+      justify-content: center;
+      padding: 6px 18px 4px;
       border-radius: 999px;
-      background: #facc15;
-      color: #111827;
-      text-transform: uppercase;
+      background: #facc15; /* žuta */
+      color: #000; /* crna slova */
       font-weight: 700;
-      letter-spacing: 0.1em;
-      box-shadow: 0 12px 28px rgba(250, 204, 21, 0.55);
-      animation: wave 3s ease-in-out infinite;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      animation: wave 3s infinite ease-in-out;
+      transform-origin: center;
     }
 
-    .sansa-main {
-      font-size: 0.9rem;
+    .sansa-logo span {
+      font-weight: 900;
+      margin-left: 4px;
     }
 
-    .sansa-since {
+    .sansa-logo small {
       font-size: 0.65rem;
-      font-weight: 600;
+      font-weight: 500;
+      margin-top: -2px;
     }
 
     @keyframes wave {
       0%   { transform: rotate(0deg); }
-      25%  { transform: rotate(1.8deg); }
+      25%  { transform: rotate(2deg); }
       50%  { transform: rotate(0deg); }
-      75%  { transform: rotate(-1.8deg); }
+      75%  { transform: rotate(-2deg); }
       100% { transform: rotate(0deg); }
     }
 
     @media (max-width: 640px) {
       iframe {
         min-height: 420px;
-      }
-
-      .tabs {
-        gap: 4px;
-      }
-
-      .tab-btn {
-        font-size: 0.75rem;
-        padding: 7px 6px;
       }
     }
   </style>
@@ -248,7 +239,7 @@
   <div class="page">
     <header>
       <h1>DADEKS TURNIR 2025</h1>
-      <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
+      <p>Rezultati, tabele, timovi, live score i završnica turnira</p>
     </header>
 
     <!-- TAB NAV -->
@@ -261,7 +252,7 @@
       <button class="tab-btn" data-target="finale">Finale</button>
     </div>
 
-    <!-- TIMOVI – GODIŠTA 2015–2018 -->
+    <!-- TIMOVI -->
     <section class="tab-content active" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -290,7 +281,7 @@
       </div>
     </section>
 
-    <!-- TABELE – GODIŠTA 2015–2018 -->
+    <!-- TABELE -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -324,7 +315,7 @@
       <div class="card">
         <h2>Live score</h2>
         <p class="hint">
-          Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google Sheets).
+          Rezultati se automatski osvježavaju svakih 2 sekunde (CSV iz Google Sheets).
         </p>
 
         <div id="live-status">
@@ -386,11 +377,11 @@
       </div>
     </section>
 
-    <!-- SPONZOR -->
+    <!-- SPONZOR LOGO -->
     <div class="sponsor-box">
       <div class="sansa-logo">
-        <span class="sansa-main">ŠANSABET.com</span>
-        <span class="sansa-since">SINCE 1997</span>
+        ŠANSA<span>BET.com</span>
+        <small>since 1997</small>
       </div>
     </div>
   </div>
@@ -459,215 +450,120 @@
       });
     });
 
-    <script>
-  // ------------------------------
-  // LIVE SCORE – CSV IZ SHEETS
-  // ------------------------------
-  const LIVE_SCORE_CSV_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
+    // ------------------------------
+    // LIVE SCORE – CSV IZ SHEETS
+    // ------------------------------
+    const LIVE_SCORE_CSV_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
-  const REFRESH_MS = 5000; // 5 sekundi
+    const REFRESH_MS = 2000; // 2 sekunde
 
-  const tableBody = document.getElementById("live-tbody");
-  const statusDot = document.getElementById("status-dot");
-  const statusText = document.getElementById("status-text");
-  const errorEl = document.getElementById("live-error");
+    const tableBody = document.getElementById("live-tbody");
+    const statusDot = document.getElementById("status-dot");
+    const statusText = document.getElementById("status-text");
+    const errorEl = document.getElementById("live-error");
 
-  let previousRows = null; // čuvamo prethodne redove samo da znamo šta se promijenilo
+    // Čuvamo prethodne rezultate po utakmici da znamo šta je promijenjeno
+    let previousScores = {};
 
-  function parseCsv(text) {
-    const lines = text.trim().split(/\r?\n/);
-    return lines.map((line) => line.split(","));
-  }
-
-  function renderLiveScore(rows) {
-    // prvi red je header
-    const dataRows = rows.slice(1);
-    tableBody.innerHTML = "";
-
-    dataRows.forEach((r, i) => {
-      const tr = document.createElement("tr");
-
-      // A: Utakmica, B: Domacin, C: Gost, D: Rezultat, E: Status, F: Godiste
-      const utakmica = r[0] || "";
-      const domacin = r[1] || "";
-      const gost = r[2] || "";
-      const rezultat = r[3] || "";
-      const status = r[4] || "";
-      const godiste = r[5] || "";
-
-      tr.innerHTML = `
-        <td>${i + 1}</td>
-        <td>${utakmica}</td>
-        <td>${domacin}</td>
-        <td>${gost}</td>
-        <td>${rezultat}</td>
-        <td>${status}</td>
-        <td>${godiste}</td>
-      `;
-
-      // PROVJERA DA LI SE RED PROMIJENIO U ODNOSU NA PRETHODNO STANJE
-      if (previousRows) {
-        const oldRow = previousRows[i] ? previousRows[i].join("|") : "";
-        const newRow = r.join("|");
-        if (oldRow && oldRow !== newRow) {
-          tr.classList.add("goal-flash");
-        }
-      }
-
-      tableBody.appendChild(tr);
-    });
-
-    // Sačuvamo trenutno stanje kao "prethodno" za sljedeće poređenje
-    previousRows = dataRows.map((row) => [...row]);
-
-    statusDot.style.background = "#22c55e";
-    statusText.textContent =
-      "Posljednje osvježavanje: " +
-      new Date().toLocaleTimeString("sr-RS");
-  }
-
-  async function loadLiveScore() {
-    try {
-      statusDot.style.background = "#f97316";
-      statusText.textContent = "Učitavanje...";
-      errorEl.style.display = "none";
-
-      const resp = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now(), {
-        cache: "no-store",
-      });
-      const text = await resp.text();
-      const rows = parseCsv(text);
-
-      if (!rows.length) {
-        tableBody.innerHTML = "";
-        errorEl.style.display = "block";
-        errorEl.textContent = "Nema podataka u live score tabeli.";
-        statusDot.style.background = "#ef4444";
-        statusText.textContent = "Nema podataka";
-        return;
-      }
-
-      renderLiveScore(rows);
-    } catch (err) {
-      console.error("Live score error", err);
-      errorEl.style.display = "block";
-      errorEl.textContent = "Greška pri učitavanju live podataka.";
-      statusDot.style.background = "#ef4444";
-      statusText.textContent = "Greška";
+    function parseCsv(text) {
+      const lines = text.trim().split(/\r?\n/);
+      return lines.map((line) => line.split(","));
     }
-  }
 
-  function startLiveScore() {
-    loadLiveScore();
-    setInterval(loadLiveScore, REFRESH_MS);
-  }
+    function renderLiveScore(rows) {
+      // prvi red je header
+      const dataRows = rows.slice(1);
+      tableBody.innerHTML = "";
 
-  document.addEventListener("DOMContentLoaded", startLiveScore);
-</script>
-<script>
-  // ------------------------------
-  // LIVE SCORE – CSV IZ SHEETS
-  // ------------------------------
-  const LIVE_SCORE_CSV_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
+      const newScores = {};
 
-  const REFRESH_MS = 5000; // 5 sekundi
+      dataRows.forEach((r, i) => {
+        const tr = document.createElement("tr");
 
-  const tableBody = document.getElementById("live-tbody");
-  const statusDot = document.getElementById("status-dot");
-  const statusText = document.getElementById("status-text");
-  const errorEl = document.getElementById("live-error");
+        const utakmica = r[0] || "";
+        const domacin = r[1] || "";
+        const gost = r[2] || "";
+        const rezultat = r[3] || "";
+        const status = r[4] || "";
+        const godiste = r[5] || "";
 
-  let previousRows = null; // čuvamo prethodne redove samo da znamo šta se promijenilo
+        // ključ po utakmici + godistu
+        const key = utakmica + "|" + domacin + "|" + gost + "|" + godiste;
 
-  function parseCsv(text) {
-    const lines = text.trim().split(/\r?\n/);
-    return lines.map((line) => line.split(","));
-  }
+        newScores[key] = rezultat;
 
-  function renderLiveScore(rows) {
-    // prvi red je header
-    const dataRows = rows.slice(1);
-    tableBody.innerHTML = "";
+        // ako se promijenio rezultat i nije prazan -> flash
+        const changed =
+          rezultat &&
+          previousScores[key] !== undefined &&
+          previousScores[key] !== rezultat;
 
-    dataRows.forEach((r, i) => {
-      const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${utakmica}</td>
+          <td>${domacin}</td>
+          <td>${gost}</td>
+          <td>${rezultat}</td>
+          <td>${status}</td>
+          <td>${godiste}</td>
+        `;
 
-      // A: Utakmica, B: Domacin, C: Gost, D: Rezultat, E: Status, F: Godiste
-      const utakmica = r[0] || "";
-      const domacin = r[1] || "";
-      const gost = r[2] || "";
-      const rezultat = r[3] || "";
-      const status = r[4] || "";
-      const godiste = r[5] || "";
-
-      tr.innerHTML = `
-        <td>${i + 1}</td>
-        <td>${utakmica}</td>
-        <td>${domacin}</td>
-        <td>${gost}</td>
-        <td>${rezultat}</td>
-        <td>${status}</td>
-        <td>${godiste}</td>
-      `;
-
-      // PROVJERA DA LI SE RED PROMIJENIO U ODNOSU NA PRETHODNO STANJE
-      if (previousRows) {
-        const oldRow = previousRows[i] ? previousRows[i].join("|") : "";
-        const newRow = r.join("|");
-        if (oldRow && oldRow !== newRow) {
-          tr.classList.add("goal-flash");
+        if (changed) {
+          tr.classList.add("score-flash");
+          // posle animacije skini klasu
+          setTimeout(() => tr.classList.remove("score-flash"), 1200);
         }
-      }
 
-      tableBody.appendChild(tr);
-    });
-
-    // Sačuvamo trenutno stanje kao "prethodno" za sljedeće poređenje
-    previousRows = dataRows.map((row) => [...row]);
-
-    statusDot.style.background = "#22c55e";
-    statusText.textContent =
-      "Posljednje osvježavanje: " +
-      new Date().toLocaleTimeString("sr-RS");
-  }
-
-  async function loadLiveScore() {
-    try {
-      statusDot.style.background = "#f97316";
-      statusText.textContent = "Učitavanje...";
-      errorEl.style.display = "none";
-
-      const resp = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now(), {
-        cache: "no-store",
+        tableBody.appendChild(tr);
       });
-      const text = await resp.text();
-      const rows = parseCsv(text);
 
-      if (!rows.length) {
-        tableBody.innerHTML = "";
-        errorEl.style.display = "block";
-        errorEl.textContent = "Nema podataka u live score tabeli.";
-        statusDot.style.background = "#ef4444";
-        statusText.textContent = "Nema podataka";
-        return;
-      }
+      // upiši nove rezultate kao "prethodne" za naredno osvježavanje
+      previousScores = newScores;
 
-      renderLiveScore(rows);
-    } catch (err) {
-      console.error("Live score error", err);
-      errorEl.style.display = "block";
-      errorEl.textContent = "Greška pri učitavanju live podataka.";
-      statusDot.style.background = "#ef4444";
-      statusText.textContent = "Greška";
+      statusDot.style.background = "#22c55e";
+      statusText.textContent =
+        "Posljednje osvježavanje: " +
+        new Date().toLocaleTimeString("sr-RS");
     }
-  }
 
-  function startLiveScore() {
-    loadLiveScore();
-    setInterval(loadLiveScore, REFRESH_MS);
-  }
+    async function loadLiveScore() {
+      try {
+        statusDot.style.background = "#f97316";
+        statusText.textContent = "Učitavanje...";
+        errorEl.style.display = "none";
 
-  document.addEventListener("DOMContentLoaded", startLiveScore);
-</script>
+        const resp = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now(), {
+          cache: "no-store",
+        });
+        const text = await resp.text();
+        const rows = parseCsv(text);
+
+        if (!rows.length) {
+          tableBody.innerHTML = "";
+          errorEl.style.display = "block";
+          errorEl.textContent = "Nema podataka u live score tabeli.";
+          statusDot.style.background = "#ef4444";
+          statusText.textContent = "Nema podataka";
+          return;
+        }
+
+        renderLiveScore(rows);
+      } catch (err) {
+        console.error("Live score error", err);
+        errorEl.style.display = "block";
+        errorEl.textContent = "Greška pri učitavanju live podataka.";
+        statusDot.style.background = "#ef4444";
+        statusText.textContent = "Greška";
+      }
+    }
+
+    function startLiveScore() {
+      loadLiveScore();
+      setInterval(loadLiveScore, REFRESH_MS);
+    }
+
+    document.addEventListener("DOMContentLoaded", startLiveScore);
+  </script>
+</body>
+</html>
