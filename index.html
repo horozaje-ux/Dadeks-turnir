@@ -88,7 +88,7 @@
       border: 1px solid #1f2937;
       padding: 14px 14px 18px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     h2 {
@@ -174,57 +174,48 @@
       color: #f97316;
     }
 
-    /* Highlight kad se rezultat promijeni */
-    .score-flash {
-      animation: scoreFlash 1.2s ease-out;
+    /* ŠANSABET LOGO – ŽUTO / CRNO, TALASA KAO ZASTAVA */
+    .sponsor-card {
+      margin-top: 10px;
+      text-align: center;
     }
 
-    @keyframes scoreFlash {
-      0%   { background-color: #facc15; }
-      100% { background-color: transparent; }
-    }
-
-    /* SANSA BET LOGO */
-    .sponsor-box {
-      margin-top: 24px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .sansa-logo {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 18px 4px;
+    .sansa-banner {
+      display: inline-block;
+      padding: 8px 26px 10px;
       border-radius: 999px;
-      background: #facc15; /* žuta */
-      color: #000; /* crna slova */
+      background: linear-gradient(90deg, #fde047, #facc15);
+      color: #000;
       font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.06em;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-      animation: wave 3s infinite ease-in-out;
-      transform-origin: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      position: relative;
+      overflow: hidden;
+      animation: flagWave 2.8s ease-in-out infinite;
     }
 
-    .sansa-logo span {
-      font-weight: 900;
-      margin-left: 4px;
+    .sansa-main {
+      font-size: 0.9rem;
     }
 
-    .sansa-logo small {
-      font-size: 0.65rem;
-      font-weight: 500;
-      margin-top: -2px;
+    .sansa-dot {
+      font-size: 0.9rem;
     }
 
-    @keyframes wave {
-      0%   { transform: rotate(0deg); }
-      25%  { transform: rotate(2deg); }
-      50%  { transform: rotate(0deg); }
-      75%  { transform: rotate(-2deg); }
-      100% { transform: rotate(0deg); }
+    .sansa-since {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      margin-top: 2px;
+    }
+
+    @keyframes flagWave {
+      0%   { transform: skewX(0deg) translateY(0); }
+      25%  { transform: skewX(-2deg) translateY(-1px); }
+      50%  { transform: skewX(0deg) translateY(0); }
+      75%  { transform: skewX(2deg) translateY(1px); }
+      100% { transform: skewX(0deg) translateY(0); }
     }
 
     @media (max-width: 640px) {
@@ -239,7 +230,7 @@
   <div class="page">
     <header>
       <h1>DADEKS TURNIR 2025</h1>
-      <p>Rezultati, tabele, timovi, live score i završnica turnira</p>
+      <p>Rezultati, tabele, timovi i live score za godišta 2015–2018</p>
     </header>
 
     <!-- TAB NAV -->
@@ -247,12 +238,12 @@
       <button class="tab-btn active" data-target="timovi">Timovi</button>
       <button class="tab-btn" data-target="tabele">Tabele</button>
       <button class="tab-btn" data-target="live">Live score</button>
-      <button class="tab-btn" data-target="cetvrt">Četvrt finale</button>
-      <button class="tab-btn" data-target="polu">Polu finale</button>
+      <button class="tab-btn" data-target="cetvrt">Četvrt-finale</button>
+      <button class="tab-btn" data-target="polu">Polu-finale</button>
       <button class="tab-btn" data-target="finale">Finale</button>
     </div>
 
-    <!-- TIMOVI -->
+    <!-- TIMOVI – GODIŠTA 2015–2018 -->
     <section class="tab-content active" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -281,7 +272,7 @@
       </div>
     </section>
 
-    <!-- TABELE -->
+    <!-- TABELE – GODIŠTA 2015–2018 -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -315,7 +306,7 @@
       <div class="card">
         <h2>Live score</h2>
         <p class="hint">
-          Rezultati se automatski osvježavaju svakih 2 sekunde (CSV iz Google Sheets).
+          Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google Sheets).
         </p>
 
         <div id="live-status">
@@ -329,11 +320,11 @@
               <tr>
                 <th>#</th>
                 <th>Utakmica</th>
-                <th>Domaćin</th>
+                <th>Domacin</th>
                 <th>Gost</th>
                 <th>Rezultat</th>
                 <th>Status</th>
-                <th>Godište</th>
+                <th>Godiste</th>
               </tr>
             </thead>
             <tbody id="live-tbody"></tbody>
@@ -344,10 +335,10 @@
       </div>
     </section>
 
-    <!-- ČETVRT FINALE -->
+    <!-- ČETVRT-FINALE -->
     <section class="tab-content" id="cetvrt">
       <div class="card">
-        <h2>Četvrt finale</h2>
+        <h2>Četvrt-finale</h2>
         <iframe
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true"
           loading="lazy">
@@ -355,10 +346,10 @@
       </div>
     </section>
 
-    <!-- POLU FINALE -->
+    <!-- POLU-FINALE -->
     <section class="tab-content" id="polu">
       <div class="card">
-        <h2>Polu finale</h2>
+        <h2>Polu-finale</h2>
         <iframe
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true"
           loading="lazy">
@@ -377,13 +368,13 @@
       </div>
     </section>
 
-    <!-- SPONZOR LOGO -->
-    <div class="sponsor-box">
-      <div class="sansa-logo">
-        ŠANSA<span>BET.com</span>
-        <small>since 1997</small>
+    <!-- ŠANSABET LOGO NA DNU -->
+    <section class="card sponsor-card">
+      <div class="sansa-banner">
+        <span class="sansa-main">ŠANSABET</span><span class="sansa-dot">.com</span>
+        <span class="sansa-since">SINCE 1997</span>
       </div>
-    </div>
+    </section>
   </div>
 
   <script>
@@ -456,15 +447,12 @@
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
-    const REFRESH_MS = 2000; // 2 sekunde
+    const REFRESH_MS = 5000; // 5 sekundi
 
     const tableBody = document.getElementById("live-tbody");
     const statusDot = document.getElementById("status-dot");
     const statusText = document.getElementById("status-text");
     const errorEl = document.getElementById("live-error");
-
-    // Čuvamo prethodne rezultate po utakmici da znamo šta je promijenjeno
-    let previousScores = {};
 
     function parseCsv(text) {
       const lines = text.trim().split(/\r?\n/);
@@ -476,28 +464,16 @@
       const dataRows = rows.slice(1);
       tableBody.innerHTML = "";
 
-      const newScores = {};
-
       dataRows.forEach((r, i) => {
         const tr = document.createElement("tr");
 
+        // A: Utakmica, B: Domacin, C: Gost, D: Rezultat, E: Status, F: Godiste
         const utakmica = r[0] || "";
         const domacin = r[1] || "";
         const gost = r[2] || "";
         const rezultat = r[3] || "";
         const status = r[4] || "";
         const godiste = r[5] || "";
-
-        // ključ po utakmici + godistu
-        const key = utakmica + "|" + domacin + "|" + gost + "|" + godiste;
-
-        newScores[key] = rezultat;
-
-        // ako se promijenio rezultat i nije prazan -> flash
-        const changed =
-          rezultat &&
-          previousScores[key] !== undefined &&
-          previousScores[key] !== rezultat;
 
         tr.innerHTML = `
           <td>${i + 1}</td>
@@ -508,18 +484,8 @@
           <td>${status}</td>
           <td>${godiste}</td>
         `;
-
-        if (changed) {
-          tr.classList.add("score-flash");
-          // posle animacije skini klasu
-          setTimeout(() => tr.classList.remove("score-flash"), 1200);
-        }
-
         tableBody.appendChild(tr);
       });
-
-      // upiši nove rezultate kao "prethodne" za naredno osvježavanje
-      previousScores = newScores;
 
       statusDot.style.background = "#22c55e";
       statusText.textContent =
