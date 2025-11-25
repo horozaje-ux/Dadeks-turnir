@@ -88,7 +88,7 @@
       border: 1px solid #1f2937;
       padding: 14px 14px 18px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     h2 {
@@ -174,53 +174,71 @@
       color: #f97316;
     }
 
-    /* ŠANSABET LOGO – ŽUTO / CRNO, TALASA KAO ZASTAVA */
-    .sponsor-card {
-      margin-top: 10px;
-      text-align: center;
+    /* FLASH KAD PADNE GOL (PROMJENA REDA) */
+    @keyframes flashBg {
+      0%   { background-color: #facc15; }
+      25%  { background-color: #fbbf24; }
+      50%  { background-color: #0f172a; }
+      75%  { background-color: #facc15; }
+      100% { background-color: #0f172a; }
     }
 
-    .sansa-banner {
-      display: inline-block;
-      padding: 8px 26px 10px;
+    #live-table tbody tr.goal-flash {
+      animation: flashBg 1.2s ease-in-out 0s 3;
+    }
+
+    /* SPONZOR – ŠANSABET.com */
+    .sponsor-box {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sansa-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #fde047, #facc15);
-      color: #000;
-      font-weight: 700;
+      background: #facc15;
+      color: #111827;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      position: relative;
-      overflow: hidden;
-      animation: flagWave 2.8s ease-in-out infinite;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      box-shadow: 0 12px 28px rgba(250, 204, 21, 0.55);
+      animation: wave 3s ease-in-out infinite;
     }
 
     .sansa-main {
       font-size: 0.9rem;
     }
 
-    .sansa-dot {
-      font-size: 0.9rem;
-    }
-
     .sansa-since {
-      display: block;
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.2em;
-      margin-top: 2px;
     }
 
-    @keyframes flagWave {
-      0%   { transform: skewX(0deg) translateY(0); }
-      25%  { transform: skewX(-2deg) translateY(-1px); }
-      50%  { transform: skewX(0deg) translateY(0); }
-      75%  { transform: skewX(2deg) translateY(1px); }
-      100% { transform: skewX(0deg) translateY(0); }
+    @keyframes wave {
+      0%   { transform: rotate(0deg); }
+      25%  { transform: rotate(1.8deg); }
+      50%  { transform: rotate(0deg); }
+      75%  { transform: rotate(-1.8deg); }
+      100% { transform: rotate(0deg); }
     }
 
     @media (max-width: 640px) {
       iframe {
         min-height: 420px;
+      }
+
+      .tabs {
+        gap: 4px;
+      }
+
+      .tab-btn {
+        font-size: 0.75rem;
+        padding: 7px 6px;
       }
     }
   </style>
@@ -238,8 +256,8 @@
       <button class="tab-btn active" data-target="timovi">Timovi</button>
       <button class="tab-btn" data-target="tabele">Tabele</button>
       <button class="tab-btn" data-target="live">Live score</button>
-      <button class="tab-btn" data-target="cetvrt">Četvrt-finale</button>
-      <button class="tab-btn" data-target="polu">Polu-finale</button>
+      <button class="tab-btn" data-target="cetvrt">Četvrt finale</button>
+      <button class="tab-btn" data-target="polu">Polu finale</button>
       <button class="tab-btn" data-target="finale">Finale</button>
     </div>
 
@@ -320,11 +338,11 @@
               <tr>
                 <th>#</th>
                 <th>Utakmica</th>
-                <th>Domacin</th>
+                <th>Domaćin</th>
                 <th>Gost</th>
                 <th>Rezultat</th>
                 <th>Status</th>
-                <th>Godiste</th>
+                <th>Godište</th>
               </tr>
             </thead>
             <tbody id="live-tbody"></tbody>
@@ -335,10 +353,10 @@
       </div>
     </section>
 
-    <!-- ČETVRT-FINALE -->
+    <!-- ČETVRT FINALE -->
     <section class="tab-content" id="cetvrt">
       <div class="card">
-        <h2>Četvrt-finale</h2>
+        <h2>Četvrt finale</h2>
         <iframe
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true"
           loading="lazy">
@@ -346,10 +364,10 @@
       </div>
     </section>
 
-    <!-- POLU-FINALE -->
+    <!-- POLU FINALE -->
     <section class="tab-content" id="polu">
       <div class="card">
-        <h2>Polu-finale</h2>
+        <h2>Polu finale</h2>
         <iframe
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true"
           loading="lazy">
@@ -368,13 +386,13 @@
       </div>
     </section>
 
-    <!-- ŠANSABET LOGO NA DNU -->
-    <section class="card sponsor-card">
-      <div class="sansa-banner">
-        <span class="sansa-main">ŠANSABET</span><span class="sansa-dot">.com</span>
+    <!-- SPONZOR -->
+    <div class="sponsor-box">
+      <div class="sansa-logo">
+        <span class="sansa-main">ŠANSABET.com</span>
         <span class="sansa-since">SINCE 1997</span>
       </div>
-    </section>
+    </div>
   </div>
 
   <script>
@@ -442,19 +460,19 @@
     });
 
     // ------------------------------
-    // LIVE SCORE – CSV IZ SHEETS
+    // LIVE SCORE – CSV IZ SHEETS + FLASH KAD SE PROMIJENI RED
     // ------------------------------
     const LIVE_SCORE_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/1M5G6aIGTfSoQmwjMCkt0m1iETAGXBi_MkOpY6TGvM1M/export?format=csv&gid=1224715353";
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
-
-    const REFRESH_MS = 2000; // 2 sekunde
-
+    const REFRESH_MS = 5000; // 5 sekundi
 
     const tableBody = document.getElementById("live-tbody");
     const statusDot = document.getElementById("status-dot");
     const statusText = document.getElementById("status-text");
     const errorEl = document.getElementById("live-error");
+
+    let previousRows = [];
 
     function parseCsv(text) {
       const lines = text.trim().split(/\r?\n/);
@@ -464,6 +482,8 @@
     function renderLiveScore(rows) {
       // prvi red je header
       const dataRows = rows.slice(1);
+      const newRowsFlat = dataRows.map((r) => (r || []).join("|"));
+
       tableBody.innerHTML = "";
 
       dataRows.forEach((r, i) => {
@@ -486,8 +506,19 @@
           <td>${status}</td>
           <td>${godiste}</td>
         `;
+
+        // Ako imamo prethodne podatke i ovaj red se promijenio -> flash
+        if (previousRows.length && previousRows[i] !== newRowsFlat[i]) {
+          tr.classList.add("goal-flash");
+          setTimeout(() => {
+            tr.classList.remove("goal-flash");
+          }, 3600); // oko 3.6 sekunde treperi
+        }
+
         tableBody.appendChild(tr);
       });
+
+      previousRows = newRowsFlat;
 
       statusDot.style.background = "#22c55e";
       statusText.textContent =
@@ -535,4 +566,3 @@
   </script>
 </body>
 </html>
-
