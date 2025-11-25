@@ -88,6 +88,7 @@
       border: 1px solid #1f2937;
       padding: 14px 14px 18px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
+      margin-bottom: 24px;
     }
 
     h2 {
@@ -173,65 +174,42 @@
       color: #f97316;
     }
 
-    /* SPONZOR – ŠANSABET.com */
-    .sponsor-wrapper {
-      margin-top: 40px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .sponsor-flag {
-      position: relative;
-      padding: 18px 26px 14px;
-      background: #facc15;           /* žuta */
-      color: #0f172a;                /* skoro crna */
-      border-radius: 18px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-      min-width: 260px;
-      max-width: 360px;
-      text-align: center;
-      animation: flagWave 3s ease-in-out infinite;
-      transform-origin: center;
-      overflow: hidden;
-    }
-
-    .sponsor-main {
-      display: block;
-      font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: 0.12em;
-    }
-
-    .sponsor-main .dot {
-      font-weight: 700;
-    }
-
-    .sponsor-sub {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 2px 14px 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      background: #111827;
-      color: #facc15;
-      border-radius: 999px;
-    }
-
-    /* Talasanje zastave */
-    @keyframes flagWave {
-      0%   { transform: skewX(0deg) translateY(0); }
-      25%  { transform: skewX(-2deg) translateY(-3px); }
-      50%  { transform: skewX(1.5deg) translateY(0); }
-      75%  { transform: skewX(-1deg) translateY(2px); }
-      100% { transform: skewX(0deg) translateY(0); }
-    }
-
     @media (max-width: 640px) {
       iframe {
         min-height: 420px;
       }
+    }
+
+    /* ŠANSABET sponsor – žuto/crni, talasa kao zastava */
+    .sansa-wrapper {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .sansa-flag {
+      background: #facc15; /* žuta */
+      color: #111827;      /* skoro crna */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 10px 28px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+      animation: flagWave 2.8s infinite ease-in-out;
+      transform-origin: left center;
+      border: 2px solid #fde68a;
+    }
+
+    @keyframes flagWave {
+      0%   { transform: skewX(0deg) translateY(0); }
+      20%  { transform: skewX(-3deg) translateY(-1px); }
+      40%  { transform: skewX(2deg) translateY(1px); }
+      60%  { transform: skewX(-2deg) translateY(-1px); }
+      80%  { transform: skewX(3deg) translateY(1px); }
+      100% { transform: skewX(0deg) translateY(0); }
     }
   </style>
 </head>
@@ -248,9 +226,12 @@
       <button class="tab-btn active" data-target="timovi">Timovi</button>
       <button class="tab-btn" data-target="tabele">Tabele</button>
       <button class="tab-btn" data-target="live">Live score</button>
+      <button class="tab-btn" data-target="cetvrt">Četvrt-finale</button>
+      <button class="tab-btn" data-target="polu">Polu-finale</button>
+      <button class="tab-btn" data-target="finale">Finale</button>
     </div>
 
-    <!-- TIMOVI -->
+    <!-- TIMOVI – GODIŠTA 2015–2018 -->
     <section class="tab-content active" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -279,7 +260,7 @@
       </div>
     </section>
 
-    <!-- TABELE -->
+    <!-- TABELE – GODIŠTA 2015–2018 -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -342,13 +323,46 @@
       </div>
     </section>
 
-    <!-- SPONZOR – ŠANSABET.com -->
-    <div class="sponsor-wrapper">
-      <div class="sponsor-flag">
-        <span class="sponsor-main">ŠANSABET<span class="dot">.com</span></span>
-        <span class="sponsor-sub">SINCE 1998</span>
+    <!-- ČETVRT-FINALE -->
+    <section class="tab-content" id="cetvrt">
+      <div class="card">
+        <h2>Četvrt-finale</h2>
+        <iframe
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true"
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- POLU-FINALE -->
+    <section class="tab-content" id="polu">
+      <div class="card">
+        <h2>Polu-finale</h2>
+        <iframe
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true"
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- FINALE -->
+    <section class="tab-content" id="finale">
+      <div class="card">
+        <h2>Finale</h2>
+        <iframe
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=533875103&single=true"
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- SPONZOR – ŠANSABET.COM -->
+    <div class="sansa-wrapper">
+      <div class="sansa-flag">
+        ŠANSABET.COM
       </div>
     </div>
+
   </div>
 
   <script>
