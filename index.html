@@ -25,6 +25,9 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -178,6 +181,49 @@
         min-height: 420px;
       }
     }
+
+    /* --------------------------
+       SPONZOR – ŠANSABET ZASTAVA
+       -------------------------- */
+    .sponsor-bar {
+      margin-top: 32px;
+      padding: 16px 0 6px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .sponsor-inner {
+      padding: 10px 26px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid #374151;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .sponsor-logo {
+      max-height: 160px;      /* ovo je onih „160“ :) */
+      display: block;
+      animation: sansaWave 2.8s infinite ease-in-out;
+      transform-origin: left center;
+    }
+
+    @keyframes sansaWave {
+      0% {
+        transform: perspective(900px) rotateY(0deg) translateY(0px);
+      }
+      25% {
+        transform: perspective(900px) rotateY(6deg) translateY(-2px);
+      }
+      50% {
+        transform: perspective(900px) rotateY(0deg) translateY(0px);
+      }
+      75% {
+        transform: perspective(900px) rotateY(-6deg) translateY(2px);
+      }
+      100% {
+        transform: perspective(900px) rotateY(0deg) translateY(0px);
+      }
+    }
   </style>
 </head>
 
@@ -195,7 +241,7 @@
       <button class="tab-btn" data-target="live">Live score</button>
     </div>
 
-    <!-- TIMOVI – GODIŠTA 2015–2018 (KAO PRIJE) -->
+    <!-- TIMOVI -->
     <section class="tab-content active" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -224,7 +270,7 @@
       </div>
     </section>
 
-    <!-- TABELE – GODIŠTA 2015–2018 (KAO PRIJE) -->
+    <!-- TABELE -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -253,7 +299,7 @@
       </div>
     </section>
 
-    <!-- LIVE SCORE – NOVO -->
+    <!-- LIVE SCORE -->
     <section class="tab-content" id="live">
       <div class="card">
         <h2>Live score</h2>
@@ -286,12 +332,23 @@
         <p id="live-error">Greška pri učitavanju live podataka.</p>
       </div>
     </section>
+
+    <!-- SPONZOR – LOGO NA DNU, VIDI SE NA SVIM TABOVIMA -->
+    <div class="sponsor-bar">
+      <div class="sponsor-inner">
+        <!-- OVDJE STAVI TAČNO IME FAJLA LOGA U REPO-U -->
+        <img
+          class="sponsor-logo"
+          src="IMG_7887.PNG"
+
+          alt="Šansabet.com – glavni sponzor"
+        />
+      </div>
+    </div>
   </div>
 
   <script>
-    // ------------------------------
-    // TIMOVI – LINKOVI PO GODIŠTU (STARI KOJI SU RADILI)
-    // ------------------------------
+    // TIMOVI – LINKOVI PO GODIŠTU
     const GEN_URLS = {
       "2015":
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
@@ -311,9 +368,7 @@
       iframe.src = GEN_URLS[gen];
     }
 
-    // ------------------------------
-    // TABELE – LINKOVI PO GODIŠTU (STARI KOJI SU RADILI)
-    // ------------------------------
+    // TABELE – LINKOVI PO GODIŠTU
     const TABLE_URLS = {
       "2015":
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false",
@@ -333,9 +388,7 @@
       iframe.src = TABLE_URLS[gen];
     }
 
-    // ------------------------------
     // TABOVI
-    // ------------------------------
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const targetId = btn.dataset.target;
@@ -352,9 +405,7 @@
       });
     });
 
-    // ------------------------------
     // LIVE SCORE – CSV IZ SHEETS
-    // ------------------------------
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pub?gid=1224715353&single=true&output=csv";
 
