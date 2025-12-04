@@ -150,7 +150,8 @@
     <div class="card">
       <h2>Unos utakmice</h2>
       <p class="hint">
-        Popuni polja, klikni <strong>Dodaj utakmicu</strong>. Na dnu će se praviti JSON koji lijepiš u <code>matches.json</code>.
+        Izaberi godište, grupu i timove, upiši golove, klikni <strong>Dodaj utakmicu</strong>.
+        Na dnu će se praviti JSON koji lijepiš u <code>matches.json</code>.
       </p>
 
       <div class="row">
@@ -176,12 +177,16 @@
 
       <div class="row">
         <div class="col-2">
-          <label for="domacin">Domaćin (ime tima tačno kao u kodu)</label>
-          <input id="domacin" type="text" placeholder="npr. Dadeks" />
+          <label for="domacinSelect">Domaćin (tim iz grupe)</label>
+          <select id="domacinSelect">
+            <option value="">Prvo izaberi godište i grupu</option>
+          </select>
         </div>
         <div class="col-2">
-          <label for="gost">Gost (ime tima tačno kao u kodu)</label>
-          <input id="gost" type="text" placeholder="npr. Buducnost" />
+          <label for="gostSelect">Gost (tim iz grupe)</label>
+          <select id="gostSelect">
+            <option value="">Prvo izaberi godište i grupu</option>
+          </select>
         </div>
       </div>
 
@@ -205,7 +210,7 @@
     <div class="card">
       <h2>Unesene utakmice (pregled)</h2>
       <p class="hint">
-        Provjeri da li je sve tačno (godiste, grupa, imena timova, golovi). Ovo je samo pregled – stvarni fajl je dole u JSON polju.
+        Provjeri da li je sve tačno (godište, grupa, timovi, golovi). Ovo je samo pregled – stvarni fajl je dole u JSON polju.
       </p>
 
       <div style="overflow-x:auto;">
@@ -243,12 +248,40 @@
   </div>
 
   <script>
+    // TIMOVI – ISTO KAO U index.html
+    const GROUPS_DATA = {
+      "2015": {
+        "A": ["Dadeks", "Buducnost", "Akademik Nk", "Desetka Bar", "Fa Kerver 19"],
+        "B": ["Pristina", "Fk Berane", "Župa Nk", "Bernabeu", "Danilovgrad 2"],
+        "C": ["Herceg Novi", "Karioke Nk", "Danilovgrad 1", "Ilarion", "Podgorica"],
+        "D": ["Fenix", "Otrant", "Barsa Bar", "Titan", "Porto"],
+      },
+      "2016": {
+        "A": ["Dadeks", "Durmitor", "Centar", "As 1", "Akademik Nk"],
+        "B": ["Herceg Novi", "Buducnost", "Danilovgrad", "Desetka"],
+        "C": ["Otrant", "Fudbalito", "Porto", "Zupa", "Bernabeu"],
+        "D": ["Onogost", "Barsa", "Stari aerodrom", "As 2", "Akademija Berane"],
+      },
+      "2017": {
+        "A": ["Dadeks", "Karioke Nk", "Titan", "Bernabeu 1", "Tuzi"],
+        "B": ["Stari Aerodrom", "Porto", "Fudbalito", "As", "Desetka"],
+        "C": ["Nacional", "Berane", "Cijevna", "Danilovgrad", "Ilarion"],
+        "D": ["Zlatna lopta", "Ibar", "Buducnost", "Bernabeu 2", "Centar"],
+      },
+      "2018": {
+        "A": ["Dadeks", "Desetka", "Jezero", "Fudbalito 3"],
+        "B": ["Zlatna lopta", "Fudbalito 2", "Arena", "Fenix"],
+        "C": ["Bernabeu", "Fa Kerver", "Zupa", "Porto"],
+        "D": ["Fudbalito 1", "Karioke Nk", "Akademija Berane", "Stari aerodrom"],
+      }
+    };
+
     const matches = [];
 
     const godisteEl = document.getElementById("godiste");
     const grupaEl = document.getElementById("grupa");
-    const domacinEl = document.getElementById("domacin");
-    const gostEl = document.getElementById("gost");
+    const domacinSelect = document.getElementById("domacinSelect");
+    const gostSelect = document.getElementById("gostSelect");
     const golDomEl = document.getElementById("golDom");
     const golGostEl = document.getElementById("golGost");
 
@@ -263,6 +296,41 @@
       if (msg) {
         setTimeout(() => { formStatusEl.textContent = ""; }, 4000);
       }
+    }
+
+    function getTeamsForCurrentSelection() {
+      const year = godisteEl.value;
+      const group = grupaEl.value;
+      if (!GROUPS_DATA[year] || !GROUPS_DATA[year][group]) return [];
+      return GROUPS_DATA[year][group];
+    }
+
+    function refreshTeamSelects() {
+      const teams = getTeamsForCurrentSelection();
+
+      domacinSelect.innerHTML = "";
+      gostSelect.innerHTML = "";
+
+      if (!teams.length) {
+        domacinSelect.innerHTML = '<option value="">Nema timova za ovo godište/grupu</option>';
+        gostSelect.innerHTML = '<option value="">Nema timova za ovo godište/grupu</option>';
+        return;
+      }
+
+      domacinSelect.innerHTML = '<option value="">-- izaberi domaćina --</option>';
+      gostSelect.innerHTML = '<option value="">-- izaberi gosta --</option>';
+
+      teams.forEach(team => {
+        const opt1 = document.createElement("option");
+        opt1.value = team;
+        opt1.textContent = team;
+        domacinSelect.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = team;
+        opt2.textContent = team;
+        gostSelect.appendChild(opt2);
+      });
     }
 
     function updateMatchesTable() {
@@ -294,13 +362,23 @@
     document.getElementById("add-match-btn").addEventListener("click", () => {
       const godiste = godisteEl.value.trim();
       const grupa = grupaEl.value.trim();
-      const domacin = domacinEl.value.trim();
-      const gost = gostEl.value.trim();
+      const domacin = domacinSelect.value;
+      const gost = gostSelect.value;
       const golDom = golDomEl.value;
       const golGost = golGostEl.value;
 
-      if (!godiste || !grupa || !domacin || !gost) {
-        showFormStatus("Popuni sva polja (godište, grupa, domaćin, gost).", true);
+      if (!godiste || !grupa) {
+        showFormStatus("Izaberi godište i grupu.", true);
+        return;
+      }
+
+      if (!domacin || !gost) {
+        showFormStatus("Izaberi oba tima (domaćin i gost).", true);
+        return;
+      }
+
+      if (domacin === gost) {
+        showFormStatus("Domaćin i gost ne mogu biti isti tim.", true);
         return;
       }
 
@@ -322,8 +400,6 @@
       updateMatchesTable();
       updateJsonOutput();
 
-      domacinEl.value = "";
-      gostEl.value = "";
       golDomEl.value = 0;
       golGostEl.value = 0;
 
@@ -369,7 +445,12 @@
       setTimeout(() => { jsonStatusEl.textContent = ""; }, 4000);
     });
 
+    // promjena godišta ili grupe -> osvježi timove
+    godisteEl.addEventListener("change", refreshTeamSelects);
+    grupaEl.addEventListener("change", refreshTeamSelects);
+
     // inicijalno stanje
+    refreshTeamSelects();
     updateMatchesTable();
     updateJsonOutput();
   </script>
