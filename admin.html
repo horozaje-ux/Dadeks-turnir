@@ -30,7 +30,7 @@
       margin: 16px 0 8px;
     }
     .hint {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: #9ca3af;
     }
     .card {
@@ -43,19 +43,19 @@
     }
     label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       margin-bottom: 4px;
       color: #9ca3af;
     }
     input, select {
       width: 100%;
-      padding: 6px 8px;
+      padding: 10px 10px;
       border-radius: 10px;
       border: 1px solid #1f2937;
       background: #020617;
       color: #e5e7eb;
-      font-size: 0.85rem;
-      margin-bottom: 10px;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
     }
     .row {
       display: flex;
@@ -68,8 +68,8 @@
     button {
       border-radius: 999px;
       border: none;
-      padding: 8px 14px;
-      font-size: 0.9rem;
+      padding: 10px 16px;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: 0.15s;
     }
@@ -121,7 +121,7 @@
       border: 1px solid #1f2937;
       padding: 8px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       resize: vertical;
     }
 
@@ -135,7 +135,14 @@
     }
 
     @media (max-width: 640px) {
+      .page { padding: 10px; }
+      h1 { font-size: 1.3rem; }
       .col-2, .col-3 { flex: 1 1 100%; }
+      table { font-size: 0.75rem; }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-right: 0;
+      }
     }
   </style>
 </head>
@@ -237,7 +244,8 @@
     <div class="card">
       <h2>JSON za <code>matches.json</code></h2>
       <p class="hint">
-        Ovo kopiraš kompletno u <strong>matches.json</strong> na GitHub-u (zamijeniš stari sadržaj).
+        Ovo kopiraš kompletno u <strong>matches.json</strong> na GitHub-u (zamijeniš stari sadržaj)
+        ili koristiš <strong>Download</strong> pa uploaduješ fajl.
       </p>
 
       <textarea id="json-output">[]</textarea>
