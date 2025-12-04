@@ -1,156 +1,377 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-<meta charset="UTF-8">
-<title>Admin panel – Unos rezultata</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+  <meta charset="UTF-8" />
+  <title>Dadeks admin – rezultati</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; }
     body {
-        background: #0c111b;
-        font-family: Arial, sans-serif;
-        color: #e5e7eb;
-        padding: 20px;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
     }
-
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
     h1 {
-        text-align: center;
-        color: #38bdf8;
-        margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.6rem;
+      color: #38bdf8;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
     }
-
+    h2 {
+      font-size: 1.1rem;
+      margin: 16px 0 8px;
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
     .card {
-        background: #111827;
-        border: 1px solid #1f2937;
-        padding: 20px;
-        border-radius: 12px;
-        max-width: 500px;
-        margin: auto;
-        box-shadow: 0 0 30px rgba(0,0,0,0.4);
+      background: radial-gradient(circle at top left, #0f172a, #020617 55%);
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      padding: 14px 14px 18px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
+      margin-bottom: 16px;
     }
-
     label {
-        display: block;
-        margin-top: 12px;
-        font-size: 0.9rem;
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+      color: #9ca3af;
     }
-
-    select, input {
-        width: 100%;
-        padding: 8px;
-        margin-top: 4px;
-        border-radius: 8px;
-        border: 1px solid #374151;
-        background: #1f2937;
-        color: white;
+    input, select {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
     }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .col-2 { flex: 1 1 48%; }
+    .col-3 { flex: 1 1 30%; }
 
     button {
-        width: 100%;
-        margin-top: 15px;
-        background: #16a34a;
-        padding: 10px;
-        border: none;
-        border-radius: 999px;
-        color: black;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 1rem;
+      border-radius: 999px;
+      border: none;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: #020617;
+      font-weight: 600;
+      margin-right: 8px;
+      margin-top: 4px;
+    }
+    .btn-secondary {
+      background: #111827;
+      color: #e5e7eb;
+      border: 1px solid #374151;
+      margin-right: 8px;
+      margin-top: 4px;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+    .btn-secondary:hover {
+      background: #1f2937;
     }
 
-    button:hover {
-        background: #22c55e;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+    th, td {
+      border-bottom: 1px solid #1f2937;
+      padding: 4px 6px;
+      text-align: center;
+    }
+    th {
+      background: rgba(15, 23, 42, 0.9);
+    }
+    tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.55);
     }
 
-    #jsonOutput {
-        margin-top: 30px;
-        white-space: pre-wrap;
-        background: #1f2937;
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #374151;
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      background: #020617;
+      color: #e5e7eb;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      padding: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      resize: vertical;
     }
 
-    .danger {
-        background: #dc2626 !important;
-        color: white;
+    .status {
+      font-size: 0.8rem;
+      margin-top: 6px;
+      color: #22c55e;
     }
-</style>
+    .status.error {
+      color: #f97316;
+    }
+
+    @media (max-width: 640px) {
+      .col-2, .col-3 { flex: 1 1 100%; }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <h1>DGA – ADMIN</h1>
+    <p class="hint" style="text-align:center;">
+      Unos rezultata za Dadeks turnir – generišeš JSON za <strong>matches.json</strong>.
+    </p>
 
-<h1>ADMIN PANEL – UNOS REZULTATA</h1>
+    <!-- FORMA ZA JEDNU UTAKMICU -->
+    <div class="card">
+      <h2>Unos utakmice</h2>
+      <p class="hint">
+        Popuni polja, klikni <strong>Dodaj utakmicu</strong>. Na dnu će se praviti JSON koji lijepiš u <code>matches.json</code>.
+      </p>
 
-<div class="card">
-    <label>Godište</label>
-    <select id="godiste">
-        <option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-    </select>
+      <div class="row">
+        <div class="col-2">
+          <label for="godiste">Godište</label>
+          <select id="godiste">
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <label for="grupa">Grupa</label>
+          <select id="grupa">
+            <option value="A">Grupa A</option>
+            <option value="B">Grupa B</option>
+            <option value="C">Grupa C</option>
+            <option value="D">Grupa D</option>
+          </select>
+        </div>
+      </div>
 
-    <label>Grupa</label>
-    <select id="grupa">
-        <option value="A">Grupa A</option>
-        <option value="B">Grupa B</option>
-        <option value="C">Grupa C</option>
-        <option value="D">Grupa D</option>
-    </select>
+      <div class="row">
+        <div class="col-2">
+          <label for="domacin">Domaćin (ime tima tačno kao u kodu)</label>
+          <input id="domacin" type="text" placeholder="npr. Dadeks" />
+        </div>
+        <div class="col-2">
+          <label for="gost">Gost (ime tima tačno kao u kodu)</label>
+          <input id="gost" type="text" placeholder="npr. Buducnost" />
+        </div>
+      </div>
 
-    <label>Domaćin</label>
-    <input id="domacin" type="text" placeholder="Unesi ime tima">
+      <div class="row">
+        <div class="col-3">
+          <label for="golDom">Golovi domaćina</label>
+          <input id="golDom" type="number" min="0" value="0" />
+        </div>
+        <div class="col-3">
+          <label for="golGost">Golovi gosta</label>
+          <input id="golGost" type="number" min="0" value="0" />
+        </div>
+      </div>
 
-    <label>Gost</label>
-    <input id="gost" type="text" placeholder="Unesi ime tima">
+      <button class="btn-primary" id="add-match-btn">Dodaj utakmicu</button>
+      <button class="btn-secondary" id="clear-matches-btn">Obriši sve unesene utakmice</button>
+      <p id="form-status" class="status"></p>
+    </div>
 
-    <label>Golovi domaćina</label>
-    <input id="golDom" type="number" value="0">
+    <!-- LISTA UNESENIH UTAKMICA -->
+    <div class="card">
+      <h2>Unesene utakmice (pregled)</h2>
+      <p class="hint">
+        Provjeri da li je sve tačno (godiste, grupa, imena timova, golovi). Ovo je samo pregled – stvarni fajl je dole u JSON polju.
+      </p>
 
-    <label>Golovi gosta</label>
-    <input id="golGost" type="number" value="0">
+      <div style="overflow-x:auto;">
+        <table id="matches-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Godište</th>
+              <th>Grupa</th>
+              <th>Domaćin</th>
+              <th>Gol D</th>
+              <th>Gol G</th>
+              <th>Gost</th>
+            </tr>
+          </thead>
+          <tbody id="matches-tbody">
+            <tr><td colspan="7" class="hint">Nema još unesenih utakmica.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-    <button onclick="addMatch()">Dodaj utakmicu</button>
-    <button class="danger" onclick="clearMatches()">Obriši sve</button>
-    <button onclick="generateJSON()">Generiši JSON</button>
-</div>
+    <!-- JSON OUTPUT -->
+    <div class="card">
+      <h2>JSON za <code>matches.json</code></h2>
+      <p class="hint">
+        Ovo kopiraš kompletno u <strong>matches.json</strong> na GitHub-u (zamijeniš stari sadržaj).
+      </p>
 
-<h2 style="text-align:center; margin-top:25px;">Rezultat JSON fajla</h2>
-<pre id="jsonOutput">[]</pre>
+      <textarea id="json-output">[]</textarea>
+      <button class="btn-primary" id="copy-json-btn">Kopiraj JSON</button>
+      <button class="btn-secondary" id="download-json-btn">Skini kao matches.json</button>
+      <p id="json-status" class="status"></p>
+    </div>
+  </div>
 
-<script>
-let matches = [];
+  <script>
+    const matches = [];
 
-function addMatch() {
-    const match = {
-        godiste: document.getElementById('godiste').value,
-        grupa: document.getElementById('grupa').value,
-        domacin: document.getElementById('domacin').value.trim(),
-        gost: document.getElementById('gost').value.trim(),
-        golDom: Number(document.getElementById('golDom').value),
-        golGost: Number(document.getElementById('golGost').value)
-    };
+    const godisteEl = document.getElementById("godiste");
+    const grupaEl = document.getElementById("grupa");
+    const domacinEl = document.getElementById("domacin");
+    const gostEl = document.getElementById("gost");
+    const golDomEl = document.getElementById("golDom");
+    const golGostEl = document.getElementById("golGost");
 
-    if (match.domacin === "" || match.gost === "") {
-        alert("Domaćin i gost moraju biti upisani.");
+    const formStatusEl = document.getElementById("form-status");
+    const matchesTbody = document.getElementById("matches-tbody");
+    const jsonOutput = document.getElementById("json-output");
+    const jsonStatusEl = document.getElementById("json-status");
+
+    function showFormStatus(msg, isError = false) {
+      formStatusEl.textContent = msg;
+      formStatusEl.classList.toggle("error", isError);
+      if (msg) {
+        setTimeout(() => { formStatusEl.textContent = ""; }, 4000);
+      }
+    }
+
+    function updateMatchesTable() {
+      if (!matches.length) {
+        matchesTbody.innerHTML = '<tr><td colspan="7" class="hint">Nema još unesenih utakmica.</td></tr>';
         return;
+      }
+
+      matchesTbody.innerHTML = "";
+      matches.forEach((m, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${m.godiste}</td>
+          <td>${m.grupa}</td>
+          <td>${m.domacin}</td>
+          <td>${m.golDom}</td>
+          <td>${m.golGost}</td>
+          <td>${m.gost}</td>
+        `;
+        matchesTbody.appendChild(tr);
+      });
     }
 
-    matches.push(match);
-    alert("Utakmica dodata!");
-}
-
-function clearMatches() {
-    if (confirm("Da li sigurno želiš obrisati sve utakmice?")) {
-        matches = [];
-        document.getElementById("jsonOutput").textContent = "[]";
+    function updateJsonOutput() {
+      jsonOutput.value = JSON.stringify(matches, null, 2);
     }
-}
 
-function generateJSON() {
-    const jsonText = JSON.stringify(matches, null, 2);
-    document.getElementById("jsonOutput").textContent = jsonText;
-}
-</script>
+    document.getElementById("add-match-btn").addEventListener("click", () => {
+      const godiste = godisteEl.value.trim();
+      const grupa = grupaEl.value.trim();
+      const domacin = domacinEl.value.trim();
+      const gost = gostEl.value.trim();
+      const golDom = golDomEl.value;
+      const golGost = golGostEl.value;
 
+      if (!godiste || !grupa || !domacin || !gost) {
+        showFormStatus("Popuni sva polja (godište, grupa, domaćin, gost).", true);
+        return;
+      }
+
+      if (golDom === "" || golGost === "") {
+        showFormStatus("Unesi golove (0 ako nema golova).", true);
+        return;
+      }
+
+      const match = {
+        godiste: godiste,
+        grupa: grupa,
+        domacin: domacin,
+        gost: gost,
+        golDom: Number(golDom),
+        golGost: Number(golGost)
+      };
+
+      matches.push(match);
+      updateMatchesTable();
+      updateJsonOutput();
+
+      domacinEl.value = "";
+      gostEl.value = "";
+      golDomEl.value = 0;
+      golGostEl.value = 0;
+
+      showFormStatus("Utakmica dodata.");
+    });
+
+    document.getElementById("clear-matches-btn").addEventListener("click", () => {
+      if (!matches.length) {
+        showFormStatus("Nema šta da obrišeš.", true);
+        return;
+      }
+      if (!confirm("Sigurno želiš da obrišeš sve unesene utakmice?")) return;
+      matches.length = 0;
+      updateMatchesTable();
+      updateJsonOutput();
+      showFormStatus("Sve unesene utakmice obrisane.");
+    });
+
+    document.getElementById("copy-json-btn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(jsonOutput.value);
+        jsonStatusEl.textContent = "JSON kopiran u clipboard.";
+        jsonStatusEl.classList.remove("error");
+      } catch (e) {
+        jsonStatusEl.textContent = "Nije uspjelo kopiranje. Kopiraj ručno.";
+        jsonStatusEl.classList.add("error");
+      }
+      setTimeout(() => { jsonStatusEl.textContent = ""; }, 4000);
+    });
+
+    document.getElementById("download-json-btn").addEventListener("click", () => {
+      const blob = new Blob([jsonOutput.value], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "matches.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      jsonStatusEl.textContent = "Preuzet fajl matches.json (lokalno).";
+      jsonStatusEl.classList.remove("error");
+      setTimeout(() => { jsonStatusEl.textContent = ""; }, 4000);
+    });
+
+    // inicijalno stanje
+    updateMatchesTable();
+    updateJsonOutput();
+  </script>
 </body>
 </html>
