@@ -1,2 +1,11 @@
 [].
-
+[
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Buducnost",
+    "golDom": 6,
+    "golGost": 0
+  }
+]
