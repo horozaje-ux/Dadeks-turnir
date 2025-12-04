@@ -516,104 +516,155 @@
         }));
       });
 
-      // Primjena rezultata utakmica
-      const matches = MATCHES.filter(m => m.godiste === year);
-      matches.forEach(m => {
-        const groupLetter = m.grupa;
-        const groupTable = standings[groupLetter];
-        if (!groupTable) return;
+     <script>
 
-        const home = groupTable.find(t => t.team === m.domacin);
-        const away = groupTable.find(t => t.team === m.gost);
-        if (!home || !away) return;
+// Učitavanje rezultata iz matches.json
+async function loadMatches() {
+  try {
+    const response = await fetch("matches.json?cache=" + Date.now());
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.error("Greška pri učitavanju matches.json:", e);
+    return [];
+  }
+}
 
-        const gh = Number(m.golDom);
-        const ga = Number(m.golGost);
-        if (isNaN(gh) || isNaN(ga)) return;
+// Svi timovi po grupama (ostaje isto kao ranije)
+const GROUPS_DATA = {
+  "2015": {
+    "A": ["Dadeks", "Buducnost", "Akademik NK", "Desetka Bar", "FK Kerver"],
+    "B": ["Pristina", "FK Berane", "Zupa NK", "Bernabeu", "Danilovgrad 2"],
+    "C": ["Herceg Novi", "Karioke NK", "Danilovgrad 1", "Ilarion", "Podgorica"],
+    "D": ["Fenix", "Otrand", "Barsa Bar", "Titan", "Porto"],
+  },
+  "2016": {
+    "A": ["Dadeks", "Durmitor", "Centar", "As 1", "Akademik Nk"],
+    "B": ["Herceg Novi", "Buducnost", "Danilovgrad", "Desetka"],
+    "C": ["Otrant", "Fudbalito", "Porto", "Zupa", "Bernabeu"],
+    "D": ["Onogost", "Barsa", "Stari aerodrom", "As 2", "Akademija Berane"],
+  },
+  "2017": {
+    "A": ["Dadeks", "Karioke Nk", "Titan", "Bernabeu 1", "Tuzi"],
+    "B": ["Stari Aerodrom", "Porto", "Fudbalito", "As", "Desetka"],
+    "C": ["Nacional", "Berane", "Cijevna", "Danilovgrad", "Ilarion"],
+    "D": ["Zlatna lopta", "Ibar", "Buducnost", "Bernabeu 2", "Centar"],
+  },
+  "2018": {
+    "A": ["Dadeks", "Desetka", "Jezero", "Fudbalito 3"],
+    "B": ["Zlatna lopta", "Fudbalito 2", "Arena", "Fenix"],
+    "C": ["Bernabeu", "Fa Kerver", "Zupa", "Porto"],
+    "D": ["Fudbalito 1", "Karioke Nk", "Akademija Berane", "Stari aerodrom"],
+  }
+};
 
-        home.gp++;
-        away.gp++;
-        home.gf += gh;
-        home.ga += ga;
-        away.gf += ga;
-        away.ga += gh;
-        home.gd = home.gf - home.ga;
-        away.gd = away.gf - away.ga;
+// Računanje tabela iz JSON rezultata
+function calculateStandings(year, matches) {
+  const groups = GROUPS_DATA[year];
+  const standings = {};
 
-        if (gh > ga) {
-          home.w++; home.pts += 3;
-          away.l++;
-        } else if (gh < ga) {
-          away.w++; away.pts += 3;
-          home.l++;
-        } else {
-          home.d++; away.d++;
-          home.pts += 1;
-          away.pts += 1;
-        }
-      });
+  // Inicijalizacija nula
+  Object.entries(groups).forEach(([grp, teams]) => {
+    standings[grp] = teams.map(t => ({
+      team: t,
+      gp: 0, w: 0, d: 0, l: 0,
+      gf: 0, ga: 0, gd: 0, pts: 0
+    }));
+  });
 
-      // Sortiranje unutar svake grupe
-      Object.keys(standings).forEach(groupLetter => {
-        standings[groupLetter].sort((a, b) =>
-          b.pts - a.pts ||
-          b.gd - a.gd ||
-          b.gf - a.gf ||
-          a.team.localeCompare(b.team, "sr")
-        );
-      });
+  // Primjena rezultata
+  matches.filter(m => m.godiste === year).forEach(m => {
+    const group = m.grupa;
+    const table = standings[group];
 
-      return standings;
+    const home = table.find(t => t.team === m.domacin);
+    const away = table.find(t => t.team === m.gost);
+
+    const gh = Number(m.golDom);
+    const ga = Number(m.golGost);
+
+    home.gp++; away.gp++;
+    home.gf += gh; home.ga += ga;
+    away.gf += ga; away.ga += gh;
+
+    home.gd = home.gf - home.ga;
+    away.gd = away.gf - away.ga;
+
+    if (gh > ga) {
+      home.w++; home.pts += 3; away.l++;
+    } else if (gh < ga) {
+      away.w++; away.pts += 3; home.l++;
+    } else {
+      home.d++; away.d++;
+      home.pts++; away.pts++;
     }
+  });
 
-    function renderTablesForYear(year) {
-      const container = document.getElementById("tables-container");
-      if (!container) return;
+  // Sortiranje
+  Object.keys(standings).forEach(g => {
+    standings[g].sort((a, b) =>
+      b.pts - a.pts ||
+      b.gd - a.gd ||
+      b.gf - a.gf ||
+      a.team.localeCompare(b.team)
+    );
+  });
 
-      const txt = document.getElementById("selected-table-gen-text");
-      if (txt) {
-        txt.innerHTML = "Odabrano godište: <strong>" + year + "</strong>";
-      }
+  return standings;
+}
 
-      const standings = calculateStandings(year);
-      const groupLetters = Object.keys(standings).sort();
-      if (!groupLetters.length) {
-        container.innerHTML = "<p class='hint'>Nema definisanih grupa za ovo godište.</p>";
-        return;
-      }
+// Render tabela
+async function renderTablesForYear(year) {
+  const container = document.getElementById("tables-container");
+  container.innerHTML = "<p class='hint'>Učitavanje...</p>";
 
-      let html = "<div class='standings-grid'>";
+  const matches = await loadMatches();
+  const standings = calculateStandings(year, matches);
 
-      groupLetters.forEach(letter => {
-        const rows = standings[letter];
-        html += "<div class='standings-card'>";
-        html += "<h3>Grupa " + letter + "</h3>";
-        html += "<table class='standings-table'>";
-        html += "<thead><tr><th>#</th><th>Tim</th><th>UT</th><th>P</th><th>N</th><th>I</th><th>DG</th><th>PG</th><th>GR</th><th>B</th></tr></thead><tbody>";
+  let html = "<div class='standings-grid'>";
 
-        rows.forEach((t, idx) => {
-          html += "<tr>";
-          html += "<td>" + (idx + 1) + "</td>";
-          html += "<td>" + t.team + "</td>";
-          html += "<td>" + t.gp + "</td>";
-          html += "<td>" + t.w + "</td>";
-          html += "<td>" + t.d + "</td>";
-          html += "<td>" + t.l + "</td>";
-          html += "<td>" + t.gf + "</td>";
-          html += "<td>" + t.ga + "</td>";
-          html += "<td>" + t.gd + "</td>";
-          html += "<td>" + t.pts + "</td>";
-          html += "</tr>";
-        });
+  Object.keys(standings).forEach(grp => {
+    html += `<div class="standings-card">
+      <h3>Grupa ${grp}</h3>
+      <table class="standings-table">
+      <thead>
+        <tr><th>#</th><th>Tim</th><th>UT</th><th>P</th><th>N</th><th>I</th><th>DG</th><th>PG</th><th>GR</th><th>B</th></tr>
+      </thead>
+      <tbody>`;
 
-        html += "</tbody></table></div>";
-      });
+    standings[grp].forEach((t, i) => {
+      html += `
+        <tr>
+          <td>${i+1}</td>
+          <td>${t.team}</td>
+          <td>${t.gp}</td>
+          <td>${t.w}</td>
+          <td>${t.d}</td>
+          <td>${t.l}</td>
+          <td>${t.gf}</td>
+          <td>${t.ga}</td>
+          <td>${t.gd}</td>
+          <td>${t.pts}</td>
+        </tr>`;
+    });
 
-      html += "</div>";
-      container.innerHTML = html;
-    }
+    html += "</tbody></table></div>";
+  });
 
-    // Prvo renderovanje tabela (2015)
+  html += "</div>";
+  container.innerHTML = html;
+}
+
+// Listener za dropdown
+document.getElementById("table-gen-select").addEventListener("change", e => {
+  renderTablesForYear(e.target.value);
+});
+
+// Prvo učitavanje – 2015
+renderTablesForYear("2015");
+
+</script>
+
     renderTablesForYear("2015");
 
     const tableSelect = document.getElementById("table-gen-select");
@@ -755,3 +806,4 @@
   </script>
 </body>
 </html>
+
