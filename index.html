@@ -258,14 +258,17 @@
 
     <!-- TAB NAV -->
     <div class="tabs">
-      <a href="grupe.html" class="tab-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">Grupe</a>
+      <a
+        href="grupe.html"
+        class="tab-btn"
+        style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;"
+      >
+        Grupe
+      </a>
 
       <button class="tab-btn active" data-target="timovi">Timovi</button>
       <button class="tab-btn" data-target="tabele">Tabele</button>
       <button class="tab-btn" data-target="live">Live score</button>
-      <button class="tab-btn" data-target="cetvrt">Četvrt-finale</button>
-      <button class="tab-btn" data-target="polu">Polu-finale</button>
-      <button class="tab-btn" data-target="finale">Finale</button>
     </div>
 
     <!-- TIMOVI – GODIŠTA 2015–2018 -->
@@ -360,39 +363,6 @@
       </div>
     </section>
 
-    <!-- ČETVRT-FINALE -->
-    <section class="tab-content" id="cetvrt">
-      <div class="card">
-        <h2>Četvrt-finale</h2>
-        <iframe
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=864058856&single=true"
-          loading="lazy">
-        </iframe>
-      </div>
-    </section>
-
-    <!-- POLU-FINALE -->
-    <section class="tab-content" id="polu">
-      <div class="card">
-        <h2>Polu-finale</h2>
-        <iframe
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1643104694&single=true"
-          loading="lazy">
-        </iframe>
-      </div>
-    </section>
-
-    <!-- FINALE -->
-    <section class="tab-content" id="finale">
-      <div class="card">
-        <h2>Finale</h2>
-        <iframe
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=533875103&single=true"
-          loading="lazy">
-        </iframe>
-      </div>
-    </section>
-
     <!-- ŠANSABET LOGO NA DNU -->
     <section class="card sponsor-card">
       <div class="sansa-banner">
@@ -448,14 +418,14 @@
     }
 
     // ------------------------------
-    // TABOVI
+    // TABOVI  (samo za BUTTON-e, ne za "Grupe" link)
     // ------------------------------
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
+    document.querySelectorAll("button.tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const targetId = btn.dataset.target;
 
         document
-          .querySelectorAll(".tab-btn")
+          .querySelectorAll("button.tab-btn")
           .forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
 
@@ -579,4 +549,3 @@
   </script>
 </body>
 </html>
-
