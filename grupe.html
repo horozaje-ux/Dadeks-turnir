@@ -3,126 +3,109 @@
 <head>
   <meta charset="UTF-8" />
   <title>Dadeks turnir – Grupe i nokaut</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
   <style>
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: #020617;
       color: #e5e7eb;
     }
 
+    a { color: inherit; text-decoration: none; }
+
     .page {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 16px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 12px;
+      padding: 10px 0 18px;
     }
 
     header h1 {
       margin: 0;
       font-size: 1.8rem;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #38bdf8;
     }
 
     header p {
-      margin: 6px 0 0;
-      font-size: 0.95rem;
+      margin: 4px 0 0;
+      font-size: 0.9rem;
       color: #9ca3af;
     }
 
-    /* Dugme za povratak */
-
-    .back-bar {
-      margin: 12px 0 20px;
-      display: flex;
-      justify-content: center;
-    }
-
     .back-link {
-      padding: 8px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid #38bdf8;
-      background: #0b1120;
-      color: #e0f2fe;
-      font-size: 0.85rem;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      transition: 0.2s;
+      border: 1px solid #1f2937;
+      background: #020617;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.15s;
     }
 
     .back-link:hover {
-      background: #1e3a8a;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
+      background: #0f172a;
     }
 
-    /* Dugmad za godišta */
-
-    .year-switcher {
+    .years {
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin: 18px 0 6px;
+      margin: 20px 0 12px;
     }
 
     .year-btn {
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid #4b5563;
+      border: 1px solid #1f2937;
       background: #020617;
       color: #e5e7eb;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       cursor: pointer;
       transition: 0.15s;
     }
 
     .year-btn.active {
-      border-color: #38bdf8;
-      background: #0b1120;
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid #38bdf8;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #e0f2fe;
+      background: #0ea5e9;
+      color: #020617;
+      font-weight: 600;
+      border-color: transparent;
     }
 
     .section-title {
-      font-size: 1.1rem;
-      margin: 14px 0 10px;
+      margin-top: 12px;
+      font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #93c5fd;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
     }
-
-    /* Grupe */
 
     .groups-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 16px;
+      margin-top: 10px;
     }
 
-    .group-card {
-      background: radial-gradient(circle at top, #0f172a 0, #020617 60%);
-      border-radius: 14px;
-      border: 1px solid #1e293b;
-      padding: 12px 14px;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+    .card {
+      background: radial-gradient(circle at top left, #0f172a, #020617 55%);
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      padding: 14px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
     }
 
     .group-header {
@@ -133,119 +116,109 @@
     }
 
     .group-name {
-      font-weight: 600;
       font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.09em;
       color: #bfdbfe;
     }
 
-    .group-label {
+    .team-count {
       font-size: 0.7rem;
       padding: 2px 8px;
       border-radius: 999px;
-      border: 1px solid #4b5563;
-      color: #e5e7eb;
+      border: 1px solid #1f2937;
+      background: rgba(15, 23, 42, 0.8);
+      color: #9ca3af;
     }
 
     .team-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      font-size: 0.9rem;
+      font-size: 0.82rem;
     }
 
     .team-list li {
-      padding: 4px 0;
-      border-bottom: 1px dashed #1e293b;
+      padding: 3px 0;
+      border-bottom: 1px dashed #1f2937;
     }
 
-    .team-list li:last-child { border-bottom: none; }
+    .team-list li:last-child {
+      border-bottom: none;
+    }
 
-    /* Nokaut faza */
-
-    .knockout-wrapper {
+    .knockout-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 16px;
-      margin-bottom: 20px;
+      margin-top: 10px;
     }
 
-    .knockout-card {
-      background: linear-gradient(135deg, #020617, #0b1120);
-      border-radius: 14px;
-      border: 1px solid #1e293b;
-      padding: 12px 14px;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
-    }
-
-    .knockout-title {
+    .knockout-card h3 {
+      margin: 0 0 6px;
       font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin: 0 0 8px;
-      color: #fbbf24;
+      letter-spacing: 0.09em;
+      color: #facc15;
     }
 
-    .pair {
-      font-size: 0.9rem;
-      padding: 4px 0;
-      border-bottom: 1px dashed #1e293b;
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .pair:last-child { border-bottom: none; }
-
-    .pair span.code {
-      font-weight: 600;
-      color: #bfdbfe;
-    }
-
-    .pair span.desc {
+    .fixture-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       font-size: 0.8rem;
+    }
+
+    .fixture-list li {
+      display: flex;
+      flex-direction: column;
+      padding: 4px 0;
+      border-bottom: 1px solid #1f2937;
+    }
+
+    .fixture-list li:last-child {
+      border-bottom: none;
+    }
+
+    .fixture-label {
+      color: #9ca3af;
+      font-size: 0.76rem;
+    }
+
+    .fixture-teams {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .fixture-note {
+      font-size: 0.75rem;
       color: #9ca3af;
     }
 
-    /* Footer sa Sansabet */
-
-    footer {
-      margin-top: 12px;
-      padding: 10px 16px;
-      background: #facc15;
-      color: #111827;
-    }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .footer-badge {
-      padding: 4px 12px;
+    /* sponsor traka */
+    .sponsor-strip {
+      margin-top: 26px;
+      padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid #111827;
-      background: #111827;
-      color: #facc15;
-      font-weight: 700;
+      background: #facc15;
+      color: #0f172a;
+      font-size: 0.78rem;
+      text-align: center;
+      text-transform: uppercase;
       letter-spacing: 0.16em;
-      font-size: 0.7rem;
     }
 
-    .year-section { display: none; }
-    .year-section.active { display: block; }
+    .sponsor-strip span.logo {
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #0f172a;
+      color: #facc15;
+      margin-left: 6px;
+    }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.4rem; }
+    @media (max-width: 640px) {
+      .page { padding: 10px; }
     }
   </style>
 </head>
@@ -254,409 +227,275 @@
     <header>
       <h1>Dadeks turnir – Grupe i nokaut</h1>
       <p>Pregled grupa i završnice po godištima</p>
+
+      <a href="index.html" class="back-link">← Nazad na Dadeks turnir 2025</a>
     </header>
 
-    <!-- POVRATAK NA GLAVNU APLIKACIJU -->
-    <div class="back-bar">
-      <a href="./" class="back-link">← Nazad na Dadeks turnir 2025</a>
-    </div>
-
-    <!-- GODIŠTA -->
-    <div class="year-switcher">
+    <div class="years">
       <button class="year-btn active" data-year="2015">2015</button>
       <button class="year-btn" data-year="2016">2016</button>
       <button class="year-btn" data-year="2017">2017</button>
       <button class="year-btn" data-year="2018">2018</button>
     </div>
 
-    <!-- ===================== 2015 ===================== -->
-    <section class="year-section active" id="year-2015">
-      <span class="badge">2015. godište</span>
+    <p class="section-title" id="year-label">2015. godište</p>
 
+    <!-- GRUPE -->
+    <section>
       <h2 class="section-title">Grupe</h2>
-
-      <div class="groups-grid">
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Dadeks</li>
-            <li>Budućnost</li>
-            <li>Akademik Nikšić</li>
-            <li>Desetka Bar</li>
-            <li>FA Kerver 19</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa B</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Priština</li>
-            <li>FK Berane</li>
-            <li>Župa Nikšić</li>
-            <li>Bernabeu</li>
-            <li>Danilovgrad 2</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Herceg Novi</li>
-            <li>Karioke Nikšić</li>
-            <li>Danilovgrad 1</li>
-            <li>Ilarion</li>
-            <li>Podgorica</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Fenix</li>
-            <li>Otrant</li>
-            <li>Barsa Bar</li>
-            <li>Titan</li>
-            <li>Porto</li>
-          </ul>
-        </div>
-      </div>
-
-      <h2 class="section-title">Nokaut faza</h2>
-
-      <div class="knockout-wrapper">
-        <!-- ČETVRTFINALE -->
-        <div class="knockout-card">
-          <h3 class="knockout-title">Četvrtfinale</h3>
-          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
-          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
-          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
-          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
-        </div>
-
-        <!-- POLUFINALE -->
-        <div class="knockout-card">
-          <h3 class="knockout-title">Polufinale</h3>
-          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3. meča</span></div>
-          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4. meča</span></div>
-        </div>
-
-        <!-- FINALE + 3. MJESTO -->
-        <div class="knockout-card">
-          <h3 class="knockout-title">Finale</h3>
-          <div class="pair">
-            <span class="code">P1 – P2</span>
-            <span class="desc">Pobjednici polufinala</span>
-          </div>
-
-          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
-          <div class="pair">
-            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
-            <span class="desc">Poraženi u polufinalu</span>
-          </div>
-        </div>
-      </div>
+      <div id="groups-container" class="groups-grid"></div>
     </section>
 
-    <!-- ===================== 2016 ===================== -->
-    <section class="year-section" id="year-2016">
-      <span class="badge">2016. godište</span>
-
-      <h2 class="section-title">Grupe</h2>
-
-      <div class="groups-grid">
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Dadeks</li>
-            <li>Durmitor</li>
-            <li>Centar</li>
-            <li>As 1</li>
-            <li>Akademik Nk</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa B</div><div class="group-label">4 ekipe</div>
-          </div>
-          <ul class="team-list">
-            <li>Herceg Novi</li>
-            <li>Budućnost</li>
-            <li>Danilovgrad</li>
-            <li>Desetka</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Otrant</li>
-            <li>Fudbalito</li>
-            <li>Porto</li>
-            <li>Župa</li>
-            <li>Bernabeu</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Onogošt</li>
-            <li>Barsa</li>
-            <li>Stari aerodrom</li>
-            <li>As 2</li>
-            <li>Akademija Berane</li>
-          </ul>
-        </div>
-      </div>
-
+    <!-- NOKAUT FAZA -->
+    <section style="margin-top:16px;">
       <h2 class="section-title">Nokaut faza</h2>
-
-      <div class="knockout-wrapper">
-        <div class="knockout-card">
-          <h3 class="knockout-title">Četvrtfinale</h3>
-          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
-          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
-          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
-          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
-        </div>
-
-        <div class="knockout-card">
-          <h3 class="knockout-title">Polufinale</h3>
-          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3.</span></div>
-          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4.</span></div>
-        </div>
-
-        <div class="knockout-card">
-          <h3 class="knockout-title">Finale</h3>
-          <div class="pair"><span class="code">P1 – P2</span><span class="desc">Pobjednici polufinala</span></div>
-
-          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
-          <div class="pair">
-            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
-            <span class="desc">Poraženi u polufinalu</span>
-          </div>
-        </div>
-      </div>
+      <div id="knockout-container" class="knockout-grid"></div>
     </section>
 
-    <!-- ===================== 2017 ===================== -->
-    <section class="year-section" id="year-2017">
-      <span class="badge">2017. godište</span>
-
-      <h2 class="section-title">Grupe</h2>
-
-      <div class="groups-grid">
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Dadeks</li>
-            <li>Karioke Nk</li>
-            <li>Titan</li>
-            <li>Bernabeu 1</li>
-            <li>Tuzi</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa B</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Stari aerodrom</li>
-            <li>Porto</li>
-            <li>Fudbalito</li>
-            <li>As</li>
-            <li>Desetka</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Nacional</li>
-            <li>Berane</li>
-            <li>Cijevna</li>
-            <li>Danilovgrad</li>
-            <li>Ilarion</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div>
-          </div>
-          <ul class="team-list">
-            <li>Zlatna lopta</li>
-            <li>Ibar</li>
-            <li>Budućnost</li>
-            <li>Bernabeu 2</li>
-            <li>Centar</li>
-          </ul>
-        </div>
-      </div>
-
-      <h2 class="section-title">Nokaut faza</h2>
-
-      <div class="knockout-wrapper">
-        <div class="knockout-card">
-          <h3 class="knockout-title">Četvrtfinale</h3>
-          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
-          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
-          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
-          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
-        </div>
-
-        <div class="knockout-card">
-          <h3 class="knockout-title">Polufinale</h3>
-          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3.</span></div>
-          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4.</span></div>
-        </div>
-
-        <div class="knockout-card">
-          <h3 class="knockout-title">Finale</h3>
-          <div class="pair"><span class="code">P1 – P2</span><span class="desc">Pobjednici polufinala</span></div>
-
-          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
-          <div class="pair">
-            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
-            <span class="desc">Poraženi u polufinalu</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== 2018 ===================== -->
-    <section class="year-section" id="year-2018">
-      <span class="badge">2018. godište</span>
-
-      <h2 class="section-title">Grupe</h2>
-
-      <div class="groups-grid">
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa A</div><div class="group-label">4 ekipe</div>
-          </div>
-          <ul class="team-list">
-            <li>Dadeks</li>
-            <li>Desetka</li>
-            <li>Jezero</li>
-            <li>Fudbalito 3</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa B</div><div class="group-label">4 ekipe</div>
-          </div>
-          <ul class="team-list">
-            <li>Zlatna lopta</li>
-            <li>Fudbalito 2</li>
-            <li>Arena</li>
-            <li>Fenix</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa C</div><div class="group-label">4 ekipe</div>
-          </div>
-          <ul class="team-list">
-            <li>Bernabeu</li>
-            <li>FA Kerver</li>
-            <li>Župa</li>
-            <li>Porto</li>
-          </ul>
-        </div>
-
-        <div class="group-card">
-          <div class="group-header">
-            <div class="group-name">Grupa D</div><div class="group-label">4 ekipe</div>
-          </div>
-          <ul class="team-list">
-            <li>Fudbalito 1</li>
-            <li>Karioke Nk</li>
-            <li>Akademija Berane</li>
-            <li>Stari aerodrom</li>
-          </ul>
-        </div>
-      </div>
-
-      <h2 class="section-title">Nokaut faza</h2>
-
-      <div class="knockout-wrapper">
-        <div class="knockout-card">
-          <h3 class="knockout-title">Četvrtfinale</h3>
-          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
-          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
-          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
-          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
-        </div>
-
-        <div class="knockout-card">
-          <h3 class="knockout-title">Polufinale</h3>
-          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3.</span></div>
-          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4.</span></div>
-        </div>
-
-        <div class="knockout-card">
-          <h3 class="knockout-title">Finale</h3>
-          <div class="pair"><span class="code">P1 – P2</span><span class="desc">Pobjednici polufinala</span></div>
-
-          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
-          <div class="pair">
-            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
-            <span class="desc">Poraženi u polufinalu</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- sponsor -->
+    <div class="sponsor-strip">
+      DADEKS TURNIR – GRUPE I NOKAUT · GENERALNI SPONZOR:
+      <span class="logo">ŠANSABET.COM</span>
+    </div>
   </div>
 
-  <footer>
-    <div class="footer-inner">
-      <span>Dadeks turnir – Grupe i nokaut</span>
-      <span>•</span>
-      <span>Generalni sponzor:</span>
-      <span class="footer-badge">ŠANSABET.com</span>
-    </div>
-  </footer>
-
   <script>
-    const buttons = document.querySelectorAll('.year-btn');
-    const sections = document.querySelectorAll('.year-section');
+    // SVE EKIPE PO GODIŠTU / GRUPI
+    const GROUPS_DATA = {
+      "2015": {
+        "A": ["Dadeks", "Buducnost", "Akademik Nk", "Desetka Bar", "Fa Kerver 19"],
+        "B": ["Pristina", "Fk Berane", "Župa Nk", "Bernabeu", "Danilovgrad 2"],
+        "C": ["Herceg Novi", "Karioke Nk", "Danilovgrad 1", "Ilarion", "Podgorica"],
+        "D": ["Fenix", "Otrant", "Barsa Bar", "Titan", "Porto"]
+      },
+      "2016": {
+        "A": ["Dadeks", "Durmitor", "Centar", "As 1", "Akademik Nk"],
+        "B": ["Herceg Novi", "Buducnost", "Danilovgrad", "Desetka"],
+        "C": ["Otrant", "Fudbalito", "Porto", "Zupa", "Bernabeu"],
+        "D": ["Onogost", "Barsa", "Stari aerodrom", "As 2", "Akademija Berane"]
+      },
+      "2017": {
+        "A": ["Dadeks", "Karioke Nk", "Titan", "Bernabeu 1", "Tuzi"],
+        "B": ["Stari Aerodrom", "Porto", "Fudbalito", "As", "Desetka"],
+        "C": ["Nacional", "Berane", "Cijevna", "Danilovgrad", "Ilarion"],
+        "D": ["Zlatna lopta", "Ibar", "Buducnost", "Bernabeu 2", "Centar"]
+      },
+      "2018": {
+        "A": ["Dadeks", "Desetka", "Jezero", "Fudbalito 3"],
+        "B": ["Zlatna lopta", "Fudbalito 2", "Arena", "Fenix"],
+        "C": ["Bernabeu", "Fa Kerver", "Zupa", "Porto"],
+        "D": ["Fudbalito 1", "Karioke Nk", "Akademija Berane", "Stari aerodrom"]
+      }
+    };
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const year = btn.getAttribute('data-year');
+    let currentYear = "2015";
+    let allMatches = [];
 
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // UČITAVANJE matches.json
+    async function loadMatches() {
+      try {
+        const resp = await fetch("matches.json?cache=" + Date.now());
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        const data = await resp.json();
+        allMatches = data;
+      } catch (err) {
+        console.error("Greška pri učitavanju matches.json:", err);
+        allMatches = [];
+      }
+    }
 
-        sections.forEach(sec => {
-          sec.classList.remove('active');
-          if (sec.id === 'year-' + year) sec.classList.add('active');
-        });
+    // RAČUNANJE TABELA IZ REZULTATA
+    function calculateStandings(year) {
+      const groups = GROUPS_DATA[year];
+      if (!groups) return {};
+
+      const standings = {};
+      // inicijalizacija
+      Object.entries(groups).forEach(([grp, teams]) => {
+        standings[grp] = teams.map(name => ({
+          team: name,
+          gp: 0, w: 0, d: 0, l: 0,
+          gf: 0, ga: 0, gd: 0, pts: 0
+        }));
       });
+
+      const matches = allMatches.filter(m => m.godiste === year);
+      matches.forEach(m => {
+        const grp = m.grupa;
+        const table = standings[grp];
+        if (!table) return;
+
+        const home = table.find(t => t.team === m.domacin);
+        const away = table.find(t => t.team === m.gost);
+        if (!home || !away) return;
+
+        const gh = Number(m.golDom);
+        const ga = Number(m.golGost);
+        if (Number.isNaN(gh) || Number.isNaN(ga)) return;
+
+        home.gp++; away.gp++;
+        home.gf += gh; home.ga += ga;
+        away.gf += ga; away.ga += gh;
+        home.gd = home.gf - home.ga;
+        away.gd = away.gf - away.ga;
+
+        if (gh > ga) {
+          home.w++; home.pts += 3; away.l++;
+        } else if (gh < ga) {
+          away.w++; away.pts += 3; home.l++;
+        } else {
+          home.d++; away.d++;
+          home.pts++; away.pts++;
+        }
+      });
+
+      // sortiranje
+      Object.keys(standings).forEach(grp => {
+        standings[grp].sort((a, b) =>
+          b.pts - a.pts ||
+          b.gd - a.gd ||
+          b.gf - a.gf ||
+          a.team.localeCompare(b.team, "sr")
+        );
+      });
+
+      return standings;
+    }
+
+    // RENDER GRUPA
+    function renderGroups(year) {
+      const container = document.getElementById("groups-container");
+      const groups = GROUPS_DATA[year];
+      if (!groups) {
+        container.innerHTML = "<p>Nema podataka za ovo godište.</p>";
+        return;
+      }
+
+      let html = "";
+      Object.entries(groups).forEach(([grp, teams]) => {
+        const labelTeams = teams.length + " ekipa" + (teams.length > 1 ? "" : "a");
+        html += `
+          <div class="card">
+            <div class="group-header">
+              <span class="group-name">Grupa ${grp}</span>
+              <span class="team-count">${labelTeams}</span>
+            </div>
+            <ul class="team-list">
+              ${teams.map(t => `<li>${t}</li>`).join("")}
+            </ul>
+          </div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // RENDER NOKAUT FAZE (samo četvrtfinale sa imenima)
+    function renderKnockout(year) {
+      const container = document.getElementById("knockout-container");
+      const standings = calculateStandings(year);
+
+      const A = standings["A"] || [];
+      const B = standings["B"] || [];
+      const C = standings["C"] || [];
+      const D = standings["D"] || [];
+
+      const A1 = A[0]?.team || "Prvak grupe A";
+      const A2 = A[1]?.team || "Drugoplasirani grupe A";
+      const B1 = B[0]?.team || "Prvak grupe B";
+      const B2 = B[1]?.team || "Drugoplasirani grupe B";
+      const C1 = C[0]?.team || "Prvak grupe C";
+      const C2 = C[1]?.team || "Drugoplasirani grupe C";
+      const D1 = D[0]?.team || "Prvak grupe D";
+      const D2 = D[1]?.team || "Drugoplasirani grupe D";
+
+      const qf1 = `${A1} – ${C2}`;
+      const qf2 = `${A2} – ${C1}`;
+      const qf3 = `${B1} – ${D2}`;
+      const qf4 = `${B2} – ${D1}`;
+
+      container.innerHTML = `
+        <div class="card knockout-card">
+          <h3>Četvrtfinale</h3>
+          <ul class="fixture-list">
+            <li>
+              <span class="fixture-label">A1 – C2</span>
+              <span class="fixture-teams">${qf1}</span>
+              <span class="fixture-note">Prvi iz grupe A vs drugi iz grupe C</span>
+            </li>
+            <li>
+              <span class="fixture-label">A2 – C1</span>
+              <span class="fixture-teams">${qf2}</span>
+              <span class="fixture-note">Drugi iz grupe A vs prvi iz grupe C</span>
+            </li>
+            <li>
+              <span class="fixture-label">B1 – D2</span>
+              <span class="fixture-teams">${qf3}</span>
+              <span class="fixture-note">Prvi iz grupe B vs drugi iz grupe D</span>
+            </li>
+            <li>
+              <span class="fixture-label">B2 – D1</span>
+              <span class="fixture-teams">${qf4}</span>
+              <span class="fixture-note">Drugi iz grupe B vs prvi iz grupe D</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card knockout-card">
+          <h3>Polufinale</h3>
+          <ul class="fixture-list">
+            <li>
+              <span class="fixture-label">P1: A1C2 – B1D2</span>
+              <span class="fixture-note">Pobjednici 1. i 3. četvrtfinala</span>
+            </li>
+            <li>
+              <span class="fixture-label">P2: A2C1 – B2D1</span>
+              <span class="fixture-note">Pobjednici 2. i 4. četvrtfinala</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card knockout-card">
+          <h3>Finale</h3>
+          <ul class="fixture-list">
+            <li>
+              <span class="fixture-label">P1 – P2</span>
+              <span class="fixture-note">Pobjednici polufinala</span>
+            </li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Utakmica za 3. mjesto</h3>
+          <ul class="fixture-list">
+            <li>
+              <span class="fixture-label">P1 (poraženi) – P2 (poraženi)</span>
+              <span class="fixture-note">Poraženi u polufinalu</span>
+            </li>
+          </ul>
+        </div>
+      `;
+    }
+
+    // PROMJENA GODIŠTA
+    function setYear(year) {
+      currentYear = year;
+      document.getElementById("year-label").textContent = year + ". godište";
+
+      document.querySelectorAll(".year-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.year === year);
+      });
+
+      renderGroups(year);
+      renderKnockout(year);
+    }
+
+    // INIT
+    document.addEventListener("DOMContentLoaded", async () => {
+      // klik na godine
+      document.querySelectorAll(".year-btn").forEach(btn => {
+        btn.addEventListener("click", () => setYear(btn.dataset.year));
+      });
+
+      await loadMatches();       // učitamo rezultate
+      setYear("2015");           // podrazumijevano
     });
   </script>
 </body>
