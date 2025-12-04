@@ -37,7 +37,7 @@
       color: #9ca3af;
     }
 
-    /* ===== Dugme za povratak ===== */
+    /* Dugme za povratak */
 
     .back-bar {
       margin: 12px 0 20px;
@@ -63,7 +63,7 @@
       box-shadow: 0 0 18px rgba(56, 189, 248, 0.35);
     }
 
-    /* ===== Dugmad za odabir godišta ===== */
+    /* Dugmad za godišta */
 
     .year-switcher {
       display: flex;
@@ -109,7 +109,7 @@
       color: #93c5fd;
     }
 
-    /* ===== Grupe ===== */
+    /* Grupe */
 
     .groups-grid {
       display: grid;
@@ -162,7 +162,7 @@
 
     .team-list li:last-child { border-bottom: none; }
 
-    /* ===== NOKAUT ===== */
+    /* Nokaut faza */
 
     .knockout-wrapper {
       display: grid;
@@ -208,6 +208,8 @@
       color: #9ca3af;
     }
 
+    /* Footer sa Sansabet */
+
     footer {
       margin-top: 12px;
       padding: 10px 16px;
@@ -229,15 +231,18 @@
     }
 
     .footer-logo {
-      height: 28px;
+      height: 26px;
+      object-fit: contain;
     }
 
     .year-section { display: none; }
     .year-section.active { display: block; }
 
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+    }
   </style>
 </head>
-
 <body>
   <div class="page">
     <header>
@@ -245,12 +250,12 @@
       <p>Pregled grupa i završnice po godištima</p>
     </header>
 
-    <!-- Dugme za povratak na glavnu aplikaciju -->
+    <!-- POVRATAK NA GLAVNU APLIKACIJU -->
     <div class="back-bar">
       <a href="./" class="back-link">← Nazad na Dadeks turnir 2025</a>
     </div>
 
-    <!-- GODIŠTA GORE -->
+    <!-- GODIŠTA -->
     <div class="year-switcher">
       <button class="year-btn active" data-year="2015">2015</button>
       <button class="year-btn" data-year="2016">2016</button>
@@ -258,10 +263,235 @@
       <button class="year-btn" data-year="2018">2018</button>
     </div>
 
-    <!-- SVE GODINE ISTO KAO PRETHODNO (tvoje grupe i nokaut) -->
-    <!-- *** OVDJE IDE TVOJ SADRŽAJ GRUPA — NIJE MIJENJAN *** -->
+    <!-- ===================== 2015 ===================== -->
+    <section class="year-section active" id="year-2015">
+      <span class="badge">2015. godište</span>
 
-    <!-- … sav onaj sadržaj koji si kopirao prije NE DIRAM … -->
+      <h2 class="section-title">Grupe</h2>
+
+      <div class="groups-grid">
+        <div class="group-card">
+          <div class="group-header">
+            <div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div>
+          </div>
+          <ul class="team-list">
+            <li>Dadeks</li><li>Budućnost</li><li>Akademik Nikšić</li><li>Desetka Bar</li><li>FA Kerver 19</li>
+          </ul>
+        </div>
+
+        <div class="group-card">
+          <div class="group-header">
+            <div class="group-name">Grupa B</div><div class="group-label">5 ekipa</div>
+          </div>
+          <ul class="team-list">
+            <li>Priština</li><li>FK Berane</li><li>Župa Nikšić</li><li>Bernabeu</li><li>Danilovgrad 2</li>
+          </ul>
+        </div>
+
+        <div class="group-card">
+          <div class="group-header">
+            <div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div>
+          </div>
+          <ul class="team-list">
+            <li>Herceg Novi</li><li>Karioke Nikšić</li><li>Danilovgrad 1</li><li>Ilarion</li><li>Podgorica</li>
+          </ul>
+        </div>
+
+        <div class="group-card">
+          <div class="group-header">
+            <div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div>
+          </div>
+          <ul class="team-list">
+            <li>Fenix</li><li>Otrant</li><li>Barsa Bar</li><li>Titan</li><li>Porto</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-title">Nokaut faza</h2>
+
+      <div class="knockout-wrapper">
+        <!-- ČETVRTFINALE -->
+        <div class="knockout-card">
+          <h3 class="knockout-title">Četvrtfinale</h3>
+          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
+          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
+          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
+          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
+        </div>
+
+        <!-- POLUFINALE -->
+        <div class="knockout-card">
+          <h3 class="knockout-title">Polufinale</h3>
+          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3. meča</span></div>
+          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4. meča</span></div>
+        </div>
+
+        <!-- FINALE + 3. MJESTO -->
+        <div class="knockout-card">
+          <h3 class="knockout-title">Finale</h3>
+          <div class="pair">
+            <span class="code">P1 – P2</span>
+            <span class="desc">Pobjednici polufinala</span>
+          </div>
+
+          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
+          <div class="pair">
+            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
+            <span class="desc">Poraženi u polufinalu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2016 ===================== -->
+    <section class="year-section" id="year-2016">
+      <span class="badge">2016. godište</span>
+
+      <h2 class="section-title">Grupe</h2>
+
+      <div class="groups-grid">
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim 1</li><li>Tim 2</li><li>Tim 3</li><li>Tim 4</li><li>Tim 5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa B</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim 6</li><li>Tim 7</li><li>Tim 8</li><li>Tim 9</li><li>Tim 10</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim 11</li><li>Tim 12</li><li>Tim 13</li><li>Tim 14</li><li>Tim 15</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim 16</li><li>Tim 17</li><li>Tim 18</li><li>Tim 19</li><li>Tim 20</li></ul></div>
+      </div>
+
+      <h2 class="section-title">Nokaut faza</h2>
+
+      <div class="knockout-wrapper">
+        <div class="knockout-card">
+          <h3 class="knockout-title">Četvrtfinale</h3>
+          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
+          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
+          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
+          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
+        </div>
+
+        <div class="knockout-card">
+          <h3 class="knockout-title">Polufinale</h3>
+          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3.</span></div>
+          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4.</span></div>
+        </div>
+
+        <div class="knockout-card">
+          <h3 class="knockout-title">Finale</h3>
+          <div class="pair"><span class="code">P1 – P2</span><span class="desc">Pobjednici polufinala</span></div>
+
+          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
+          <div class="pair">
+            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
+            <span class="desc">Poraženi u polufinalu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2017 ===================== -->
+    <section class="year-section" id="year-2017">
+      <span class="badge">2017. godište</span>
+
+      <h2 class="section-title">Grupe</h2>
+
+      <div class="groups-grid">
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim A1</li><li>Tim A2</li><li>Tim A3</li><li>Tim A4</li><li>Tim A5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa B</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim B1</li><li>Tim B2</li><li>Tim B3</li><li>Tim B4</li><li>Tim B5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim C1</li><li>Tim C2</li><li>Tim C3</li><li>Tim C4</li><li>Tim C5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim D1</li><li>Tim D2</li><li>Tim D3</li><li>Tim D4</li><li>Tim D5</li></ul></div>
+      </div>
+
+      <h2 class="section-title">Nokaut faza</h2>
+
+      <div class="knockout-wrapper">
+        <div class="knockout-card">
+          <h3 class="knockout-title">Četvrtfinale</h3>
+          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
+          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
+          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
+          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
+        </div>
+
+        <div class="knockout-card">
+          <h3 class="knockout-title">Polufinale</h3>
+          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3.</span></div>
+          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4.</span></div>
+        </div>
+
+        <div class="knockout-card">
+          <h3 class="knockout-title">Finale</h3>
+          <div class="pair"><span class="code">P1 – P2</span><span class="desc">Pobjednici polufinala</span></div>
+
+          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
+          <div class="pair">
+            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
+            <span class="desc">Poraženi u polufinalu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2018 ===================== -->
+    <section class="year-section" id="year-2018">
+      <span class="badge">2018. godište</span>
+
+      <h2 class="section-title">Grupe</h2>
+
+      <div class="groups-grid">
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa A</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim A1</li><li>Tim A2</li><li>Tim A3</li><li>Tim A4</li><li>Tim A5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa B</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim B1</li><li>Tim B2</li><li>Tim B3</li><li>Tim B4</li><li>Tim B5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa C</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim C1</li><li>Tim C2</li><li>Tim C3</li><li>Tim C4</li><li>Tim C5</li></ul></div>
+
+        <div class="group-card"><div class="group-header"><div class="group-name">Grupa D</div><div class="group-label">5 ekipa</div></div>
+          <ul class="team-list"><li>Tim D1</li><li>Tim D2</li><li>Tim D3</li><li>Tim D4</li><li>Tim D5</li></ul></div>
+      </div>
+
+      <h2 class="section-title">Nokaut faza</h2>
+
+      <div class="knockout-wrapper">
+        <div class="knockout-card">
+          <h3 class="knockout-title">Četvrtfinale</h3>
+          <div class="pair"><span class="code">A1 – C2</span><span class="desc">Prvi A vs drugi C</span></div>
+          <div class="pair"><span class="code">A2 – C1</span><span class="desc">Drugi A vs prvi C</span></div>
+          <div class="pair"><span class="code">B1 – D2</span><span class="desc">Prvi B vs drugi D</span></div>
+          <div class="pair"><span class="code">B2 – D1</span><span class="desc">Drugi B vs prvi D</span></div>
+        </div>
+
+        <div class="knockout-card">
+          <h3 class="knockout-title">Polufinale</h3>
+          <div class="pair"><span class="code">P1: A1C2 – B1D2</span><span class="desc">Pobjednici 1. i 3.</span></div>
+          <div class="pair"><span class="code">P2: A2C1 – B2D1</span><span class="desc">Pobjednici 2. i 4.</span></div>
+        </div>
+
+        <div class="knockout-card">
+          <h3 class="knockout-title">Finale</h3>
+          <div class="pair"><span class="code">P1 – P2</span><span class="desc">Pobjednici polufinala</span></div>
+
+          <h3 class="knockout-title" style="margin-top:14px;">Utakmica za 3. mjesto</h3>
+          <div class="pair">
+            <span class="code">P1 (poraženi) – P2 (poraženi)</span>
+            <span class="desc">Poraženi u polufinalu</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </div>
 
@@ -270,7 +500,7 @@
       <span>Dadeks turnir – Grupe i nokaut</span>
       <span>•</span>
       <span>Generalni sponzor:</span>
-      <img src="sansabet.png" class="footer-logo" alt="Sansabet">
+      <img src="sansabet.png" alt="Sansabet" class="footer-logo">
     </div>
   </footer>
 
@@ -292,6 +522,5 @@
       });
     });
   </script>
-
 </body>
 </html>
