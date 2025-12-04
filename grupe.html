@@ -178,11 +178,44 @@
     }
 
     footer {
-      margin-top: 12px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
+  margin-top: 24px;
+  padding: 10px 16px;
+  background: #facc15; /* žuta pozadina Sansabet */
+  color: #111827;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.footer-text {
+  font-weight: 500;
+}
+
+.footer-sponsor-label {
+  opacity: 0.8;
+}
+
+.footer-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sponsor-logo {
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 3px rgba(0,0,0,0.6));
+}
+
 
     .year-section { display: none; }
     .year-section.active { display: block; }
@@ -442,8 +475,16 @@
     </section>
 
     <footer>
-      Dadeks turnir – Grupe i nokaut
-    </footer>
+  <div class="footer-inner">
+    <span class="footer-text">Dadeks turnir – Grupe i nokaut</span>
+    <span>•</span>
+    <span class="footer-sponsor-label">Generalni sponzor:</span>
+    <a href="https://sansabet.com" target="_blank" rel="noopener" class="footer-logo-wrap">
+      <img src="sansabet.png" alt="Sansabet" class="sponsor-logo">
+    </a>
+  </div>
+</footer>
+
   </div>
 
   <script>
