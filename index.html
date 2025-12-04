@@ -241,6 +241,61 @@
       100% { transform: skewX(0deg) translateY(0); }
     }
 
+    /* TABELA GRUPA (NOVO) */
+    .standings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .standings-card {
+      background: radial-gradient(circle at top, #0f172a 0, #020617 60%);
+      border-radius: 14px;
+      border: 1px solid #1f2937;
+      padding: 10px 10px 12px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+    }
+
+    .standings-card h3 {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #bfdbfe;
+    }
+
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.75rem;
+    }
+
+    .standings-table th,
+    .standings-table td {
+      padding: 3px 4px;
+      border-bottom: 1px solid #1f2937;
+      text-align: right;
+    }
+
+    .standings-table th:first-child,
+    .standings-table td:first-child {
+      text-align: left;
+    }
+
+    .standings-table th:nth-child(2),
+    .standings-table td:nth-child(2) {
+      text-align: left;
+    }
+
+    .standings-table thead {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .standings-table tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.55);
+    }
+
     @media (max-width: 640px) {
       iframe {
         min-height: 420px;
@@ -300,7 +355,7 @@
       </div>
     </section>
 
-    <!-- TABELE – GODIŠTA 2015–2018 -->
+    <!-- TABELE – SVE NA SAJTU (BEZ GOOGLE SHEETS) -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -312,7 +367,7 @@
 
           <label class="hint">
             Izaberi godište:
-            <select id="table-gen-select" onchange="changeGenerationTables(this.value)">
+            <select id="table-gen-select">
               <option value="2015" selected>2015</option>
               <option value="2016">2016</option>
               <option value="2017">2017</option>
@@ -321,11 +376,11 @@
           </label>
         </div>
 
-        <iframe
-          id="table-iframe"
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false"
-          loading="lazy">
-        </iframe>
+        <p class="hint">
+          Tabela se računa automatski iz unesenih rezultata za svaku grupu (A, B, C, D).
+        </p>
+
+        <div id="tables-container"></div>
       </div>
     </section>
 
@@ -334,7 +389,7 @@
       <div class="card">
         <h2>Live score</h2>
         <p class="hint">
-          Rezultati se automatski osvježavaju svakih 5 sekundi (CSV iz Google Sheets).
+          Rezultati se automatski osvježavaju svakih 2 sekunde (CSV iz Google Sheets).
         </p>
 
         <div id="live-status">
@@ -396,25 +451,176 @@
     }
 
     // ------------------------------
-    // TABELE – LINKOVI PO GODIŠTU
+    // TABELA GRUPA – PODACI O TIMOVIMA
     // ------------------------------
-    const TABLE_URLS = {
-      "2015":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=557402747&single=true&widget=true&headers=false",
-      "2016":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1814233139&single=true&widget=true&headers=false",
-      "2017":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1898316737&single=true&widget=true&headers=false",
-      "2018":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=1999108339&single=true&widget=true&headers=false",
+    const GROUPS_DATA = {
+      "2015": {
+        "A": ["Dadeks", "Buducnost", "Akademik NK", "Desetka Bar", "FK Kerver"],
+        "B": ["Pristina", "FK Berane", "Zupa NK", "Bernabeu", "Danilovgrad 2"],
+        "C": ["Herceg Novi", "Karioke NK", "Danilovgrad 1", "Ilarion", "Podgorica"],
+        "D": ["Fenix", "Otrand", "Barsa Bar", "Titan", "Porto"],
+      },
+      "2016": {
+        "A": ["Dadeks", "Durmitor", "Centar", "As 1", "Akademik Nk"],
+        "B": ["Herceg Novi", "Buducnost", "Danilovgrad", "Desetka"],
+        "C": ["Otrant", "Fudbalito", "Porto", "Zupa", "Bernabeu"],
+        "D": ["Onogost", "Barsa", "Stari aerodrom", "As 2", "Akademija Berane"],
+      },
+      "2017": {
+        "A": ["Dadeks", "Karioke Nk", "Titan", "Bernabeu 1", "Tuzi"],
+        "B": ["Stari Aerodrom", "Porto", "Fudbalito", "As", "Desetka"],
+        "C": ["Nacional", "Berane", "Cijevna", "Danilovgrad", "Ilarion"],
+        "D": ["Zlatna lopta", "Ibar", "Buducnost", "Bernabeu 2", "Centar"],
+      },
+      "2018": {
+        "A": ["Dadeks", "Desetka", "Jezero", "Fudbalito 3"],
+        "B": ["Zlatna lopta", "Fudbalito 2", "Arena", "Fenix"],
+        "C": ["Bernabeu", "Fa Kerver", "Zupa", "Porto"],
+        "D": ["Fudbalito 1", "Karioke Nk", "Akademija Berane", "Stari aerodrom"],
+      }
     };
 
-    function changeGenerationTables(gen) {
-      const txt = document.getElementById("selected-table-gen-text");
-      txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
+    // ------------------------------
+    // TABELA GRUPA – UTAKMICE (OVDJE ĆEMO POSLIJE DODAVATI REZULTATE)
+    // ------------------------------
+    const MATCHES = [
+      // PRIMJER ZAPISA (izbrisati ili prepraviti kad krene turnir):
+      // {
+      //   godiste: "2015",
+      //   grupa: "A",
+      //   domacin: "Dadeks",
+      //   gost: "Buducnost",
+      //   golDom: 2,
+      //   golGost: 1
+      // },
+    ];
 
-      const iframe = document.getElementById("table-iframe");
-      iframe.src = TABLE_URLS[gen];
+    function calculateStandings(year) {
+      const groups = GROUPS_DATA[year];
+      if (!groups) return {};
+
+      const standings = {};
+
+      // Inicijalizacija svih timova sa nulama
+      Object.entries(groups).forEach(([groupLetter, teams]) => {
+        standings[groupLetter] = teams.map(name => ({
+          team: name,
+          gp: 0,
+          w: 0,
+          d: 0,
+          l: 0,
+          gf: 0,
+          ga: 0,
+          gd: 0,
+          pts: 0
+        }));
+      });
+
+      // Primjena rezultata utakmica
+      const matches = MATCHES.filter(m => m.godiste === year);
+      matches.forEach(m => {
+        const groupLetter = m.grupa;
+        const groupTable = standings[groupLetter];
+        if (!groupTable) return;
+
+        const home = groupTable.find(t => t.team === m.domacin);
+        const away = groupTable.find(t => t.team === m.gost);
+        if (!home || !away) return;
+
+        const gh = Number(m.golDom);
+        const ga = Number(m.golGost);
+        if (isNaN(gh) || isNaN(ga)) return;
+
+        home.gp++;
+        away.gp++;
+        home.gf += gh;
+        home.ga += ga;
+        away.gf += ga;
+        away.ga += gh;
+        home.gd = home.gf - home.ga;
+        away.gd = away.gf - away.ga;
+
+        if (gh > ga) {
+          home.w++; home.pts += 3;
+          away.l++;
+        } else if (gh < ga) {
+          away.w++; away.pts += 3;
+          home.l++;
+        } else {
+          home.d++; away.d++;
+          home.pts += 1;
+          away.pts += 1;
+        }
+      });
+
+      // Sortiranje unutar svake grupe
+      Object.keys(standings).forEach(groupLetter => {
+        standings[groupLetter].sort((a, b) =>
+          b.pts - a.pts ||
+          b.gd - a.gd ||
+          b.gf - a.gf ||
+          a.team.localeCompare(b.team, "sr")
+        );
+      });
+
+      return standings;
+    }
+
+    function renderTablesForYear(year) {
+      const container = document.getElementById("tables-container");
+      if (!container) return;
+
+      const txt = document.getElementById("selected-table-gen-text");
+      if (txt) {
+        txt.innerHTML = "Odabrano godište: <strong>" + year + "</strong>";
+      }
+
+      const standings = calculateStandings(year);
+      const groupLetters = Object.keys(standings).sort();
+      if (!groupLetters.length) {
+        container.innerHTML = "<p class='hint'>Nema definisanih grupa za ovo godište.</p>";
+        return;
+      }
+
+      let html = "<div class='standings-grid'>";
+
+      groupLetters.forEach(letter => {
+        const rows = standings[letter];
+        html += "<div class='standings-card'>";
+        html += "<h3>Grupa " + letter + "</h3>";
+        html += "<table class='standings-table'>";
+        html += "<thead><tr><th>#</th><th>Tim</th><th>UT</th><th>P</th><th>N</th><th>I</th><th>DG</th><th>PG</th><th>GR</th><th>B</th></tr></thead><tbody>";
+
+        rows.forEach((t, idx) => {
+          html += "<tr>";
+          html += "<td>" + (idx + 1) + "</td>";
+          html += "<td>" + t.team + "</td>";
+          html += "<td>" + t.gp + "</td>";
+          html += "<td>" + t.w + "</td>";
+          html += "<td>" + t.d + "</td>";
+          html += "<td>" + t.l + "</td>";
+          html += "<td>" + t.gf + "</td>";
+          html += "<td>" + t.ga + "</td>";
+          html += "<td>" + t.gd + "</td>";
+          html += "<td>" + t.pts + "</td>";
+          html += "</tr>";
+        });
+
+        html += "</tbody></table></div>";
+      });
+
+      html += "</div>";
+      container.innerHTML = html;
+    }
+
+    // Prvo renderovanje tabela (2015)
+    renderTablesForYear("2015");
+
+    const tableSelect = document.getElementById("table-gen-select");
+    if (tableSelect) {
+      tableSelect.addEventListener("change", (e) => {
+        renderTablesForYear(e.target.value);
+      });
     }
 
     // ------------------------------
@@ -437,7 +643,7 @@
     });
 
     // ------------------------------
-    // LIVE SCORE – CSV IZ SHEETS
+    // LIVE SCORE – CSV IZ SHEETS (MOŽE OSTATI)
     // ------------------------------
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/1M5G6aIGTfSoQmwjMCkt0m1iETAGXBi_MkOpY6TGvM1M/export?format=csv&gid=1224715353";
