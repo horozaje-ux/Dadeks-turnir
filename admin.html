@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<title>Admin panel – Unos rezultata</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        background: #0c111b;
+        font-family: Arial, sans-serif;
+        color: #e5e7eb;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #38bdf8;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background: #111827;
+        border: 1px solid #1f2937;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 0 30px rgba(0,0,0,0.4);
+    }
+
+    label {
+        display: block;
+        margin-top: 12px;
+        font-size: 0.9rem;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 8px;
+        border: 1px solid #374151;
+        background: #1f2937;
+        color: white;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 15px;
+        background: #16a34a;
+        padding: 10px;
+        border: none;
+        border-radius: 999px;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    button:hover {
+        background: #22c55e;
+    }
+
+    #jsonOutput {
+        margin-top: 30px;
+        white-space: pre-wrap;
+        background: #1f2937;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #374151;
+    }
+
+    .danger {
+        background: #dc2626 !important;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<h1>ADMIN PANEL – UNOS REZULTATA</h1>
+
+<div class="card">
+    <label>Godište</label>
+    <select id="godiste">
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+    </select>
+
+    <label>Grupa</label>
+    <select id="grupa">
+        <option value="A">Grupa A</option>
+        <option value="B">Grupa B</option>
+        <option value="C">Grupa C</option>
+        <option value="D">Grupa D</option>
+    </select>
+
+    <label>Domaćin</label>
+    <input id="domacin" type="text" placeholder="Unesi ime tima">
+
+    <label>Gost</label>
+    <input id="gost" type="text" placeholder="Unesi ime tima">
+
+    <label>Golovi domaćina</label>
+    <input id="golDom" type="number" value="0">
+
+    <label>Golovi gosta</label>
+    <input id="golGost" type="number" value="0">
+
+    <button onclick="addMatch()">Dodaj utakmicu</button>
+    <button class="danger" onclick="clearMatches()">Obriši sve</button>
+    <button onclick="generateJSON()">Generiši JSON</button>
+</div>
+
+<h2 style="text-align:center; margin-top:25px;">Rezultat JSON fajla</h2>
+<pre id="jsonOutput">[]</pre>
+
+<script>
+let matches = [];
+
+function addMatch() {
+    const match = {
+        godiste: document.getElementById('godiste').value,
+        grupa: document.getElementById('grupa').value,
+        domacin: document.getElementById('domacin').value.trim(),
+        gost: document.getElementById('gost').value.trim(),
+        golDom: Number(document.getElementById('golDom').value),
+        golGost: Number(document.getElementById('golGost').value)
+    };
+
+    if (match.domacin === "" || match.gost === "") {
+        alert("Domaćin i gost moraju biti upisani.");
+        return;
+    }
+
+    matches.push(match);
+    alert("Utakmica dodata!");
+}
+
+function clearMatches() {
+    if (confirm("Da li sigurno želiš obrisati sve utakmice?")) {
+        matches = [];
+        document.getElementById("jsonOutput").textContent = "[]";
+    }
+}
+
+function generateJSON() {
+    const jsonText = JSON.stringify(matches, null, 2);
+    document.getElementById("jsonOutput").textContent = jsonText;
+}
+</script>
+
+</body>
+</html>
