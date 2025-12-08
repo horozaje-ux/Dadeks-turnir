@@ -459,13 +459,12 @@
             <thead>
               <tr>
                 <th>#</th>
-                    const utakmica = r[0] || "";
-    const domacin = r[1] || "";
-    const gost = r[2] || "";
-    const rezultat = r[3] || "";
-    const status = r[4] || "";
-    const godiste = r[5] || "";
-
+                <th>Utakmica</th>
+                <th>Domaćin</th>
+                <th>Gost</th>
+                <th>Rezultat</th>
+                <th>Status</th>
+                <th>Godište</th>
               </tr>
             </thead>
             <tbody id="live-tbody"></tbody>
@@ -853,7 +852,6 @@
         const tr = document.createElement("tr");
 
         const utakmica = r[0] || "";
-        thead
         const domacin = r[1] || "";
         const gost = r[2] || "";
         const rezultat = r[3] || "";
@@ -897,5 +895,42 @@
       if (!statusDot || !statusText || !errorEl) return;
 
       try {
-        statusDot.style
+        statusDot.style.background = "#facc15";
+        statusText.textContent = "Osvježavanje...";
+        errorEl.style.display = "none";
 
+        const res = await fetch(LIVE_SCORE_CSV_URL + "&_=" + Date.now());
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const text = await res.text();
+        const rows = parseCsv(text);
+        renderLiveScore(rows);
+      } catch (e) {
+        console.error("Greška pri učitavanju live score CSV:", e);
+        statusDot.style.background = "#f97316";
+        statusText.textContent = "Greška pri osvježavanju.";
+        errorEl.style.display = "block";
+      }
+    }
+
+    // ------------------------------
+    // INIT
+    // ------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+      setupTabs();
+      renderScheduleTable("2015");
+      renderTablesForYear("2015");
+
+      const tableGenSelect = document.getElementById("table-gen-select");
+      if (tableGenSelect) {
+        tableGenSelect.addEventListener("change", (e) => {
+          renderTablesForYear(e.target.value);
+        });
+      }
+
+      loadLiveScore();
+      setInterval(loadLiveScore, REFRESH_MS);
+    });
+  </script>
+</body>
+</html>
