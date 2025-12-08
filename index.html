@@ -459,12 +459,13 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Utakmica</th>
-                <th>Domacin</th>
-                <th>Gost</th>
-                <th>Rezultat</th>
-                <th>Status</th>
-                <th>Godiste</th>
+                    const utakmica = r[0] || "";
+    const domacin = r[1] || "";
+    const gost = r[2] || "";
+    const rezultat = r[3] || "";
+    const status = r[4] || "";
+    const godiste = r[5] || "";
+
               </tr>
             </thead>
             <tbody id="live-tbody"></tbody>
@@ -897,3 +898,4 @@
 
       try {
         statusDot.style
+
