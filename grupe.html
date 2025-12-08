@@ -389,90 +389,100 @@
       container.innerHTML = html;
     }
 
-    // RENDER NOKAUT FAZE (samo četvrtfinale sa imenima)
-    function renderKnockout(year) {
-      const container = document.getElementById("knockout-container");
-      const standings = calculateStandings(year);
+    // RENDER NOKAUT FAZE – koristi redosled iz grupa dok nema rezultata
+function renderKnockout(year) {
+  const container = document.getElementById("knockout-container");
+  const standings = calculateStandings(year);
 
-      const A = standings["A"] || [];
-      const B = standings["B"] || [];
-      const C = standings["C"] || [];
-      const D = standings["D"] || [];
+  // helper: uzmi tim sa pozicije (1,2,...) iz grupe
+  // ako niko nema odigranu utakmicu -> koristi redosled iz GROUPS_DATA
+  function teamFromGroup(groupLetter, pos) {
+    const table = standings[groupLetter] || [];
 
-      const A1 = A[0]?.team || "Prvak grupe A";
-      const A2 = A[1]?.team || "Drugoplasirani grupe A";
-      const B1 = B[0]?.team || "Prvak grupe B";
-      const B2 = B[1]?.team || "Drugoplasirani grupe B";
-      const C1 = C[0]?.team || "Prvak grupe C";
-      const C2 = C[1]?.team || "Drugoplasirani grupe C";
-      const D1 = D[0]?.team || "Prvak grupe D";
-      const D2 = D[1]?.team || "Drugoplasirani grupe D";
-
-      const qf1 = `${A1} – ${C2}`;
-      const qf2 = `${A2} – ${C1}`;
-      const qf3 = `${B1} – ${D2}`;
-      const qf4 = `${B2} – ${D1}`;
-
-      container.innerHTML = `
-        <div class="card knockout-card">
-          <h3>Četvrtfinale</h3>
-          <ul class="fixture-list">
-            <li>
-              <span class="fixture-label">A1 – C2</span>
-              <span class="fixture-teams">${qf1}</span>
-              <span class="fixture-note">Prvi iz grupe A vs drugi iz grupe C</span>
-            </li>
-            <li>
-              <span class="fixture-label">A2 – C1</span>
-              <span class="fixture-teams">${qf2}</span>
-              <span class="fixture-note">Drugi iz grupe A vs prvi iz grupe C</span>
-            </li>
-            <li>
-              <span class="fixture-label">B1 – D2</span>
-              <span class="fixture-teams">${qf3}</span>
-              <span class="fixture-note">Prvi iz grupe B vs drugi iz grupe D</span>
-            </li>
-            <li>
-              <span class="fixture-label">B2 – D1</span>
-              <span class="fixture-teams">${qf4}</span>
-              <span class="fixture-note">Drugi iz grupe B vs prvi iz grupe D</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="card knockout-card">
-          <h3>Polufinale</h3>
-          <ul class="fixture-list">
-            <li>
-              <span class="fixture-label">P1: A1C2 – B1D2</span>
-              <span class="fixture-note">Pobjednici 1. i 3. četvrtfinala</span>
-            </li>
-            <li>
-              <span class="fixture-label">P2: A2C1 – B2D1</span>
-              <span class="fixture-note">Pobjednici 2. i 4. četvrtfinala</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="card knockout-card">
-          <h3>Finale</h3>
-          <ul class="fixture-list">
-            <li>
-              <span class="fixture-label">P1 – P2</span>
-              <span class="fixture-note">Pobjednici polufinala</span>
-            </li>
-          </ul>
-
-          <h3 style="margin-top:12px;">Utakmica za 3. mjesto</h3>
-          <ul class="fixture-list">
-            <li>
-              <span class="fixture-label">P1 (poraženi) – P2 (poraženi)</span>
-              <span class="fixture-note">Poraženi u polufinalu</span>
-            </li>
-          </ul>
-        </div>
-      `;
+    if (table.length && table.every(t => t.gp === 0)) {
+      // niko nije igrao – uzmi iz originalne liste timova
+      const list = (GROUPS_DATA[year] && GROUPS_DATA[year][groupLetter]) || [];
+      return list[pos - 1] || `Pozicija ${pos} u grupi ${groupLetter}`;
     }
+
+    // ima odigranih utakmica – koristi tabelu
+    return table[pos - 1]?.team || `Pozicija ${pos} u grupi ${groupLetter}`;
+  }
+
+  const A1 = teamFromGroup("A", 1);
+  const A2 = teamFromGroup("A", 2);
+  const B1 = teamFromGroup("B", 1);
+  const B2 = teamFromGroup("B", 2);
+  const C1 = teamFromGroup("C", 1);
+  const C2 = teamFromGroup("C", 2);
+  const D1 = teamFromGroup("D", 1);
+  const D2 = teamFromGroup("D", 2);
+
+  const qf1 = `${A1} – ${C2}`;
+  const qf2 = `${A2} – ${C1}`;
+  const qf3 = `${B1} – ${D2}`;
+  const qf4 = `${B2} – ${D1}`;
+
+  container.innerHTML = `
+    <div class="card knockout-card">
+      <h3>Četvrtfinale</h3>
+      <ul class="fixture-list">
+        <li>
+          <span class="fixture-label">A1 – C2</span>
+          <span class="fixture-teams">${qf1}</span>
+          <span class="fixture-note">Prvi iz grupe A vs drugi iz grupe C</span>
+        </li>
+        <li>
+          <span class="fixture-label">A2 – C1</span>
+          <span class="fixture-teams">${qf2}</span>
+          <span class="fixture-note">Drugi iz grupe A vs prvi iz grupe C</span>
+        </li>
+        <li>
+          <span class="fixture-label">B1 – D2</span>
+          <span class="fixture-teams">${qf3}</span>
+          <span class="fixture-note">Prvi iz grupe B vs drugi iz grupe D</span>
+        </li>
+        <li>
+          <span class="fixture-label">B2 – D1</span>
+          <span class="fixture-teams">${qf4}</span>
+          <span class="fixture-note">Drugi iz grupe B vs prvi iz grupe D</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card knockout-card">
+      <h3>Polufinale</h3>
+      <ul class="fixture-list">
+        <li>
+          <span class="fixture-label">P1: A1C2 – B1D2</span>
+          <span class="fixture-note">Pobjednici 1. i 3. četvrtfinala</span>
+        </li>
+        <li>
+          <span class="fixture-label">P2: A2C1 – B2D1</span>
+          <span class="fixture-note">Pobjednici 2. i 4. četvrtfinala</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card knockout-card">
+      <h3>Finale</h3>
+      <ul class="fixture-list">
+        <li>
+          <span class="fixture-label">P1 – P2</span>
+          <span class="fixture-note">Pobjednici polufinala</span>
+        </li>
+      </ul>
+
+      <h3 style="margin-top:12px;">Utakmica za 3. mjesto</h3>
+      <ul class="fixture-list">
+        <li>
+          <span class="fixture-label">P1 (poraženi) – P2 (poraženi)</span>
+          <span class="fixture-note">Poraženi u polufinalu</span>
+        </li>
+      </ul>
+    </div>
+  `;
+}
 
     // PROMJENA GODIŠTA
     function setYear(year) {
