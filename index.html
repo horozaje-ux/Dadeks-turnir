@@ -241,7 +241,7 @@
       100% { transform: skewX(0deg) translateY(0); }
     }
 
-    /* TABELA GRUPA (NOVO) */
+    /* TABELA GRUPA (ZA STANDINGS) */
     .standings-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -296,6 +296,33 @@
       background: rgba(15, 23, 42, 0.55);
     }
 
+    /* TABELA RASPOREDA */
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      min-width: 520px;
+    }
+
+    .schedule-table th,
+    .schedule-table td {
+      border-bottom: 1px solid #1f2937;
+      padding: 4px 6px;
+      text-align: left;
+    }
+
+    .schedule-table th {
+      background: rgba(15, 23, 42, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .schedule-table tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.55);
+    }
+
     @media (max-width: 640px) {
       iframe {
         min-height: 420px;
@@ -323,6 +350,7 @@
 
       <button class="tab-btn active" data-target="timovi">Timovi</button>
       <button class="tab-btn" data-target="tabele">Tabele</button>
+      <button class="tab-btn" data-target="raspored">Raspored</button>
       <button class="tab-btn" data-target="live">Live score</button>
     </div>
 
@@ -381,6 +409,35 @@
         </p>
 
         <div id="tables-container"></div>
+      </div>
+    </section>
+
+    <!-- RASPORED – PO GODIŠTIMA -->
+    <section class="tab-content" id="raspored">
+      <div class="card">
+        <h2>Raspored utakmica</h2>
+
+        <div class="gen-row">
+          <p class="hint" id="selected-schedule-gen-text">
+            Odabrano godište: <strong>2015</strong>
+          </p>
+
+          <label class="hint">
+            Izaberi godište:
+            <select id="schedule-gen-select" onchange="changeScheduleYear(this.value)">
+              <option value="2015" selected>2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+            </select>
+          </label>
+        </div>
+
+        <p class="hint">
+          Raspored za petak i subotu – vrijeme, teren i parovi po godištima.
+        </p>
+
+        <div id="schedule-container" style="overflow-x:auto;"></div>
       </div>
     </section>
 
@@ -457,32 +514,109 @@
     // TABELA GRUPA – PODACI O TIMOVIMA
     // ------------------------------
     const GROUPS_DATA = {
-  "2015": {
-    "A": ["Dadeks", "Buducnost", "Akademik Nk", "Desetka Bar", "Fa Kerver 19"],
-    "B": ["Pristina", "Fk Berane", "Župa Nk", "Bernabeu", "Danilovgrad 2"],
-    "C": ["Herceg Novi", "Karioke Nk", "Danilovgrad 1", "Ilarion", "Podgorica"],
-    "D": ["Fenix", "Otrant", "Barsa Bar", "Titan", "Porto"],
-  },
-  "2016": {
-    "A": ["Dadeks", "Durmitor", "Centar", "As 1", "Akademik Nk"],
-    "B": ["Herceg Novi", "Buducnost", "Danilovgrad", "Desetka"],
-    "C": ["Otrant", "Fudbalito", "Porto", "Zupa", "Bernabeu"],
-    "D": ["Onogost", "Barsa", "Stari aerodrom", "As 2", "Akademija Berane"],
-  },
-  "2017": {
-    "A": ["Dadeks", "Karioke Nk", "Titan", "Bernabeu 1", "Tuzi"],
-    "B": ["Stari Aerodrom", "Porto", "Fudbalito", "As", "Desetka"],
-    "C": ["Nacional", "Berane", "Cijevna", "Danilovgrad", "Ilarion"],
-    "D": ["Zlatna lopta", "Ibar", "Buducnost", "Bernabeu 2", "Centar"],
-  },
-  "2018": {
-    "A": ["Dadeks", "Desetka", "Jezero", "Fudbalito 3"],
-    "B": ["Zlatna lopta", "Fudbalito 2", "Arena", "Fenix"],
-    "C": ["Bernabeu", "Fa Kerver", "Zupa", "Porto"],
-    "D": ["Fudbalito 1", "Karioke Nk", "Akademija Berane", "Stari aerodrom"],
-  }
-};
+      "2015": {
+        "A": ["Dadeks", "Buducnost", "Akademik Nk", "Desetka Bar", "Fa Kerver 19"],
+        "B": ["Pristina", "Fk Berane", "Župa Nk", "Bernabeu", "Danilovgrad 2"],
+        "C": ["Herceg Novi", "Karioke Nk", "Danilovgrad 1", "Ilarion", "Podgorica"],
+        "D": ["Fenix", "Otrant", "Barsa Bar", "Titan", "Porto"],
+      },
+      "2016": {
+        "A": ["Dadeks", "Durmitor", "Centar", "As 1", "Akademik Nk"],
+        "B": ["Herceg Novi", "Buducnost", "Danilovgrad", "Desetka"],
+        "C": ["Otrant", "Fudbalito", "Porto", "Zupa", "Bernabeu"],
+        "D": ["Onogost", "Barsa", "Stari aerodrom", "As 2", "Akademija Berane"],
+      },
+      "2017": {
+        "A": ["Dadeks", "Karioke Nk", "Titan", "Bernabeu 1", "Tuzi"],
+        "B": ["Stari Aerodrom", "Porto", "Fudbalito", "As", "Desetka"],
+        "C": ["Nacional", "Berane", "Cijevna", "Danilovgrad", "Ilarion"],
+        "D": ["Zlatna lopta", "Ibar", "Buducnost", "Bernabeu 2", "Centar"],
+      },
+      "2018": {
+        "A": ["Dadeks", "Desetka", "Jezero", "Fudbalito 3"],
+        "B": ["Zlatna lopta", "Fudbalito 2", "Arena", "Fenix"],
+        "C": ["Bernabeu", "Fa Kerver", "Zupa", "Porto"],
+        "D": ["Fudbalito 1", "Karioke Nk", "Akademija Berane", "Stari aerodrom"],
+      }
+    };
 
+    // ------------------------------
+    // RASPORED – PODACI PO GODIŠTU
+    // ------------------------------
+    const SCHEDULE_DATA = {
+      "2015": [
+        // PRIMJER (OBRIŠI I STAVI PRAVI RASPORED)
+        // { dan: "Petak", vrijeme: "09:00", teren: "Teren 1", grupa: "A", domacin: "Dadeks", gost: "Buducnost" },
+        // { dan: "Petak", vrijeme: "09:20", teren: "Teren 1", grupa: "A", domacin: "Akademik Nk", gost: "Desetka Bar" },
+      ],
+      "2016": [
+        // { dan: "Petak", vrijeme: "10:00", teren: "Teren 2", grupa: "A", domacin: "Dadeks", gost: "Durmitor" },
+      ],
+      "2017": [
+        // { dan: "Subota", vrijeme: "09:00", teren: "Teren 3", grupa: "B", domacin: "Stari Aerodrom", gost: "Porto" },
+      ],
+      "2018": [
+        // { dan: "Subota", vrijeme: "10:00", teren: "Teren 1", grupa: "A", domacin: "Dadeks", gost: "Desetka" },
+      ]
+    };
+
+    function renderScheduleTable(year) {
+      const container = document.getElementById("schedule-container");
+      if (!container) return;
+
+      const matches = SCHEDULE_DATA[year] || [];
+
+      if (!matches.length) {
+        container.innerHTML = "<p class='hint'>Nema unesenih utakmica za ovo godište.</p>";
+        return;
+      }
+
+      matches.sort((a, b) => {
+        if (a.dan === b.dan) {
+          return (a.vrijeme || "").localeCompare(b.vrijeme || "");
+        }
+        return a.dan.localeCompare(b.dan);
+      });
+
+      let html = `
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Dan</th>
+              <th>Vrijeme</th>
+              <th>Teren</th>
+              <th>Grupa</th>
+              <th>Domaćin</th>
+              <th>Gost</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      matches.forEach(m => {
+        html += `
+          <tr>
+            <td>${m.dan || ""}</td>
+            <td>${m.vrijeme || ""}</td>
+            <td>${m.teren || ""}</td>
+            <td>${m.grupa || ""}</td>
+            <td>${m.domacin || ""}</td>
+            <td>${m.gost || ""}</td>
+          </tr>
+        `;
+      });
+
+      html += "</tbody></table>";
+      container.innerHTML = html;
+    }
+
+    function changeScheduleYear(gen) {
+      const txt = document.getElementById("selected-schedule-gen-text");
+      if (txt) {
+        txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
+      }
+      renderScheduleTable(gen);
+    }
 
     // ------------------------------
     // UČITAVANJE REZULTATA IZ matches.json
@@ -757,10 +891,12 @@
         });
       }
 
+      // startno – 2015 tabela i raspored
       renderTablesForYear("2015");
+      renderScheduleTable("2015");
+
       startLiveScore();
     });
   </script>
 </body>
 </html>
-
