@@ -208,4 +208,38 @@ h2 {
   width: 100%;
   height: 100%;
   border: 0;
+
+}
+.sansa-btn {
+  display: block;
+  text-align: center;
+  background: #f7c62f;
+  color: #000;
+  padding: 22px 0;
+  border-radius: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 22px;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.55);
+  margin: 40px 0;
+  animation: sansaPulse 2.2s infinite ease-in-out;
+  border: 2px solid #000;
+}
+
+.sansa-main {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.sansa-sub {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: -2px;
+}
+
+@keyframes sansaPulse {
+  0% { transform: scale(1); box-shadow: 0 0 14px rgba(255, 215, 0, 0.3); }
+  50% { transform: scale(1.03); box-shadow: 0 0 26px rgba(255, 215, 0, 0.6); }
+  100% { transform: scale(1); box-shadow: 0 0 14px rgba(255, 215, 0, 0.3); }
 }
