@@ -830,41 +830,7 @@ const SCHEDULE_DATA = {
 }
 
 
-      matches.sort((a, b) => {
-        if (a.dan === b.dan) {
-          return (a.vrijeme || "").localeCompare(b.vrijeme || "");
-        }
-        return a.dan.localeCompare(b.dan);
-      });
-
-      let html = `
-        <table class="schedule-table">
-          <thead>
-            <tr>
-              <th>Dan</th>
-              <th>Vrijeme</th>
-              <th>Teren</th>
-              <th>Domaćin</th>
-              <th>Gost</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-      matches.forEach(m => {
-        html += `
-          <tr>
-            <td>${m.dan || ""}</td>
-            <td>${m.vrijeme || ""}</td>
-            <td>${m.teren || ""}</td>
-            <td>${m.domacin || ""}</td>
-            <td>${m.gost || ""}</td>
-          </tr>
-        `;
-      });
-
-      html += "</tbody></table>";
-      container.innerHTML = html;
+  
     }
 
     function changeScheduleYear(gen) {
@@ -1140,6 +1106,7 @@ const SCHEDULE_DATA = {
   </script>
 </body>
 </html>
+
 
 
 
