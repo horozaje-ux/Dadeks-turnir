@@ -544,74 +544,213 @@
     // RASPORED – PODACI PO GODIŠTU (PETAK)
     // ------------------------------
     const SCHEDULE_DATA = {
-      "2015": [
-        { dan: "Petak", vrijeme: "08:30", teren: "Pavle Rovinski", domacin: "Ilarion", gost: "Podgorica" },
-        { dan: "Petak", vrijeme: "08:55", teren: "Pavle Rovinski", domacin: "Danilovgrad 2", gost: "Bernabeu" },
-        { dan: "Petak", vrijeme: "09:20", teren: "Pavle Rovinski", domacin: "Dadeks", gost: "Buducnost" },
-        { dan: "Petak", vrijeme: "10:10", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Podgorica" },
-        { dan: "Petak", vrijeme: "11:00", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Ilarion" },
-        { dan: "Petak", vrijeme: "11:10", teren: "Cros Park", domacin: "Fenix", gost: "Porto" },
-        { dan: "Petak", vrijeme: "12:00", teren: "Cros Park", domacin: "Fenix", gost: "Titan" },
-        { dan: "Petak", vrijeme: "12:15", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Danilovgrad 1" },
-        { dan: "Petak", vrijeme: "12:35", teren: "Dadeks", domacin: "Pristina", gost: "Bernabeu" },
-        { dan: "Petak", vrijeme: "12:50", teren: "Cros Park", domacin: "Titan", gost: "Porto" },
-        { dan: "Petak", vrijeme: "14:20", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Herceg Novi" },
-        { dan: "Petak", vrijeme: "15:55", teren: "Dadeks", domacin: "Pristina", gost: "Danilovgrad 2" },
-        { dan: "Petak", vrijeme: "16:00", teren: "Pavle Rovinski", domacin: "Herceg Novi", gost: "Danilovgrad 1" }
-      ],
+  "2015": [
+    // PETAK
+    { dan: "Petak", vrijeme: "08:30", teren: "Pavle Rovinski", domacin: "Ilarion", gost: "Podgorica" },
+    { dan: "Petak", vrijeme: "08:55", teren: "Pavle Rovinski", domacin: "Danilovgrad 2", gost: "Bernabeu" },
+    { dan: "Petak", vrijeme: "09:20", teren: "Pavle Rovinski", domacin: "Dadeks", gost: "Buducnost" },
+    { dan: "Petak", vrijeme: "10:10", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Podgorica" },
+    { dan: "Petak", vrijeme: "11:00", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Ilarion" },
+    { dan: "Petak", vrijeme: "11:10", teren: "Cros Park", domacin: "Fenix", gost: "Porto" },
+    { dan: "Petak", vrijeme: "12:00", teren: "Cros Park", domacin: "Fenix", gost: "Titan" },
+    { dan: "Petak", vrijeme: "12:15", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Danilovgrad 1" },
+    { dan: "Petak", vrijeme: "12:35", teren: "Dadeks", domacin: "Pristina", gost: "Bernabeu" },
+    { dan: "Petak", vrijeme: "12:50", teren: "Cros Park", domacin: "Titan", gost: "Porto" },
+    { dan: "Petak", vrijeme: "14:20", teren: "Pavle Rovinski", domacin: "Karioke Nk", gost: "Herceg Novi" },
+    { dan: "Petak", vrijeme: "15:55", teren: "Dadeks", domacin: "Pristina", gost: "Danilovgrad 2" },
+    { dan: "Petak", vrijeme: "16:00", teren: "Pavle Rovinski", domacin: "Herceg Novi", gost: "Danilovgrad 1" },
 
-      "2016": [
-        { dan: "Petak", vrijeme: "08:50", teren: "Dadeks", domacin: "Porto", gost: "Fudbalito" },
-        { dan: "Petak", vrijeme: "09:45", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Danilovgrad" },
-        { dan: "Petak", vrijeme: "10:35", teren: "Pavle Rovinski", domacin: "Desetka", gost: "Danilovgrad" },
-        { dan: "Petak", vrijeme: "11:25", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Desetka" },
-        { dan: "Petak", vrijeme: "13:00", teren: "Dadeks", domacin: "Stari aerodrom", gost: "As 1" },
-        { dan: "Petak", vrijeme: "13:25", teren: "Dadeks", domacin: "Fudbalito", gost: "Bernabeu" },
-        { dan: "Petak", vrijeme: "13:40", teren: "Cros Park", domacin: "Dadeks", gost: "As 1" },
-        { dan: "Petak", vrijeme: "13:50", teren: "Dadeks", domacin: "Porto", gost: "Bernabeu" },
-        { dan: "Petak", vrijeme: "14:05", teren: "Cros Park", domacin: "Stari aerodrom", gost: "As 2" },
-        { dan: "Petak", vrijeme: "15:35", teren: "Pavle Rovinski", domacin: "Desetka", gost: "Herceg Novi" },
-        { dan: "Petak", vrijeme: "19:00", teren: "Dadeks", domacin: "Dadeks", gost: "Centar" },
-        { dan: "Petak", vrijeme: "19:50", teren: "Dadeks", domacin: "Centar", gost: "As 1" },
-        { dan: "Petak", vrijeme: "20:15", teren: "Dadeks", domacin: "Herceg Novi", gost: "Buducnost" }
-      ],
+    // SUBOTA – Pavle Rovinski
+    { dan: "Subota", vrijeme: "08:00", teren: "Pavle Rovinski", domacin: "Herceg Novi", gost: "Ilarion" },
+    { dan: "Subota", vrijeme: "08:25", teren: "Pavle Rovinski", domacin: "Danilovgrad 1", gost: "Podgorica" },
+    { dan: "Subota", vrijeme: "09:15", teren: "Pavle Rovinski", domacin: "Herceg Novi", gost: "Podgorica" },
+    { dan: "Subota", vrijeme: "09:40", teren: "Pavle Rovinski", domacin: "Danilovgrad 1", gost: "Ilarion" },
+    { dan: "Subota", vrijeme: "10:05", teren: "Pavle Rovinski", domacin: "Barsa", gost: "Titan" },
+    { dan: "Subota", vrijeme: "10:55", teren: "Pavle Rovinski", domacin: "Otrant", gost: "Titan" },
+    { dan: "Subota", vrijeme: "12:10", teren: "Pavle Rovinski", domacin: "Otrant", gost: "Barsa" },
+    { dan: "Subota", vrijeme: "13:00", teren: "Pavle Rovinski", domacin: "Stari Aerodrom", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "15:55", teren: "Pavle Rovinski", domacin: "Fenix", gost: "Barsa" },
+    { dan: "Subota", vrijeme: "16:20", teren: "Pavle Rovinski", domacin: "Otrant", gost: "Porto" },
+    { dan: "Subota", vrijeme: "17:10", teren: "Pavle Rovinski", domacin: "Fenix", gost: "Otrant" },
+    { dan: "Subota", vrijeme: "17:35", teren: "Pavle Rovinski", domacin: "Berane", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "18:00", teren: "Pavle Rovinski", domacin: "Zupa", gost: "Bernabeu" },
+    { dan: "Subota", vrijeme: "18:25", teren: "Pavle Rovinski", domacin: "Berane", gost: "Onogost 2" },
 
-      "2017": [
-        { dan: "Petak", vrijeme: "09:15", teren: "Dadeks", domacin: "Stari Aerodrom", gost: "Fudbalito" },
-        { dan: "Petak", vrijeme: "09:40", teren: "Dadeks", domacin: "Porto", gost: "As" },
-        { dan: "Petak", vrijeme: "10:05", teren: "Dadeks", domacin: "Nacional", gost: "Cijevna" },
-        { dan: "Petak", vrijeme: "10:30", teren: "Dadeks", domacin: "Stari Aerodrom", gost: "As" },
-        { dan: "Petak", vrijeme: "10:55", teren: "Dadeks", domacin: "Nacional", gost: "Ilarion" },
-        { dan: "Petak", vrijeme: "11:20", teren: "Dadeks", domacin: "Cijevna", gost: "Danilovgrad" },
-        { dan: "Petak", vrijeme: "11:35", teren: "Cros Park", domacin: "Titan", gost: "Bernabeu 1" },
-        { dan: "Petak", vrijeme: "12:10", teren: "Dadeks", domacin: "Danilovgrad", gost: "Ilarion" },
-        { dan: "Petak", vrijeme: "12:25", teren: "Cros Park", domacin: "Stari Aerodrom", gost: "Porto" },
-        { dan: "Petak", vrijeme: "13:15", teren: "Cros Park", domacin: "Dadeks", gost: "Titan" },
-        { dan: "Petak", vrijeme: "14:15", teren: "Dadeks", domacin: "Zlatna lopta", gost: "Ibar" },
-        { dan: "Petak", vrijeme: "14:40", teren: "Dadeks", domacin: "Porto", gost: "Fudbalito" },
-        { dan: "Petak", vrijeme: "15:05", teren: "Dadeks", domacin: "Ibar", gost: "Bernabeu 2" },
-        { dan: "Petak", vrijeme: "15:30", teren: "Dadeks", domacin: "Zlatna lopta", gost: "Buducnost" },
-        { dan: "Petak", vrijeme: "16:20", teren: "Dadeks", domacin: "Ibar", gost: "Buducnost" },
-        { dan: "Petak", vrijeme: "17:20", teren: "Dadeks", domacin: "Dadeks", gost: "Tuzi" },
-        { dan: "Petak", vrijeme: "17:45", teren: "Dadeks", domacin: "Ibar", gost: "Centar" },
-        { dan: "Petak", vrijeme: "18:10", teren: "Dadeks", domacin: "Bernabeu 1", gost: "Tuzi" },
-        { dan: "Petak", vrijeme: "18:35", teren: "Dadeks", domacin: "Bernabeu 2", gost: "Centar" },
-        { dan: "Petak", vrijeme: "19:25", teren: "Dadeks", domacin: "Bernabeu 1", gost: "Tuzi" }
-      ],
+    // SUBOTA – Dadeks
+    { dan: "Subota", vrijeme: "09:40", teren: "Dadeks", domacin: "Pristina", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "10:30", teren: "Dadeks", domacin: "Pristina", gost: "Berane" },
+    { dan: "Subota", vrijeme: "14:40", teren: "Dadeks", domacin: "Dadeks", gost: "Akademik" },
+    { dan: "Subota", vrijeme: "15:05", teren: "Dadeks", domacin: "Kerver", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "17:45", teren: "Dadeks", domacin: "As", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "19:00", teren: "Dadeks", domacin: "Kerver", gost: "Akademik" },
+    { dan: "Subota", vrijeme: "19:50", teren: "Dadeks", domacin: "Bernabeu", gost: "Kerver" },
+    { dan: "Subota", vrijeme: "20:40", teren: "Dadeks", domacin: "Dadeks", gost: "Kerver" },
 
-      "2018": [
-        { dan: "Petak", vrijeme: "08:00", teren: "Dadeks", domacin: "Zlatna lopta", gost: "Fudbalito 2" },
-        { dan: "Petak", vrijeme: "08:25", teren: "Dadeks", domacin: "Arena", gost: "Fenix" },
-        { dan: "Petak", vrijeme: "11:45", teren: "Dadeks", domacin: "Bernabeu", gost: "Porto" },
-        { dan: "Petak", vrijeme: "11:50", teren: "Pavle Rovinski", domacin: "Fudbalito 3", gost: "Desetka" },
-        { dan: "Petak", vrijeme: "12:40", teren: "Pavle Rovinski", domacin: "Jezero", gost: "Desetka" },
-        { dan: "Petak", vrijeme: "13:30", teren: "Pavle Rovinski", domacin: "Jezero", gost: "Dadeks" },
-        { dan: "Petak", vrijeme: "13:55", teren: "Pavle Rovinski", domacin: "Fudbalito 1", gost: "Stari aerodrom" },
-        { dan: "Petak", vrijeme: "14:45", teren: "Pavle Rovinski", domacin: "Jezero", gost: "Fudbalito 3" },
-        { dan: "Petak", vrijeme: "15:10", teren: "Pavle Rovinski", domacin: "Dadeks", gost: "Desetka" },
-        { dan: "Petak", vrijeme: "16:55", teren: "Dadeks", domacin: "Zlatna lopta", gost: "Arena" }
-      ]
-    };
+    // SUBOTA – Cros Park
+    { dan: "Subota", vrijeme: "10:55", teren: "Cros Park", domacin: "Buducnost", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "13:50", teren: "Cros Park", domacin: "Buducnost", gost: "Akademik" },
+    { dan: "Subota", vrijeme: "17:50", teren: "Cros Park", domacin: "Dadeks", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "19:05", teren: "Cros Park", domacin: "Barsa", gost: "Porto" },
+    { dan: "Subota", vrijeme: "19:25", teren: "Cros Park", domacin: "Zupa", gost: "Danilovgrad 2" },
+    { dan: "Subota", vrijeme: "19:50", teren: "Cros Park", domacin: "Berane", gost: "Bernabeu" },
+    { dan: "Subota", vrijeme: "20:40", teren: "Cros Park", domacin: "Akademik", gost: "Desetka" }
+
+    // NEDJELJA – NEMA 2015
+  ],
+
+  // --------------------------------------------------------
+  // 2016
+  // --------------------------------------------------------
+
+  "2016": [
+    // PETAK
+    { dan: "Petak", vrijeme: "08:50", teren: "Dadeks", domacin: "Porto", gost: "Fudbalito" },
+    { dan: "Petak", vrijeme: "09:45", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Danilovgrad" },
+    { dan: "Petak", vrijeme: "10:35", teren: "Pavle Rovinski", domacin: "Desetka", gost: "Danilovgrad" },
+    { dan: "Petak", vrijeme: "11:25", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Desetka" },
+    { dan: "Petak", vrijeme: "13:00", teren: "Dadeks", domacin: "Stari Aerodrom", gost: "As 1" },
+    { dan: "Petak", vrijeme: "13:25", teren: "Dadeks", domacin: "Fudbalito", gost: "Bernabeu" },
+    { dan: "Petak", vrijeme: "13:40", teren: "Cros Park", domacin: "Dadeks", gost: "As 1" },
+    { dan: "Petak", vrijeme: "13:50", teren: "Dadeks", domacin: "Porto", gost: "Bernabeu" },
+    { dan: "Petak", vrijeme: "14:05", teren: "Cros Park", domacin: "Stari Aerodrom", gost: "As 2" },
+    { dan: "Petak", vrijeme: "15:35", teren: "Pavle Rovinski", domacin: "Desetka", gost: "Herceg Novi" },
+    { dan: "Petak", vrijeme: "19:00", teren: "Dadeks", domacin: "Dadeks", gost: "Centar" },
+    { dan: "Petak", vrijeme: "19:50", teren: "Dadeks", domacin: "Centar", gost: "As 1" },
+    { dan: "Petak", vrijeme: "20:15", teren: "Dadeks", domacin: "Herceg Novi", gost: "Buducnost" },
+
+    // SUBOTA – Pavle Rovinski
+    { dan: "Subota", vrijeme: "08:50", teren: "Pavle Rovinski", domacin: "Herceg Novi", gost: "Danilovgrad" },
+    { dan: "Subota", vrijeme: "09:45", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Danilovgrad" },
+    { dan: "Subota", vrijeme: "10:35", teren: "Pavle Rovinski", domacin: "Desetka", gost: "Danilovgrad" },
+    { dan: "Subota", vrijeme: "11:20", teren: "Pavle Rovinski", domacin: "Onogost", gost: "Barsa" },
+    { dan: "Subota", vrijeme: "11:45", teren: "Pavle Rovinski", domacin: "Otrant", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "12:35", teren: "Pavle Rovinski", domacin: "Otrand", gost: "Porto" },
+    { dan: "Subota", vrijeme: "13:25", teren: "Pavle Rovinski", domacin: "Onogost", gost: "As" },
+    { dan: "Subota", vrijeme: "13:50", teren: "Pavle Rovinski", domacin: "Barsa", gost: "Stari Aerodrom" },
+    { dan: "Subota", vrijeme: "14:40", terrain: "Pavle Rovinski", domacin: "Onogost", gost: "Stari Aerodrom" },
+
+    // SUBOTA – Dadeks
+    { dan: "Subota", vrijeme: "09:15", teren: "Dadeks", domacin: "Porto", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "11:20", teren: "Dadeks", domacin: "Dadeks", gost: "Durmitor" },
+    { dan: "Subota", vrijeme: "12:10", teren: "Dadeks", domacin: "Durmitor", gost: "Centar" },
+    { dan: "Subota", vrijeme: "12:35", teren: "Dadeks", domacin: "Dadeks", gost: "Akademik" },
+    { dan: "Subota", vrijeme: "13:00", teren: "Dadeks", domacin: "Zupa", gost: "Bernabeu" },
+    { dan: "Subota", vrijeme: "13:25", teren: "Dadeks", domacin: "Akademik", gost: "Stari Aerodrom" },
+    { dan: "Subota", vrijeme: "13:50", teren: "Dadeks", domacin: "Fudbalito", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "16:20", teren: "Dadeks", domacin: "Durmitor", gost: "As" },
+    { dan: "Subota", vrijeme: "17:20", teren: "Dadeks", domacin: "Durmitor", gost: "Akademik" },
+    { dan: "Subota", vrijeme: "18:10", teren: "Dadeks", domacin: "As", gost: "Akademik" },
+
+    // SUBOTA – Cros Park
+    { dan: "Subota", vrijeme: "13:00", teren: "Cros Park", domacin: "As2", gost: "Berane" },
+    { dan: "Subota", vrijeme: "17:25", teren: "Cros Park", domacin: "Barsa", gost: "Berane" },
+    { dan: "Subota", vrijeme: "18:15", teren: "Cros Park", domacin: "Stari Aerodrom", gost: "Berane" },
+    { dan: "Subota", vrijeme: "18:40", teren: "Cros Park", domacin: "Barsa", gost: "As2" }
+  ],
+
+  // --------------------------------------------------------
+  // 2017
+  // --------------------------------------------------------
+
+  "2017": [
+    // PETAK
+    { dan: "Petak", vrijeme: "09:15", teren: "Dadeks", domacin: "Stari Aerodrom", gost: "Fudbalito" },
+    { dan: "Petak", vrijeme: "09:40", teren: "Dadeks", domacin: "Porto", gost: "As" },
+    { dan: "Petak", vrijeme: "10:05", teren: "Dadeks", domacin: "Nacional", gost: "Cijevna" },
+    { dan: "Petak", vrijeme: "10:30", teren: "Dadeks", domacin: "Stari Aerodrom", gost: "As" },
+    { dan: "Petak", vrijeme: "10:55", teren: "Dadeks", domacin: "Nacional", gost: "Ilarion" },
+    { dan: "Petak", vrijeme: "11:20", teren: "Dadeks", domacin: "Cijevna", gost: "Danilovgrad" },
+    { dan: "Petak", vrijeme: "11:35", teren: "Cros Park", domacin: "Titan", gost: "Bernabeu 1" },
+    { dan: "Petak", vrijeme: "12:10", terrain: "Dadeks", domacin: "Danilovgrad", gost: "Ilarion" },
+    { dan: "Petak", vrijeme: "12:25", terrain: "Cros Park", domacin: "Stari Aerodrom", gost: "Porto" },
+    { dan: "Petak", vrijeme: "13:15", terrain: "Cros Park", domacin: "Dadeks", gost: "Titan" },
+    { dan: "Petak", vrijeme: "14:15", terrain: "Dadeks", domacin: "Zlatna lopta", gost: "Ibar" },
+    { dan: "Petak", vrijeme: "14:40", terrain: "Dadeks", domacin: "Porto", gost: "Fudbalito" },
+    { dan: "Petak", vrijeme: "15:05", terrain: "Dadeks", domacin: "Ibar", gost: "Bernabeu 2" },
+    { dan: "Petak", vrijeme: "15:30", terrain: "Dadeks", domacin: "Zlatna lopta", gost: "Buducnost" },
+    { dan: "Petak", vrijeme: "16:20", terrain: "Dadeks", domacin: "Ibar", gost: "Buducnost" },
+    { dan: "Petak", vrijeme: "17:20", terrain: "Dadeks", domacin: "Dadeks", gost: "Tuzi" },
+    { dan: "Petak", vrijeme: "17:45", terrain: "Dadeks", domacin: "Ibar", gost: "Centar" },
+    { dan: "Petak", vrijeme: "18:10", terrain: "Dadeks", domacin: "Bernabeu 1", gost: "Tuzi" },
+    { dan: "Petak", vrijeme: "18:35", terrain: "Dadeks", domacin: "Bernabeu 2", gost: "Centar" },
+    { dan: "Petak", vrijeme: "19:25", terrain: "Dadeks", domacin: "Bernabeu 1", gost: "Tuzi" },
+
+    // SUBOTA – Pavle Rovinski
+    { dan: "Subota", vrijeme: "10:30", teren: "Pavle Rovinski", domacin: "Titan", gost: "Tuzi" },
+
+    // SUBOTA – Dadeks
+    { dan: "Subota", vrijeme: "10:05", teren: "Dadeks", domacin: "Nacional", gost: "Berane" },
+    { dan: "Subota", vrijeme: "10:55", teren: "Dadeks", domacin: "Berane", gost: "Danilovgrad" },
+    { dan: "Subota", vrijeme: "11:45", teren: "Dadeks", domacin: "Berane", gost: "Cijevna" },
+    { dan: "Subota", vrijeme: "15:30", teren: "Dadeks", domacin: "Porto", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "15:55", terrain: "Dadeks", domacin: "Berane", gost: "Ilarion" },
+    { dan: "Subota", vrijeme: "16:55", terrain: "Dadeks", domacin: "Fudbalito", gost: "Desetka" },
+    { dan: "Subota", vrijeme: "17:45", terrain: "Dadeks", domacin: "As", gost: "Desetka" },
+
+    // SUBOTA – Cros Park
+    { dan: "Subota", vrijeme: "08:00", teren: "Cros Park", domacin: "Cijevna", gost: "Ilarion" },
+    { dan: "Subota", vrijeme: "08:50", teren: "Cros Park", domacin: "Fudbalito", gost: "As" },
+    { dan: "Subota", vrijeme: "09:15", teren: "Cros Park", domacin: "Zlatna Lopta", gost: "Bernabeu 2" },
+    { dan: "Subota", vrijeme: "09:40", teren: "Cros Park", domacin: "Buducnost", gost: "Centar" },
+    { dan: "Subota", vrijeme: "10:05", teren: "Cros Park", domacin: "Fudbalito 2", gost: "Fenix" },
+    { dan: "Subota", vrijeme: "10:30", teren: "Cros Park", domacin: "Buducnost", gost: "Bernabeu 2" },
+    { dan: "Subota", vrijeme: "11:45", teren: "Cros Park", domacin: "Dadeks", gost: "Karioke" },
+    { dan: "Subota", vrijeme: "13:25", teren: "Cros Park", domacin: "Karioke", gost: "Berane 1" },
+    { dan: "Subota", vrijeme: "16:10", teren: "Cros Park", domacin: "Karioke", gost: "Berane" },
+    { dan: "Subota", vrijeme: "17:00", teren: "Cros Park", domacin: "Berane", gost: "Stari Aerodrom" },
+
+    // NEDJELJA
+    { dan: "Nedelja", vrijeme: "08:00", teren: "Dadeks", domacin: "Dadeks", gost: "Bernabeu" },
+    { dan: "Nedelja", vrijeme: "08:00", teren: "Cros Park", domacin: "Zlatna Lopta", gost: "Centar" },
+    { dan: "Nedelja", vrijeme: "08:25", teren: "Cros Park", domacin: "Nacional", gost: "Danilovgrad" }
+  ],
+
+  // --------------------------------------------------------
+  // 2018
+  // --------------------------------------------------------
+
+  "2018": [
+    // PETAK
+    { dan: "Petak", vrijeme: "08:00", teren: "Dadeks", domacin: "Zlatna lopta", gost: "Fudbalito 2" },
+    { dan: "Petak", vrijeme: "08:25", teren: "Dadeks", domacin: "Arena", gost: "Fenix" },
+    { dan: "Petak", vrijeme: "11:45", terrain: "Dadeks", domacin: "Bernabeu", gost: "Porto" },
+    { dan: "Petak", vrijeme: "11:50", terrain: "Pavle Rovinski", domacin: "Fudbalito 3", gost: "Desetka" },
+    { dan: "Petak", vrijeme: "12:40", terrain: "Pavle Rovinski", domacin: "Jezero", gost: "Desetka" },
+    { dan: "Petak", vrijeme: "13:30", terrain: "Pavle Rovinski", domacin: "Jezero", gost: "Dadeks" },
+    { dan: "Petak", vrijeme: "13:55", terrain: "Pavle Rovinski", domacin: "Fudbalito 1", gost: "Stari aerodrom" },
+    { dan: "Petak", vrijeme: "14:45", terrain: "Pavle Rovinski", domacin: "Jezero", gost: "Fudbalito 3" },
+    { dan: "Petak", vrijeme: "15:10", terrain: "Pavle Rovinski", domacin: "Dadeks", gost: "Desetka" },
+    { dan: "Petak", vrijeme: "16:55", terrain: "Dadeks", domacin: "Zlatna lopta", gost: "Arena" },
+
+    // SUBOTA – Pavle Rovinski
+    { dan: "Subota", vrijeme: "11:20", teren: "Pavle Rovinski", domacin: "Fudbalito", gost: "As" },
+    { dan: "Subota", vrijeme: "11:45", teren: "Pavle Rovinski", domacin: "Zlatna Lopta", gost: "Fenix" },
+    { dan: "Subota", vrijeme: "12:25", teren: "Pavle Rovinski", domacin: "Karioke", gost: "Stari Aerodrom" },
+    { dan: "Subota", vrijeme: "14:15", teren: "Pavle Rovinski", domacin: "Kerver", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "15:05", teren: "Dadeks", domacin: "Kerver", gost: "Desetka" },
+
+    // SUBOTA – Dadeks
+    { dan: "Subota", vrijeme: "08:00", teren: "Dadeks", domacin: "Dadeks", gost: "Fudbalito 3" },
+    { dan: "Subota", vrijeme: "08:25", teren: "Dadeks", domacin: "Fudbalito 2", gost: "Arena" },
+    { dan: "Subota", vrijeme: "08:50", teren: "Dadeks", domacin: "Zupa", gost: "Porto" },
+    { dan: "Subota", vrijeme: "14:15", teren: "Dadeks", domacin: "Kerver", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "18:35", teren: "Dadeks", domacin: "Kerver", gost: "Zupa" },
+    { dan: "Subota", vrijeme: "19:25", terrain: "Dadeks", domacin: "Kerver", gost: "Porto" },
+    { dan: "Subota", vrijeme: "20:15", terrain: "Dadeks", domacin: "Bernabeu", gost: "Kerver" },
+
+    // SUBOTA – Cros Park
+    { dan: "Subota", vrijeme: "08:25", teren: "Cros Park", domacin: "Zlatna Lopta", gost: "Fenix" },
+    { dan: "Subota", vrijeme: "11:20", teren: "Cros Park", domacin: "Fudbalito 1", gost: "Karioke" },
+    { dan: "Subota", vrijeme: "12:10", teren: "Cros Park", domacin: "Fudbalito 1", gost: "Bernae" },
+    { dan: "Subota", vrijeme: "16:10", teren: "Cros Park", domacin: "Karioke", gost: "Berane" },
+    { dan: "Subota", vrijeme: "17:00", teren: "Cros Park", domacin: "Berane", gost: "Stari Aerodrom" },
+    { dan: "Subota", vrijeme: "20:15", teren: "Cros Park", domacin: "Bernabeu", gost: "Zupa" },
+
+    // NEDJELJA
+    // Nema 2018 u nedjelju
+  ]
+};
+
 
     function renderScheduleTable(year) {
       const container = document.getElementById("schedule-container");
@@ -934,4 +1073,5 @@
   </script>
 </body>
 </html>
+
 
