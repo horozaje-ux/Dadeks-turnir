@@ -602,7 +602,7 @@
         // PETAK — PAVLE ROVINSKI
         { dan: "Petak", vrijeme: "09:45", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Danilovgrad" },
         { dan: "Petak", vrijeme: "10:35", teren: "Pavle Rovinski", domacin: "Desetka", gost: "Danilovgrad" },
-        { dan: "Petak", vrijeme: "11:25", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Desetka" },
+        { dan: "Petak", vrijeme: "11:25", teren: "Pavle Rovinski", domacin: "Buducnost", gost: "Danilovgrad" },
 
         // PETAK — CROS PARK
         { dan: "Petak", vrijeme: "13:40", teren: "Cros Park", domacin: "Dadeks", gost: "AS" },
@@ -742,7 +742,7 @@
     };
 
     // ------------------------------
-    // RENDER RASPORED – PO GODIŠTU → DAN → TEREN
+    // RASPORED – PRIKAZ PO DANU I TERENU
     // ------------------------------
     function renderScheduleTable(year) {
       const container = document.getElementById("schedule-container");
@@ -755,78 +755,77 @@
         return;
       }
 
+      // redosled dana i terena
       const dayOrder = ["Petak", "Subota", "Nedelja"];
-      const fieldOrder = ["Pavle Rovinski", "Cros Park", "Dadeks"];
+      // TERENE STAVLJAMO OVIM REDOM: DadeKS, Cros Park, Pavle Rovinski
+      const fieldOrder = ["Dadeks", "Cros Park", "Pavle Rovinski"];
 
-      // Grupisanje: dan -> teren
-      const grouped = {};
-      matches.forEach(m => {
-        const dan = m.dan || "";
-        const teren = m.teren || "";
-        if (!grouped[dan]) grouped[dan] = {};
-        if (!grouped[dan][teren]) grouped[dan][teren] = [];
-        grouped[dan][teren].push(m);
+      // grupisanje: dan + teren
+      const groups = {};
+      matches.forEach((m) => {
+        const key = (m.dan || "") + "||" + (m.teren || "");
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(m);
       });
 
-      // sortiranje po vremenu
-      Object.values(grouped).forEach(tereniObj => {
-        Object.values(tereniObj).forEach(list => {
-          list.sort((a, b) => (a.vrijeme || "").localeCompare(b.vrijeme || ""));
-        });
+      // sortiranje unutar svake grupe po vremenu
+      Object.values(groups).forEach((arr) => {
+        arr.sort((a, b) => (a.vrijeme || "").localeCompare(b.vrijeme || ""));
       });
 
       let html = "";
 
-      dayOrder.forEach(dan => {
-        const tereni = grouped[dan];
-        if (!tereni) return;
+      dayOrder.forEach((dan) => {
+        let dayHasAny = false;
 
-        // naslov dana
-        html += `
-          <h3 style="margin:18px 0 8px; font-size:1rem; color:#e5e7eb;">
-            ${dan}
-          </h3>
-        `;
+        fieldOrder.forEach((teren) => {
+          const key = dan + "||" + teren;
+          const list = groups[key];
 
-        fieldOrder.forEach(teren => {
-          const list = tereni[teren];
-          if (!list || !list.length) return;
+          if (list && list.length) {
+            // jedanput napiši naslov dana za to godište
+            if (!dayHasAny) {
+              html += `<h3 style="margin-top:12px; margin-bottom:4px; font-size:0.95rem;">${dan} – ${year}. godište</h3>`;
+              dayHasAny = true;
+            }
 
-          html += `
-            <p style="margin:6px 0 4px; font-size:0.85rem; color:#38bdf8;">
-              <strong>${teren}</strong>
-            </p>
-            <div style="overflow-x:auto; margin-bottom:8px;">
-              <table class="schedule-table">
-                <thead>
-                  <tr>
-                    <th>Dan</th>
-                    <th>Vrijeme</th>
-                    <th>Teren</th>
-                    <th>Domaćin</th>
-                    <th>Gost</th>
-                  </tr>
-                </thead>
-                <tbody>
-          `;
+            // naslov terena
+            html += `<p style="margin:4px 0 2px; font-size:0.8rem; color:#9ca3af;"><strong>${teren}</strong></p>`;
 
-          list.forEach(m => {
+            // tabela za taj teren
             html += `
-              <tr>
-                <td>${m.dan || ""}</td>
-                <td>${m.vrijeme || ""}</td>
-                <td>${m.teren || ""}</td>
-                <td>${m.domacin || ""}</td>
-                <td>${m.gost || ""}</td>
-              </tr>
+              <div style="overflow-x:auto; margin-bottom:8px;">
+                <table class="schedule-table">
+                  <thead>
+                    <tr>
+                      <th>Dan</th>
+                      <th>Vrijeme</th>
+                      <th>Teren</th>
+                      <th>Domaćin</th>
+                      <th>Gost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
             `;
-          });
 
-          html += `
-                </tbody>
-              </table>
-            </div>
-          `;
+            list.forEach((m) => {
+              html += `
+                <tr>
+                  <td>${m.dan || ""}</td>
+                  <td>${m.vrijeme || ""}</td>
+                  <td>${m.teren || ""}</td>
+                  <td>${m.domacin || ""}</td>
+                  <td>${m.gost || ""}</td>
+                </tr>
+              `;
+            });
+
+            html += `
+                  </tbody>
+                </table>
+              </div>
+            `;
+          }
         });
       });
 
