@@ -1,1 +1,34 @@
-[].
+[
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Buducnost",
+    "golDom": 4,
+    "golGost": 2
+  },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Pristina",
+    "gost": "Fk Berane",
+    "golDom": 2,
+    "golGost": 1
+  },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Bernabeu",
+    "gost": "Danilovgrad 2",
+    "golDom": 1,
+    "golGost": 3
+  },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Fk Berane",
+    "gost": "Župa Nk",
+    "golDom": 4,
+    "golGost": 1
+  }
+]
