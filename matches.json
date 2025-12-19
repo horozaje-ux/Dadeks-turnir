@@ -102,5 +102,13 @@
     "gost": "Cijevna",
     "golDom": 0,
     "golGost": 3
+  },
+  {
+    "godiste": "2015",
+    "grupa": "C",
+    "domacin": "Karioke Nk",
+    "gost": "Ilarion",
+    "golDom": 2,
+    "golGost": 4
   }
 ]
