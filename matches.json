@@ -182,5 +182,13 @@
     "gost": "Danilovgrad 1",
     "golDom": 1,
     "golGost": 0
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Stari Aerodrom",
+    "gost": "Porto",
+    "golDom": 3,
+    "golGost": 1
   }
 ]
