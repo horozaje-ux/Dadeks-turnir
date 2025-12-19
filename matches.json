@@ -118,5 +118,13 @@
     "gost": "Porto",
     "golDom": 0,
     "golGost": 2
+  },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Cijevna",
+    "gost": "Danilovgrad",
+    "golDom": 1,
+    "golGost": 2
   }
 ]
