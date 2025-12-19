@@ -134,5 +134,13 @@
     "gost": "Desetka",
     "golDom": 2,
     "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Titan",
+    "gost": "Bernabeu 1",
+    "golDom": 0,
+    "golGost": 4
   }
 ]
