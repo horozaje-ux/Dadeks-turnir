@@ -190,5 +190,53 @@
     "gost": "Porto",
     "golDom": 3,
     "golGost": 1
+  },
+  {
+    "godiste": "2018",
+    "grupa": "A",
+    "domacin": "Jezero",
+    "gost": "Desetka",
+    "golDom": 3,
+    "golGost": 0
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Titan",
+    "gost": "Porto",
+    "golDom": 1,
+    "golGost": 1
+  },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Pristina",
+    "gost": "Bernabeu",
+    "golDom": 0,
+    "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Titan",
+    "golDom": 4,
+    "golGost": 0
+  },
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Fudbalito",
+    "gost": "Bernabeu",
+    "golDom": 1,
+    "golGost": 2
+  },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Zlatna lopta",
+    "gost": "Ibar",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
