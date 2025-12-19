@@ -1,1 +1,10 @@
-[].
+[
+  {
+    "godiste": "2018",
+    "grupa": "B",
+    "domacin": "Zlatna lopta",
+    "gost": "Fudbalito 2",
+    "golDom": 6,
+    "golGost": 1
+  }
+]
