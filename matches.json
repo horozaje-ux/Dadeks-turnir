@@ -158,5 +158,13 @@
     "gost": "Desetka",
     "golDom": 1,
     "golGost": 1
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Fenix",
+    "gost": "Titan",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
