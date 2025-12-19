@@ -78,5 +78,13 @@
     "gost": "Danilovgrad",
     "golDom": 0,
     "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Stari Aerodrom",
+    "gost": "As",
+    "golDom": 5,
+    "golGost": 0
   }
 ]
