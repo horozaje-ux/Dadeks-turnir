@@ -110,5 +110,13 @@
     "gost": "Ilarion",
     "golDom": 2,
     "golGost": 4
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Fenix",
+    "gost": "Porto",
+    "golDom": 0,
+    "golGost": 2
   }
 ]
