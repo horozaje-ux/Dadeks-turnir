@@ -30,5 +30,13 @@
     "gost": "Fudbalito",
     "golDom": 1,
     "golGost": 4
+  },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Danilovgrad 2",
+    "gost": "Bernabeu",
+    "golDom": 0,
+    "golGost": 2
   }
 ]
