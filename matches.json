@@ -166,5 +166,13 @@
     "gost": "Titan",
     "golDom": 0,
     "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Danilovgrad",
+    "gost": "Ilarion",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
