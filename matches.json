@@ -358,5 +358,69 @@
     "gost": "Danilovgrad 1",
     "golDom": 2,
     "golGost": 3
+  },
+  {
+    "godiste": "2018",
+    "grupa": "B",
+    "domacin": "Zlatna lopta",
+    "gost": "Arena",
+    "golDom": 1,
+    "golGost": 0
+  },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Tuzi",
+    "golDom": 6,
+    "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Ibar",
+    "gost": "Centar",
+    "golDom": 0,
+    "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Bernabeu 1",
+    "gost": "Tuzi",
+    "golDom": 5,
+    "golGost": 0
+  },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Bernabeu 2",
+    "gost": "Centar",
+    "golDom": 1,
+    "golGost": 1
+  },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Centar",
+    "golDom": 4,
+    "golGost": 1
+  },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Centar",
+    "gost": "As 1",
+    "golDom": 0,
+    "golGost": 2
+  },
+  {
+    "godiste": "2016",
+    "grupa": "B",
+    "domacin": "Herceg Novi",
+    "gost": "Buducnost",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
