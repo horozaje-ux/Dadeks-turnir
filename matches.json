@@ -310,5 +310,21 @@
     "gost": "Fudbalito 3",
     "golDom": 2,
     "golGost": 1
+  },
+  {
+    "godiste": "2018",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Desetka",
+    "golDom": 1,
+    "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Zlatna lopta",
+    "gost": "Buducnost",
+    "golDom": 2,
+    "golGost": 0
   }
 ]
