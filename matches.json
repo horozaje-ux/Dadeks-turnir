@@ -142,5 +142,13 @@
     "gost": "Bernabeu 1",
     "golDom": 0,
     "golGost": 4
+  },
+  {
+    "godiste": "2018",
+    "grupa": "C",
+    "domacin": "Bernabeu",
+    "gost": "Porto",
+    "golDom": 3,
+    "golGost": 2
   }
 ]
