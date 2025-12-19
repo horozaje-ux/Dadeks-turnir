@@ -68,8 +68,8 @@
     "grupa": "C",
     "domacin": "Cijevna",
     "gost": "Nacional",
-    "golDom": 0,
-    "golGost": 3
+    "golDom": 3,
+    "golGost": 0
   },
   {
     "godiste": "2016",
@@ -94,23 +94,13 @@
     "gost": "Podgorica",
     "golDom": 2,
     "golGost": 1
-  }
-]
- {
+  },
+  {
     "godiste": "2017",
     "grupa": "C",
     "domacin": "Nacional",
-    "gost": "Ilarion",
+    "gost": "Cijevna",
     "golDom": 0,
     "golGost": 3
-  }
-]
-{
-    "godiste": "2016",
-    "grupa": "B",
-    "domacin": "Desetka",
-    "gost": "Danilovgrad",
-    "golDom": 1,
-    "golGost": 0
   }
 ]
