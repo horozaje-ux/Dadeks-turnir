@@ -54,5 +54,13 @@
     "gost": "Buducnost",
     "golDom": 1,
     "golGost": 0
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Porto",
+    "gost": "As",
+    "golDom": 2,
+    "golGost": 0
   }
 ]
