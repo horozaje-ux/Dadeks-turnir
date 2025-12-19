@@ -68,8 +68,8 @@
     "grupa": "C",
     "domacin": "Cijevna",
     "gost": "Nacional",
-    "golDom": 3,
-    "golGost": 0
+    "golDom": 0,
+    "golGost": 3
   },
   {
     "godiste": "2016",
