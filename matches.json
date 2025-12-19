@@ -38,5 +38,13 @@
     "gost": "Bernabeu",
     "golDom": 0,
     "golGost": 2
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Stari Aerodrom",
+    "gost": "Fudbalito",
+    "golDom": 2,
+    "golGost": 4
   }
 ]
