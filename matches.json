@@ -126,5 +126,13 @@
     "gost": "Danilovgrad",
     "golDom": 1,
     "golGost": 2
+  },
+  {
+    "godiste": "2016",
+    "grupa": "B",
+    "domacin": "Buducnost",
+    "gost": "Desetka",
+    "golDom": 2,
+    "golGost": 1
   }
 ]
