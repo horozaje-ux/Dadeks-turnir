@@ -915,5 +915,37 @@
     "gost": "Fudbalito",
     "golDom": 0,
     "golGost": 3
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Fenix",
+    "gost": "Otrant",
+    "golDom": 3,
+    "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Akademija Berane",
+    "gost": "Bernabeu2",
+    "golDom": 5,
+    "golGost": 0
+ },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Barsa Bar",
+    "gost": "Porto",
+    "golDom": 1,
+    "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Fudbalito",
+    "gost": "Desetka",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
