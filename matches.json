@@ -1027,5 +1027,13 @@
     "gost": "Desetka Bar",
     "golDom": 0,
     "golGost": 1
+ },
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Fa Kerver 19",
+    "gost": "Akademik Nk",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
