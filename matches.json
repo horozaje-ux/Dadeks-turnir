@@ -595,5 +595,21 @@
     "gost": "Danilovgrad",
     "golDom": 1,
     "golGost": 0
+ },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Buducnost",
+    "gost": "Bernabeu 2",
+    "golDom": 2,
+    "golGost": 0
+  },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Berane",
+    "gost": "Danilovgrad",
+    "golDom": 1,
+    "golGost": 3
   }
 ]
