@@ -1108,5 +1108,21 @@
     "gost": "Porto",
     "golDom": 4,
     "golGost": 1
+ },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Nacional",
+    "gost": "Danilovgrad",
+    "golDom": 0,
+    "golGost": 3
+ },
+  {
+    "godiste": "2018",
+    "grupa": "C",
+    "domacin": "Bernabeu",
+    "gost": "Fa Kerver",
+    "golDom": 1,
+    "golGost": 3
   }
 ]
