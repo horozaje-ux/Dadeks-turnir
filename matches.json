@@ -473,7 +473,7 @@
     "grupa": "B",
     "domacin": "Zlatna lopta",
     "gost": "Fenix",
-    "golDom": 1,
-    "golGost": 0
+    "golDom": 0,
+    "golGost": 1
   }
 ]
