@@ -1052,5 +1052,21 @@
     "gost": "Ilarion",
     "golDom": 0,
     "golGost": 3
+ },
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Fa Kerver 19",
+    "golDom": 3,
+    "golGost": 0
+ },
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Buducnost",
+    "gost": "Fa Kerver 19",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
