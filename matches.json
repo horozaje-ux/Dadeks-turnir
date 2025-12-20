@@ -475,5 +475,29 @@
     "gost": "Fenix",
     "golDom": 0,
     "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Fudbalito",
+    "gost": "As",
+    "golDom": 2,
+    "golGost": 0
+  },
+  {
+    "godiste": "2016",
+    "grupa": "B",
+    "domacin": "Herceg Novi",
+    "gost": "Danilovgrad",
+    "golDom": 0,
+    "golGost": 0
+  },
+  {
+    "godiste": "2018",
+    "grupa": "C",
+    "domacin": "Zupa",
+    "gost": "Porto",
+    "golDom": 1,
+    "golGost": 5
   }
 ]
