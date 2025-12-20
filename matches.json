@@ -499,5 +499,29 @@
     "gost": "Porto",
     "golDom": 1,
     "golGost": 5
+ },
+  {
+    "godiste": "2015",
+    "grupa": "C",
+    "domacin": "Herceg Novi",
+    "gost": "Podgorica",
+    "golDom": 3,
+    "golGost": 0
+  },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Zlatna lopta",
+    "gost": "Bernabeu 2",
+    "golDom": 4,
+    "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Porto",
+    "gost": "Zupa",
+    "golDom": 0,
+    "golGost": 2
   }
 ]
