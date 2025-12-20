@@ -449,5 +449,31 @@
     "gost": "Ilarion",
     "golDom": 1,
     "golGost": 0
+  },
+
+  {
+    "godiste": "2018",
+    "grupa": "B",
+    "domacin": "Fudbalito 2",
+    "gost": "Arena",
+    "golDom": 1,
+    "golGost": 2
+ 
+},
+  {
+    "godiste": "2015",
+    "grupa": "C",
+    "domacin": "Danilovgrad 1",
+    "gost": "Podgorica",
+    "golDom": 2,
+    "golGost": 0
+  },
+  {
+    "godiste": "2018",
+    "grupa": "B",
+    "domacin": "Zlatna lopta",
+    "gost": "Fenix",
+    "golDom": 1,
+    "golGost": 0
   }
 ]
