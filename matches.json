@@ -947,5 +947,45 @@
     "gost": "Desetka",
     "golDom": 3,
     "golGost": 0
+ },
+  {
+    "godiste": "2018",
+    "grupa": "D",
+    "domacin": "Akademija Berane",
+    "gost": "Stari aerodrom",
+    "golDom": 6,
+    "golGost": 2
+ },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Durmitor",
+    "gost": "Akademik Nk",
+    "golDom": 1,
+    "golGost": 3
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Barsa",
+    "gost": "Akademija Berane",
+    "golDom": 0,
+    "golGost": 3
+ },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Fk Berane",
+    "gost": "Župa Nk",
+    "golDom": 3,
+    "golGost": 1
+ },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "As",
+    "gost": "Desetka",
+    "golDom": 2,
+    "golGost": 1
   }
 ]
