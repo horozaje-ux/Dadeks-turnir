@@ -523,5 +523,29 @@
     "gost": "Zupa",
     "golDom": 0,
     "golGost": 2
+   },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Pristina",
+    "gost": "Župa Nk",
+    "golDom": 0,
+    "golGost": 3
+  },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Pristina",
+    "gost": "Fk Berane",
+    "golDom": 0,
+    "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Nacional",
+    "gost": "Berane",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
