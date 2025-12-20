@@ -723,5 +723,61 @@
     "gost": "Akademik Nk",
     "golDom": 5,
     "golGost": 0
+ },
+  {
+    "godiste": "2018",
+    "grupa": "D",
+    "domacin": "Karioke Nk",
+    "gost": "Stari aerodrom",
+    "golDom": 2,
+    "golGost": 1
+},
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Zupa",
+    "gost": "Bernabeu",
+    "golDom": 0,
+    "golGost": 3
+ },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Stari Aerodrom",
+    "gost": "Desetka",
+    "golDom": 4,
+    "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "As 2",
+    "gost": "Akademija Berane",
+    "golDom": 0,
+    "golGost": 6
+ },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Akademik Nk",
+    "gost": "Centar",
+    "golDom": 0,
+    "golGost": 0
+ },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Karioke Nk",
+    "gost": "Bernabeu 1",
+    "golDom": 0,
+    "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Bernabeu2",
+    "gost": "As 2",
+    "golDom": 2,
+    "golGost": 0
   }
 ]
