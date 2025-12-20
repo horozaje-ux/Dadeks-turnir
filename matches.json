@@ -843,5 +843,29 @@
     "gost": "Desetka Bar",
     "golDom": 0,
     "golGost": 3
+ },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Karioke Nk",
+    "gost": "Tuzi",
+    "golDom": 4,
+    "golGost": 1
+  },
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Otrant",
+    "gost": "Bernabeu",
+    "golDom": 0,
+    "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "B",
+    "domacin": "Porto",
+    "gost": "Desetka",
+    "golDom": 3,
+    "golGost": 2
   }
 ]
