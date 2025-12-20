@@ -883,5 +883,37 @@
     "gost": "Porto",
     "golDom": 0,
     "golGost": 3
+ },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Berane",
+    "gost": "Ilarion",
+    "golDom": 1,
+    "golGost": 0
+  },
+  {
+    "godiste": "2018",
+    "grupa": "D",
+    "domacin": "Karioke Nk",
+    "gost": "Akademija Berane",
+    "golDom": 1,
+    "golGost": 5
+  },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Durmitor",
+    "gost": "As 1",
+    "golDom": 1,
+    "golGost": 5
+ },
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Otrant",
+    "gost": "Fudbalito",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
