@@ -611,5 +611,37 @@
     "gost": "Danilovgrad",
     "golDom": 1,
     "golGost": 3
+  },
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Buducnost",
+    "gost": "Desetka Bar",
+    "golDom": 2,
+    "golGost": 0
+  },
+  {
+    "godiste": "2018",
+    "grupa": "C",
+    "domacin": "Bernabeu",
+    "gost": "Zupa",
+    "golDom": 0,
+    "golGost": 2
+   },
+  {
+    "godiste": "2018",
+    "grupa": "D",
+    "domacin": "Fudbalito 1",
+    "gost": "Karioke Nk",
+    "golDom": 3,
+    "golGost": 3
+  },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Bernabeu2",
+    "gost": "Barsa",
+    "golDom": 0,
+    "golGost": 2
   }
 ]
