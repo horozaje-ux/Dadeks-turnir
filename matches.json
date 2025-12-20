@@ -422,5 +422,32 @@
     "gost": "Buducnost",
     "golDom": 3,
     "golGost": 0
+  
+ },
+  {
+    "godiste": "2018",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Fudbalito 3",
+    "golDom": 0,
+    "golGost": 5
+  
+},
+  {
+    "godiste": "2015",
+    "grupa": "C",
+    "domacin": "Herceg Novi",
+    "gost": "Ilarion",
+    "golDom": 6,
+    "golGost": 0
+  
+},
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Cijevna",
+    "gost": "Ilarion",
+    "golDom": 1,
+    "golGost": 0
   }
 ]
