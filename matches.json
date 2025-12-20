@@ -547,5 +547,21 @@
     "gost": "Berane",
     "golDom": 0,
     "golGost": 3
+ },
+  {
+    "godiste": "2015",
+    "grupa": "C",
+    "domacin": "Danilovgrad 1",
+    "gost": "Ilarion",
+    "golDom": 1,
+    "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "D",
+    "domacin": "Buducnost",
+    "gost": "Centar",
+    "golDom": 3,
+    "golGost": 1
   }
 ]
