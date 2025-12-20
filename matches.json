@@ -1011,5 +1011,21 @@
     "gost": "Akademik Nk",
     "golDom": 4,
     "golGost": 2
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Stari aerodrom",
+    "gost": "Akademija Berane",
+    "golDom": 1,
+    "golGost": 4
+ },
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Akademik Nk",
+    "gost": "Desetka Bar",
+    "golDom": 0,
+    "golGost": 1
   }
 ]
