@@ -867,5 +867,21 @@
     "gost": "Desetka",
     "golDom": 3,
     "golGost": 2
+ },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Fenix",
+    "gost": "Barsa Bar",
+    "golDom": 0,
+    "golGost": 2
+ },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Otrant",
+    "gost": "Porto",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
