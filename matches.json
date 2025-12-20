@@ -563,5 +563,21 @@
     "gost": "Centar",
     "golDom": 3,
     "golGost": 1
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Barsa Bar",
+    "gost": "Titan",
+    "golDom": 1,
+    "golGost": 2
+ },
+  {
+    "godiste": "2018",
+    "grupa": "B",
+    "domacin": "Fudbalito 2",
+    "gost": "Fenix",
+    "golDom": 0,
+    "golGost": 1
   }
 ]
