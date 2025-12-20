@@ -779,5 +779,37 @@
     "gost": "As 2",
     "golDom": 2,
     "golGost": 0
+},
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Fudbalito",
+    "gost": "Zupa",
+    "golDom": 1,
+    "golGost": 4
+},
+  {
+    "godiste": "2015",
+    "grupa": "A",
+    "domacin": "Buducnost",
+    "gost": "Akademik Nk",
+    "golDom": 1,
+    "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Barsa",
+    "gost": "Stari aerodrom",
+    "golDom": 0,
+    "golGost": 4
+ },
+  {
+    "godiste": "2018",
+    "grupa": "C",
+    "domacin": "Fa Kerver",
+    "gost": "Zupa",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
