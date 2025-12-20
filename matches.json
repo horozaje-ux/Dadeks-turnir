@@ -643,5 +643,13 @@
     "gost": "Barsa",
     "golDom": 0,
     "golGost": 2
+ },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Durmitor",
+    "golDom": 3,
+    "golGost": 0
   }
 ]
