@@ -1076,5 +1076,37 @@
     "gost": "Danilovgrad 2",
     "golDom": 2,
     "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "D",
+    "domacin": "Barsa",
+    "gost": "As 2",
+    "golDom": 0,
+    "golGost": 3
+ },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Župa Nk",
+    "gost": "Danilovgrad 2",
+    "golDom": 2,
+    "golGost": 0
+ },
+  {
+    "godiste": "2015",
+    "grupa": "B",
+    "domacin": "Fk Berane",
+    "gost": "Danilovgrad 2",
+    "golDom": 1,
+    "golGost": 2
+ },
+  {
+    "godiste": "2018",
+    "grupa": "C",
+    "domacin": "Fa Kerver",
+    "gost": "Porto",
+    "golDom": 4,
+    "golGost": 1
   }
 ]
