@@ -1036,5 +1036,21 @@
     "gost": "Bernabeu",
     "golDom": 2,
     "golGost": 4
+ },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Nacional",
+    "gost": "Danilovgrad",
+    "golDom": 0,
+    "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Nacional",
+    "gost": "Ilarion",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
