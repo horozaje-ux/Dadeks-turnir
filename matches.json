@@ -659,5 +659,69 @@
     "gost": "Titan",
     "golDom": 0,
     "golGost": 3
+  },
+  {
+    "godiste": "2017",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Karioke Nk",
+    "golDom": 11,
+    "golGost": 0
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Otrant",
+    "gost": "Barsa Bar",
+    "golDom": 0,
+    "golGost": 1
+  },
+  {
+    "godiste": "2017",
+    "grupa": "C",
+    "domacin": "Berane",
+    "gost": "Cijevna",
+    "golDom": 3,
+    "golGost": 1
+  },
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Otrant",
+    "gost": "Zupa",
+    "golDom": 2,
+    "golGost": 0
+ },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Durmitor",
+    "gost": "Centar",
+    "golDom": 1,
+    "golGost": 1
+ },
+  {
+    "godiste": "2018",
+    "grupa": "D",
+    "domacin": "Fudbalito 1",
+    "gost": "Akademija Berane",
+    "golDom": 1,
+    "golGost": 2
+ },
+  {
+    "godiste": "2016",
+    "grupa": "C",
+    "domacin": "Otrant",
+    "gost": "Porto",
+    "golDom": 0,
+    "golGost": 2
+ },
+  {
+    "godiste": "2016",
+    "grupa": "A",
+    "domacin": "Dadeks",
+    "gost": "Akademik Nk",
+    "golDom": 5,
+    "golGost": 0
   }
 ]
