@@ -651,5 +651,13 @@
     "gost": "Durmitor",
     "golDom": 3,
     "golGost": 0
+  },
+  {
+    "godiste": "2015",
+    "grupa": "D",
+    "domacin": "Otrant",
+    "gost": "Titan",
+    "golDom": 0,
+    "golGost": 3
   }
 ]
