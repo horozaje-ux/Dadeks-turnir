@@ -1084,6 +1084,33 @@
   </script>
 </body>
 </html>
+<div class="card">
+  <h2>Raspored utakmica</h2>
+  <p class="hint">Klikni na utakmicu da vidiš detalje.</p>
+
+  <label for="filterTeam">Filtriraj po ekipi</label>
+  <select id="filterTeam">
+    <option value="">— sve ekipe —</option>
+  </select>
+
+  <div id="scheduleList" style="margin-top:10px;"></div>
+</div>
+
+<!-- MODAL -->
+<div id="matchModal" style="
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.6); padding:16px; z-index:9999;">
+  <div style="
+    width:min(520px, 100%); background:#0b1222; border:1px solid #1f2937;
+    border-radius:16px; padding:14px; box-shadow:0 20px 60px rgba(0,0,0,.5);">
+    <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+      <h3 id="modalTitle" style="margin:0; color:#38bdf8;">Utakmica</h3>
+      <button id="closeModal" class="btn-secondary" style="width:auto; padding:8px 12px;">Zatvori</button>
+    </div>
+    <div id="modalBody" style="margin-top:10px; line-height:1.5;"></div>
+  </div>
+</div>
+
 
 
 
