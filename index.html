@@ -15,9 +15,7 @@
   </script>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -26,9 +24,7 @@
       color: #e5e7eb;
     }
 
-    a {
-      color: inherit;
-    }
+    a { color: inherit; }
 
     .page {
       max-width: 1200px;
@@ -83,13 +79,8 @@
       font-weight: 600;
     }
 
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     .card {
       background: radial-gradient(circle at top left, #0f172a, #020617 55%);
@@ -184,9 +175,7 @@
     }
 
     /* TREPERENJE KAD PADNE GOL */
-    .goal-flash {
-      animation: flashGoal 1.2s ease-out 3;
-    }
+    .goal-flash { animation: flashGoal 1.2s ease-out 3; }
 
     @keyframes flashGoal {
       0%   { background-color: transparent; }
@@ -197,7 +186,7 @@
       100% { background-color: transparent; }
     }
 
-    /* ŠANSABET LOGO – ŽUTO / CRNO, TALASA KAO ZASTAVA */
+    /* ŠANSABET */
     .sponsor-card {
       margin-top: 10px;
       text-align: center;
@@ -215,15 +204,11 @@
       position: relative;
       overflow: hidden;
       animation: flagWave 2.8s ease-in-out infinite;
+      text-decoration: none;
     }
 
-    .sansa-main {
-      font-size: 0.9rem;
-    }
-
-    .sansa-dot {
-      font-size: 0.9rem;
-    }
+    .sansa-main { font-size: 0.9rem; }
+    .sansa-dot { font-size: 0.9rem; }
 
     .sansa-since {
       display: block;
@@ -279,22 +264,13 @@
     }
 
     .standings-table th:first-child,
-    .standings-table td:first-child {
-      text-align: left;
-    }
+    .standings-table td:first-child { text-align: left; }
 
     .standings-table th:nth-child(2),
-    .standings-table td:nth-child(2) {
-      text-align: left;
-    }
+    .standings-table td:nth-child(2) { text-align: left; }
 
-    .standings-table thead {
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .standings-table tbody tr:nth-child(even) {
-      background: rgba(15, 23, 42, 0.55);
-    }
+    .standings-table thead { background: rgba(15, 23, 42, 0.9); }
+    .standings-table tbody tr:nth-child(even) { background: rgba(15, 23, 42, 0.55); }
 
     /* TABELA RASPOREDA */
     .schedule-table {
@@ -324,9 +300,7 @@
     }
 
     @media (max-width: 640px) {
-      iframe {
-        min-height: 420px;
-      }
+      iframe { min-height: 420px; }
     }
   </style>
 </head>
@@ -340,11 +314,7 @@
 
     <!-- TAB NAV -->
     <div class="tabs">
-      <a
-        href="grupe.html"
-        class="tab-btn"
-        style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;"
-      >
+      <a href="grupe.html" class="tab-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
         Grupe
       </a>
 
@@ -354,7 +324,7 @@
       <button class="tab-btn" data-target="live">Live score</button>
     </div>
 
-    <!-- TIMOVI – GODIŠTA 2015–2018 -->
+    <!-- TIMOVI -->
     <section class="tab-content active" id="timovi">
       <div class="card">
         <h2>Timovi po godištima</h2>
@@ -378,12 +348,11 @@
         <iframe
           id="teams-iframe"
           src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false"
-          loading="lazy">
-        </iframe>
+          loading="lazy"></iframe>
       </div>
     </section>
 
-    <!-- TABELE – STANDINGS -->
+    <!-- TABELE -->
     <section class="tab-content" id="tabele">
       <div class="card">
         <h2>Tabela po godištima</h2>
@@ -412,323 +381,289 @@
       </div>
     </section>
 
-   <!-- RASPORED – STATIČKI, TAČNO KAKO SI POSLAO -->
-<section class="tab-content" id="raspored">
-  <div class="card">
-    <h2>Raspored utakmica</h2>
-    <p class="hint">
-      Kompletan raspored – Petak, Subota i Nedelja, po terenima i godištima.
-    </p>
+    <!-- RASPORED -->
+    <section class="tab-content" id="raspored">
+      <div class="card">
+        <h2>Raspored utakmica</h2>
+        <p class="hint">Kompletan raspored – Petak, Subota i Nedelja, po terenima i godištima.</p>
 
-    <div id="schedule-container" style="overflow-x:auto;">
+        <!-- FILTER PO EKIPI -->
+        <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:10px 0 14px;">
+          <label class="hint" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            Izaberi ekipu:
+            <select id="teamFilterSelect">
+              <option value="">— izaberi ekipu —</option>
+            </select>
+          </label>
+          <span class="hint" id="teamFilterInfo"></span>
+        </div>
 
-      <!-- PETAK -->
-      <h3 style="margin-top:12px;">Petak</h3>
+        <div id="teamScheduleResults"></div>
 
-      <!-- PETAK – TEREN DADEKS -->
-      <p style="margin:4px 0;"><strong>Teren Dadeks</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>08:00</td><td>2018</td><td>Zlatna Lopta – Fudbalito2</td><td>6:1</td></tr>
-          <tr><td>2</td><td>08:25</td><td>2018</td><td>Arena – Fenix</td><td>3:0</td></tr>
-          <tr><td>3</td><td>08:50</td><td>2016</td><td>Porto – Fudbalito</td><td>1:4</td></tr>
-          <tr><td>4</td><td>09:15</td><td>2017</td><td>Stari Aerodrom – Fudbalito</td><td>2:4</td></tr>
-          <tr><td>5</td><td>09:40</td><td>2017</td><td>Porto – AS</td><td>2:0</td></tr>
-          <tr><td>6</td><td>10:05</td><td>2017</td><td>Nacional – Cijevna</td><td>0:3</td></tr>
-          <tr><td>7</td><td>10:30</td><td>2017</td><td>Stari Aerodrom – AS</td><td>5:0</td></tr>
-          <tr><td>8</td><td>10:55</td><td>2017</td><td>Nacional – Ilarion</td><td>0:3</td></tr>
-          <tr><td>9</td><td>11:20</td><td>2017</td><td>Cijevna – Danilovgrad</td><td>1:2</td></tr>
-          <tr><td>10</td><td>11:45</td><td>2018</td><td>Bernabeu – Porto</td><td>3:2</td></tr>
-          <tr><td>11</td><td>12:10</td><td>2017</td><td>Danilovgrad – Ilarion</td><td>3:0</td></tr>
-          <tr><td>12</td><td>12:35</td><td>2015</td><td>Pristina – Bernabeu</td><td>0:3</td></tr>
-          <tr><td>13</td><td>13:00</td><td>2017</td><td>Pauza</td><td></td></tr>
-          <tr><td>14</td><td>13:25</td><td>2016</td><td>Fudbalito – Bernabeu</td><td>1:2</td></tr>
-          <tr><td>15</td><td>13:50</td><td>2017</td><td>Zlatna Lopta – Ibar</td><td>3:0</td></tr>
-          <tr><td>16</td><td>14:15</td><td>2016</td><td>Porto – Bernabeu</td><td>0:12</td></tr>
-          <tr><td>17</td><td>14:40</td><td>2017</td><td>Porto – Fudbalito</td><td>2:2</td></tr>
-          <tr><td>18</td><td>15:05</td><td>2017</td><td>Ibar – Bernabeu2</td><td>0:3</td></tr>
-          <tr><td>19</td><td>15:30</td><td>2017</td><td>Zlatna Lopta – Buducnost</td><td>2:0</td></tr>
-          <tr><td>20</td><td>15:55</td><td>2015</td><td>Pristina – Danilovgrad2</td><td>0:3</td></tr>
-          <tr><td>21</td><td>16:20</td><td>2017</td><td>Ibar – Buducbost</td><td>0:3</td></tr>
-          <tr><td>22</td><td>16:55</td><td>2018</td><td>Zlatna Lopta – Arena</td><td>1:0</td></tr>
-          <tr><td>23</td><td>17:20</td><td>2017</td><td>Dadeks – Tuzi</td><td>6:1</td></tr>
-          <tr><td>24</td><td>17:45</td><td>2017</td><td>Ibar – Centar</td><td>0:3</td></tr>
-          <tr><td>25</td><td>18:10</td><td>2017</td><td>Bernabeu1 – Tuzi</td><td>5:1</td></tr>
-          <tr><td>26</td><td>18:35</td><td>2017</td><td>Bernabeu2 – Centar</td><td>1:1</td></tr>
-          <tr><td>27</td><td>19:00</td><td>2016</td><td>Dadeks – Centar</td><td>4:1</td></tr>
-          <tr><td>28</td><td>19:25</td><td>2016</td><td>Centar – As1</td><td>0:2</td></tr>
-          <tr><td>29</td><td>19:50</td><td>2016</td><td>Herceg Novi – Buducnost</td><td>3:0</td></tr>
-        </tbody>
-      </table>
+        <div id="schedule-container" style="overflow-x:auto;">
 
-      <!-- PETAK – TEREN CROS PARK -->
-      <p style="margin:8px 0 4px;"><strong>Teren Cros Park</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>11:10</td><td>2015</td><td>Fenix – Porto</td><td>0:2</td></tr>
-          <tr><td>2</td><td>11:35</td><td>2017</td><td>Titan – Bernabeu</td><td>0:4</td></tr>
-          <tr><td>3</td><td>12:00</td><td>2015</td><td>Fenix – Titan</td><td>0:3</td></tr>
-          <tr><td>4</td><td>12:25</td><td>2017</td><td>Stari Aerodrom – Porto</td><td>3:1</td></tr>
-          <tr><td>5</td><td>12:50</td><td>2015</td><td>Titan – Porto</td><td>1:1</td></tr>
-          <tr><td>6</td><td>13:15</td><td>2017</td><td>Dadeks – Titan</td><td>4:0</td></tr>
-          <tr><td>7</td><td>13:40</td><td>2016</td><td>Dadeks – AS1</td><td>3:1</td></tr>
-          <tr><td>8</td><td>14:05</td><td>2016</td><td>Stari Aerodrom – As2</td><td>7:0</td></tr>
-        </tbody>
-      </table>
+          <!-- PETAK -->
+          <h3 style="margin-top:12px;">Petak</h3>
 
-      <!-- PETAK – TEREN PAVLE ROVINSKI -->
-      <p style="margin:8px 0 4px;"><strong>Teren Pavle Rovinski</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>08:30</td><td>2015</td><td>Ilarion – Podgorica</td><td>3:1</td></tr>
-          <tr><td>2</td><td>08:55</td><td>2015</td><td>Danilovgrad2 – Bernabeu</td><td>0:2</td></tr>
-          <tr><td>3</td><td>09:20</td><td>2015</td><td>Dadeks – Buducnost</td><td>1:0</td></tr>
-          <tr><td>4</td><td>09:45</td><td>2016</td><td>Buducnost – Danilovgrad</td><td>0:3</td></tr>
-          <tr><td>5</td><td>10:10</td><td>2015</td><td>Karioke Nk – Podgorica</td><td>2:1</td></tr>
-          <tr><td>6</td><td>10:35</td><td>2016</td><td>Desetka – Danilovgrad</td><td>1:0</td></tr>
-          <tr><td>7</td><td>11:00</td><td>2015</td><td>Karioke Nk – Ilarion</td><td>2:4</td></tr>
-          <tr><td>8</td><td>11:25</td><td>2016</td><td>Buducnost – Desetka</td><td>2:1</td></tr>
-          <tr><td>9</td><td>11:50</td><td>2018</td><td>Fudbalito3 – Desetka</td><td>1:1</td></tr>
-          <tr><td>10</td><td>12:15</td><td>2015</td><td>Karioke Nk – Danilovgrad1</td><td>1:0</td></tr>
-          <tr><td>11</td><td>12:40</td><td>2018</td><td>Jezero – Desetka</td><td>3:0</td></tr>
-          <tr><td>12</td><td>13:05</td><td></td><td>Pauza/td><td></td></tr>
-          <tr><td>13</td><td>13:30</td><td>2018</td><td>Jezero – Dadeks</td><td>4:0</td></tr>
-          <tr><td>14</td><td>13:55</td><td>2018</td><td>Fudbalito1 – Stari Aerodrom</td><td>4:1</td></tr>
-          <tr><td>15</td><td>14:20</td><td>2015</td><td>Karioke – Herceg Novi</td><td>1:1</td></tr>
-          <tr><td>16</td><td>14:45</td><td>2018</td><td>Jezero – Fubalito3</td><td>2:1</td></tr>
-          <tr><td>17</td><td>15:10</td><td>2018</td><td>Dadeks – Desetka</td><td>1:1</td></tr>
-          <tr><td>18</td><td>15:35</td><td>2016</td><td>Desetka – Herceg Novi</td><td>0:3</td></tr>
-          <tr><td>19</td><td>16:00</td><td>2015</td><td>Herceg Novi – Danilovgrad1</td><td>2:3</td></tr>
-        </tbody>
-      </table>
+          <p style="margin:4px 0;"><strong>Teren Dadeks</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>08:00</td><td>2018</td><td>Zlatna Lopta – Fudbalito2</td><td>6:1</td></tr>
+              <tr><td>2</td><td>08:25</td><td>2018</td><td>Arena – Fenix</td><td>3:0</td></tr>
+              <tr><td>3</td><td>08:50</td><td>2016</td><td>Porto – Fudbalito</td><td>1:4</td></tr>
+              <tr><td>4</td><td>09:15</td><td>2017</td><td>Stari Aerodrom – Fudbalito</td><td>2:4</td></tr>
+              <tr><td>5</td><td>09:40</td><td>2017</td><td>Porto – AS</td><td>2:0</td></tr>
+              <tr><td>6</td><td>10:05</td><td>2017</td><td>Nacional – Cijevna</td><td>0:3</td></tr>
+              <tr><td>7</td><td>10:30</td><td>2017</td><td>Stari Aerodrom – AS</td><td>5:0</td></tr>
+              <tr><td>8</td><td>10:55</td><td>2017</td><td>Nacional – Ilarion</td><td>0:3</td></tr>
+              <tr><td>9</td><td>11:20</td><td>2017</td><td>Cijevna – Danilovgrad</td><td>1:2</td></tr>
+              <tr><td>10</td><td>11:45</td><td>2018</td><td>Bernabeu – Porto</td><td>3:2</td></tr>
+              <tr><td>11</td><td>12:10</td><td>2017</td><td>Danilovgrad – Ilarion</td><td>3:0</td></tr>
+              <tr><td>12</td><td>12:35</td><td>2015</td><td>Pristina – Bernabeu</td><td>0:3</td></tr>
+              <tr><td>13</td><td>13:00</td><td>2017</td><td>Pauza</td><td></td></tr>
+              <tr><td>14</td><td>13:25</td><td>2016</td><td>Fudbalito – Bernabeu</td><td>1:2</td></tr>
+              <tr><td>15</td><td>13:50</td><td>2017</td><td>Zlatna Lopta – Ibar</td><td>3:0</td></tr>
+              <tr><td>16</td><td>14:15</td><td>2016</td><td>Porto – Bernabeu</td><td>0:12</td></tr>
+              <tr><td>17</td><td>14:40</td><td>2017</td><td>Porto – Fudbalito</td><td>2:2</td></tr>
+              <tr><td>18</td><td>15:05</td><td>2017</td><td>Ibar – Bernabeu2</td><td>0:3</td></tr>
+              <tr><td>19</td><td>15:30</td><td>2017</td><td>Zlatna Lopta – Buducnost</td><td>2:0</td></tr>
+              <tr><td>20</td><td>15:55</td><td>2015</td><td>Pristina – Danilovgrad2</td><td>0:3</td></tr>
+              <tr><td>21</td><td>16:20</td><td>2017</td><td>Ibar – Buducbost</td><td>0:3</td></tr>
+              <tr><td>22</td><td>16:55</td><td>2018</td><td>Zlatna Lopta – Arena</td><td>1:0</td></tr>
+              <tr><td>23</td><td>17:20</td><td>2017</td><td>Dadeks – Tuzi</td><td>6:1</td></tr>
+              <tr><td>24</td><td>17:45</td><td>2017</td><td>Ibar – Centar</td><td>0:3</td></tr>
+              <tr><td>25</td><td>18:10</td><td>2017</td><td>Bernabeu1 – Tuzi</td><td>5:1</td></tr>
+              <tr><td>26</td><td>18:35</td><td>2017</td><td>Bernabeu2 – Centar</td><td>1:1</td></tr>
+              <tr><td>27</td><td>19:00</td><td>2016</td><td>Dadeks – Centar</td><td>4:1</td></tr>
+              <tr><td>28</td><td>19:25</td><td>2016</td><td>Centar – As1</td><td>0:2</td></tr>
+              <tr><td>29</td><td>19:50</td><td>2016</td><td>Herceg Novi – Buducnost</td><td>3:0</td></tr>
+            </tbody>
+          </table>
 
-      <!-- SUBOTA -->
-      <h3 style="margin-top:16px;">Subota</h3>
+          <p style="margin:8px 0 4px;"><strong>Teren Cros Park</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>11:10</td><td>2015</td><td>Fenix – Porto</td><td>0:2</td></tr>
+              <tr><td>2</td><td>11:35</td><td>2017</td><td>Titan – Bernabeu</td><td>0:4</td></tr>
+              <tr><td>3</td><td>12:00</td><td>2015</td><td>Fenix – Titan</td><td>0:3</td></tr>
+              <tr><td>4</td><td>12:25</td><td>2017</td><td>Stari Aerodrom – Porto</td><td>3:1</td></tr>
+              <tr><td>5</td><td>12:50</td><td>2015</td><td>Titan – Porto</td><td>1:1</td></tr>
+              <tr><td>6</td><td>13:15</td><td>2017</td><td>Dadeks – Titan</td><td>4:0</td></tr>
+              <tr><td>7</td><td>13:40</td><td>2016</td><td>Dadeks – AS1</td><td>3:1</td></tr>
+              <tr><td>8</td><td>14:05</td><td>2016</td><td>Stari Aerodrom – As2</td><td>7:0</td></tr>
+            </tbody>
+          </table>
 
-      <!-- SUBOTA – TEREN PAVLE ROVINSKI -->
-      <p style="margin:4px 0;"><strong>Teren Pavle Rovinski</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>08:00</td><td>2015</td><td>Herceg Novi – Ilarion</td><td>6:0</td></tr>
-          <tr><td>2</td><td>08:25</td><td>2015</td><td>Danilovgrad1 – Podgorica</td><td>2:0</td></tr>
-          <tr><td>3</td><td>08:50</td><td>2016</td><td>Herceg Novi – Danilovgrad</td><td>0:0</td></tr>
-          <tr><td>4</td><td>09:15</td><td>2015</td><td>Herceg Novi – Podgorica</td><td>3:0</td></tr>
-          <tr><td>5</td><td>09:40</td><td>2015</td><td>Danilovgrad1 – Ilarion</td><td>1:1</td></tr>
-          <tr><td>6</td><td>10:05</td><td>2015</td><td>Barsa – Titan</td><td>1:2</td></tr>
-          <tr><td>7</td><td>10:30</td><td>2017</td><td>Titan – Tuzi</td><td>4:0</td></tr>
-          <tr><td>8</td><td>10:55</td><td>2015</td><td>Otrant – Titan</td><td>0:3</td></tr>
-          <tr><td>9</td><td>11:20</td><td>2016</td><td>Bernabeu2 – Barsa</td><td>0:2</td></tr>
-          <tr><td>10</td><td>11:45</td><td>2016</td><td>Otrant – Zupa</td><td>2:0</td></tr>
-          <tr><td>11</td><td>12:10</td><td>2015</td><td>Otrant – Barsa</td><td>0:1</td></tr>
-          <tr><td>12</td><td>12:35</td><td>2016</td><td>Otrand – Porto</td><td>0:2</td></tr>
-          <tr><td>13</td><td>13:00</td><td>2017</td><td>Stari Aerodrom – Desetka</td><td>4:0</td></tr>
-          <tr><td>14</td><td>13:25</td><td>2016</td><td>Bernabeu2 – AS2</td><td>2:0</td></tr>
-          <tr><td>15</td><td>13:50</td><td>2016</td><td>Barsa – Stari Aerodrom</td><td>0:4</td></tr>
-          <tr><td>16</td><td>14:15</td><td>2017</td><td>Karioke – Titan</td><td>1:4</td></tr>
-          <tr><td>17</td><td>14:40</td><td>2016</td><td>Bernabeu2 – Stari Aerodrom</td><td>1:4</td></tr>
-          <tr><td>18</td><td>15:05</td><td>2017</td><td>Karioke – Tuzi</td><td>4:1</td></tr>
-          <tr><td>19</td><td>15:30</td><td>2016</td><td>Otrant – Bernabeu</td><td>0:3</td></tr>
-          <tr><td>20</td><td>15:55</td><td>2015</td><td>Fenix – Barsa</td><td>0:2</td></tr>
-          <tr><td>21</td><td>16:20</td><td>2015</td><td>Otrant – Porto</td><td>0:3</td></tr>
-          <tr><td>22</td><td>16:45</td><td>2016</td><td>Otrant – Fudbalito</td><td>0:3</td></tr>
-          <tr><td>23</td><td>17:10</td><td>2015</td><td>Fenix – Otrant</td><td>3:0</td></tr>
-          <tr><td>24</td><td>17:35</td><td>2015</td><td>Berane – Zupa</td><td>3:1</td></tr>
-          <tr><td>25</td><td>18:00</td><td>2015</td><td>Zupa – Bernabeu</td><td>2:2</td></tr>
-          <tr><td>26</td><td>18:25</td><td>2015</td><td>Berane – Danilovgrad2</td><td>1:2</td></tr>
-        </tbody>
-      </table>
+          <p style="margin:8px 0 4px;"><strong>Teren Pavle Rovinski</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>08:30</td><td>2015</td><td>Ilarion – Podgorica</td><td>3:1</td></tr>
+              <tr><td>2</td><td>08:55</td><td>2015</td><td>Danilovgrad2 – Bernabeu</td><td>0:2</td></tr>
+              <tr><td>3</td><td>09:20</td><td>2015</td><td>Dadeks – Buducnost</td><td>1:0</td></tr>
+              <tr><td>4</td><td>09:45</td><td>2016</td><td>Buducnost – Danilovgrad</td><td>0:3</td></tr>
+              <tr><td>5</td><td>10:10</td><td>2015</td><td>Karioke Nk – Podgorica</td><td>2:1</td></tr>
+              <tr><td>6</td><td>10:35</td><td>2016</td><td>Desetka – Danilovgrad</td><td>1:0</td></tr>
+              <tr><td>7</td><td>11:00</td><td>2015</td><td>Karioke Nk – Ilarion</td><td>2:4</td></tr>
+              <tr><td>8</td><td>11:25</td><td>2016</td><td>Buducnost – Desetka</td><td>2:1</td></tr>
+              <tr><td>9</td><td>11:50</td><td>2018</td><td>Fudbalito3 – Desetka</td><td>1:1</td></tr>
+              <tr><td>10</td><td>12:15</td><td>2015</td><td>Karioke Nk – Danilovgrad1</td><td>1:0</td></tr>
+              <tr><td>11</td><td>12:40</td><td>2018</td><td>Jezero – Desetka</td><td>3:0</td></tr>
+              <tr><td>12</td><td>13:05</td><td></td><td>Pauza</td><td></td></tr>
+              <tr><td>13</td><td>13:30</td><td>2018</td><td>Jezero – Dadeks</td><td>4:0</td></tr>
+              <tr><td>14</td><td>13:55</td><td>2018</td><td>Fudbalito1 – Stari Aerodrom</td><td>4:1</td></tr>
+              <tr><td>15</td><td>14:20</td><td>2015</td><td>Karioke – Herceg Novi</td><td>1:1</td></tr>
+              <tr><td>16</td><td>14:45</td><td>2018</td><td>Jezero – Fubalito3</td><td>2:1</td></tr>
+              <tr><td>17</td><td>15:10</td><td>2018</td><td>Dadeks – Desetka</td><td>1:1</td></tr>
+              <tr><td>18</td><td>15:35</td><td>2016</td><td>Desetka – Herceg Novi</td><td>0:3</td></tr>
+              <tr><td>19</td><td>16:00</td><td>2015</td><td>Herceg Novi – Danilovgrad1</td><td>2:3</td></tr>
+            </tbody>
+          </table>
 
-      <!-- SUBOTA – TEREN DADEKS -->
-      <p style="margin:8px 0 4px;"><strong>Teren Dadeks</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>08:00</td><td>2018</td><td>Dadeks – Fudbalito3</td><td>0:5</td></tr>
-          <tr><td>2</td><td>08:25</td><td>2018</td><td>Fudbalito2 – Arena</td><td>1:2</td></tr>
-          <tr><td>3</td><td>08:50</td><td>2018</td><td>Zupa – Porto</td><td>1:5</td></tr>
-          <tr><td>4</td><td>09:15</td><td>2016</td><td>Porto – Zupa</td><td>0:2</td></tr>
-          <tr><td>5</td><td>09:40</td><td>2015</td><td>Pristina – Zupa</td><td>0:3</td></tr>
-          <tr><td>6</td><td>10:05</td><td>2017</td><td>Nacional – Berane</td><td>0:3</td></tr>
-          <tr><td>7</td><td>10:30</td><td>2015</td><td>Pristina – Berane</td><td>0:3</td></tr>
-          <tr><td>8</td><td>10:55</td><td>2017</td><td>Berane – Danilovgrad</td><td>1:3</td></tr>
-          <tr><td>9</td><td>11:20</td><td>2016</td><td>Dadeks – Durmitor</td><td>3:0</td></tr>
-          <tr><td>10</td><td>11:45</td><td>2017</td><td>Berane – Cijevna</td><td>3:1</td></tr>
-          <tr><td>11</td><td>12:10</td><td>2016</td><td>Durmitor – Centar</td><td>1:1</td></tr>
-          <tr><td>12</td><td>12:35</td><td>2016</td><td>Dadeks – Akademik</td><td>5:0</td></tr>
-          <tr><td>13</td><td>13:00</td><td>2016</td><td>Zupa – Bernabeu</td><td>0:3</td></tr>
-          <tr><td>14</td><td>13:25</td><td>2016</td><td>Akademik – Centar</td><td>0:0</td></tr>
-          <tr><td>15</td><td>13:50</td><td>2016</td><td>Fudbalito – Zupa</td><td>1:4</td></tr>
-          <tr><td>16</td><td>14:15</td><td>2018</td><td>Kerver – Zupa</td><td>3:0</td></tr>
-          <tr><td>17</td><td>14:40</td><td>2015</td><td>Dadeks – Akademik</td><td>2:1</td></tr>
-          <tr><td>18</td><td>15:05</td><td>2015</td><td>Kerver – Desetka</td><td>0:3</td></tr>
-          <tr><td>19</td><td>15:30</td><td>2017</td><td>Porto – Desetka</td><td>3:2</td></tr>
-          <tr><td>20</td><td>15:55</td><td>2017</td><td>Berane – Ilarion</td><td>1:0</td></tr>
-          <tr><td>21</td><td>16:20</td><td>2016</td><td>Durmitor – AS</td><td>1:5</td></tr>
-          <tr><td>22</td><td>16:55</td><td>2017</td><td>Fudbalito – Desetka</td><td>3:0</td></tr>
-          <tr><td>23</td><td>17:20</td><td>2016</td><td>Durmitor – Akademik</td><td>1:3</td></tr>
-          <tr><td>24</td><td>17:45</td><td>2017</td><td>AS – Desetka</td><td>2:1</td></tr>
-          <tr><td>25</td><td>18:10</td><td>2016</td><td>AS – Akademik</td><td>4:2</td></tr>
-          <tr><td>26</td><td>18:35</td><td>2018</td><td>pauza</td><td></td></tr>
-          <tr><td>27</td><td>19:00</td><td>2015</td><td>Kerver – Akademik</td><td>0:3</td></tr>
-          <tr><td>28</td><td>19:25</td><td>2018</td><td>Kerver – Porto</td><td>4:1</td></tr>
-          <tr><td>29</td><td>19:50</td><td>2015</td><td>Buducnost – Kerver</td><td>3:0</td></tr>
-          <tr><td>30</td><td>20:15</td><td>2018</td><td>Bernabeu – Kerver</td><td>1:3</td></tr>
-          <tr><td>31</td><td>20:40</td><td>2015</td><td>Dadeks – Kerver</td><td>3:0</td></tr>
-        </tbody>
-      </table>
+          <!-- SUBOTA -->
+          <h3 style="margin-top:16px;">Subota</h3>
 
-      <!-- SUBOTA – TEREN CROS PARK -->
-      <p style="margin:8px 0 4px;"><strong>Teren Cros Park</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>08:00</td><td>2017</td><td>Cijevna – Ilarion</td><td>1:0</td></tr>
-          <tr><td>2</td><td>08:25</td><td>2018</td><td>Zlatna Lopta – Fenix</td><td>0:1</td></tr>
-          <tr><td>3</td><td>08:50</td><td>2017</td><td>Fudbalito – AS</td><td>2:0</td></tr>
-          <tr><td>4</td><td>09:15</td><td>2017</td><td>Zlatna Lopta – Bernabeu2</td><td>4:0</td></tr>
-          <tr><td>5</td><td>09:40</td><td>2017</td><td>Buducnost – Centar</td><td>3:1</td></tr>
-          <tr><td>6</td><td>10:05</td><td>2018</td><td>Fudbalito2 – Fenix</td><td>0:1</td></tr>
-          <tr><td>7</td><td>10:30</td><td>2017</td><td>Buducnost – Bernabeu2</td><td>2:0</td></tr>
-          <tr><td>8</td><td>10:55</td><td>2015</td><td>Buducnost – Desetka</td><td>2:0</td></tr>
-          <tr><td>9</td><td>11:20</td><td>2018</td><td>Fudbalito1 – Karioke</td><td>3:3</td></tr>
-          <tr><td>10</td><td>11:45</td><td>2017</td><td>Dadeks – Karioke</td><td>11:0</td></tr>
-          <tr><td>11</td><td>12:10</td><td>2018</td><td>Fudbalito1 – Akademija Berane</td><td>1:2</td></tr>
-          <tr><td>12</td><td>12:35</td><td>2018</td><td>Karioke – Stari Aerodrom</td><td>2:1</td></tr>
-          <tr><td>13</td><td>13:00</td><td>2016</td><td>As2 – Akademija Berane</td><td>0:6</td></tr>
-          <tr><td>14</td><td>13:25</td><td>2017</td><td>Karioke – Bernabeu1</td><td>0:0</td></tr>
-          <tr><td>15</td><td>13:50</td><td>2015</td><td>Buducnost – Akademik</td><td>1:0</td></tr>
-          <tr><td>16</td><td>16:10</td><td>2018</td><td>Karioke – Akademija Berane</td><td>1:5</td></tr>
-          <tr><td>17</td><td>16:35</td><td>2016</td><td>Akademija Berane – Bernabeu</td><td>5:0</td></tr>
-          <tr><td>18</td><td>17:00</td><td>2018</td><td>Akademija Berane – Stari Aerodrom</td><td>6:2</td></tr>
-          <tr><td>19</td><td>17:25</td><td>2016</td><td>Barsa – Akademija Berane</td><td>0:3</td></tr>
-          <tr><td>20</td><td>17:50</td><td>2015</td><td>Dadeks – Desetka</td><td>3:1</td></tr>
-          <tr><td>21</td><td>18:15</td><td>2016</td><td>Stari Aerodrom – Akademija Berane</td><td>1:4</td></tr>
-          <tr><td>22</td><td>18:40</td><td>2016</td><td>Barsa – As2</td><td>0:3</td></tr>
-          <tr><td>23</td><td>19:05</td><td>2015</td><td>Barsa – Porto</td><td>2:1</td></tr>
-          <tr><td>24</td><td>19:25</td><td>2015</td><td>Zupa – Danilovgrad2</td><td>2:0</td></tr>
-          <tr><td>25</td><td>19:50</td><td>2015</td><td>Berane – Bernabeu</td><td>2:4</td></tr>
-          <tr><td>26</td><td>20:15</td><td>2018</td><td>Bernabeu – Zupa</td><td>0:2</td></tr>
-          <tr><td>27</td><td>20:40</td><td>2015</td><td>Akademik – Deseta</td><td>0:1</td></tr>
-        </tbody>
-      </table>
+          <p style="margin:4px 0;"><strong>Teren Pavle Rovinski</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>08:00</td><td>2015</td><td>Herceg Novi – Ilarion</td><td>6:0</td></tr>
+              <tr><td>2</td><td>08:25</td><td>2015</td><td>Danilovgrad1 – Podgorica</td><td>2:0</td></tr>
+              <tr><td>3</td><td>08:50</td><td>2016</td><td>Herceg Novi – Danilovgrad</td><td>0:0</td></tr>
+              <tr><td>4</td><td>09:15</td><td>2015</td><td>Herceg Novi – Podgorica</td><td>3:0</td></tr>
+              <tr><td>5</td><td>09:40</td><td>2015</td><td>Danilovgrad1 – Ilarion</td><td>1:1</td></tr>
+              <tr><td>6</td><td>10:05</td><td>2015</td><td>Barsa – Titan</td><td>1:2</td></tr>
+              <tr><td>7</td><td>10:30</td><td>2017</td><td>Titan – Tuzi</td><td>4:0</td></tr>
+              <tr><td>8</td><td>10:55</td><td>2015</td><td>Otrant – Titan</td><td>0:3</td></tr>
+              <tr><td>9</td><td>11:20</td><td>2016</td><td>Bernabeu2 – Barsa</td><td>0:2</td></tr>
+              <tr><td>10</td><td>11:45</td><td>2016</td><td>Otrant – Zupa</td><td>2:0</td></tr>
+              <tr><td>11</td><td>12:10</td><td>2015</td><td>Otrant – Barsa</td><td>0:1</td></tr>
+              <tr><td>12</td><td>12:35</td><td>2016</td><td>Otrand – Porto</td><td>0:2</td></tr>
+              <tr><td>13</td><td>13:00</td><td>2017</td><td>Stari Aerodrom – Desetka</td><td>4:0</td></tr>
+              <tr><td>14</td><td>13:25</td><td>2016</td><td>Bernabeu2 – AS2</td><td>2:0</td></tr>
+              <tr><td>15</td><td>13:50</td><td>2016</td><td>Barsa – Stari Aerodrom</td><td>0:4</td></tr>
+              <tr><td>16</td><td>14:15</td><td>2017</td><td>Karioke – Titan</td><td>1:4</td></tr>
+              <tr><td>17</td><td>14:40</td><td>2016</td><td>Bernabeu2 – Stari Aerodrom</td><td>1:4</td></tr>
+              <tr><td>18</td><td>15:05</td><td>2017</td><td>Karioke – Tuzi</td><td>4:1</td></tr>
+              <tr><td>19</td><td>15:30</td><td>2016</td><td>Otrant – Bernabeu</td><td>0:3</td></tr>
+              <tr><td>20</td><td>15:55</td><td>2015</td><td>Fenix – Barsa</td><td>0:2</td></tr>
+              <tr><td>21</td><td>16:20</td><td>2015</td><td>Otrant – Porto</td><td>0:3</td></tr>
+              <tr><td>22</td><td>16:45</td><td>2016</td><td>Otrant – Fudbalito</td><td>0:3</td></tr>
+              <tr><td>23</td><td>17:10</td><td>2015</td><td>Fenix – Otrant</td><td>3:0</td></tr>
+              <tr><td>24</td><td>17:35</td><td>2015</td><td>Berane – Zupa</td><td>3:1</td></tr>
+              <tr><td>25</td><td>18:00</td><td>2015</td><td>Zupa – Bernabeu</td><td>2:2</td></tr>
+              <tr><td>26</td><td>18:25</td><td>2015</td><td>Berane – Danilovgrad2</td><td>1:2</td></tr>
+            </tbody>
+          </table>
 
-      <!-- NEDELJA -->
-      <h3 style="margin-top:16px;">Nedelja</h3>
+          <p style="margin:8px 0 4px;"><strong>Teren Dadeks</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>08:00</td><td>2018</td><td>Dadeks – Fudbalito3</td><td>0:5</td></tr>
+              <tr><td>2</td><td>08:25</td><td>2018</td><td>Fudbalito2 – Arena</td><td>1:2</td></tr>
+              <tr><td>3</td><td>08:50</td><td>2018</td><td>Zupa – Porto</td><td>1:5</td></tr>
+              <tr><td>4</td><td>09:15</td><td>2016</td><td>Porto – Zupa</td><td>0:2</td></tr>
+              <tr><td>5</td><td>09:40</td><td>2015</td><td>Pristina – Zupa</td><td>0:3</td></tr>
+              <tr><td>6</td><td>10:05</td><td>2017</td><td>Nacional – Berane</td><td>0:3</td></tr>
+              <tr><td>7</td><td>10:30</td><td>2015</td><td>Pristina – Berane</td><td>0:3</td></tr>
+              <tr><td>8</td><td>10:55</td><td>2017</td><td>Berane – Danilovgrad</td><td>1:3</td></tr>
+              <tr><td>9</td><td>11:20</td><td>2016</td><td>Dadeks – Durmitor</td><td>3:0</td></tr>
+              <tr><td>10</td><td>11:45</td><td>2017</td><td>Berane – Cijevna</td><td>3:1</td></tr>
+              <tr><td>11</td><td>12:10</td><td>2016</td><td>Durmitor – Centar</td><td>1:1</td></tr>
+              <tr><td>12</td><td>12:35</td><td>2016</td><td>Dadeks – Akademik</td><td>5:0</td></tr>
+              <tr><td>13</td><td>13:00</td><td>2016</td><td>Zupa – Bernabeu</td><td>0:3</td></tr>
+              <tr><td>14</td><td>13:25</td><td>2016</td><td>Akademik – Centar</td><td>0:0</td></tr>
+              <tr><td>15</td><td>13:50</td><td>2016</td><td>Fudbalito – Zupa</td><td>1:4</td></tr>
+              <tr><td>16</td><td>14:15</td><td>2018</td><td>Kerver – Zupa</td><td>3:0</td></tr>
+              <tr><td>17</td><td>14:40</td><td>2015</td><td>Dadeks – Akademik</td><td>2:1</td></tr>
+              <tr><td>18</td><td>15:05</td><td>2015</td><td>Kerver – Desetka</td><td>0:3</td></tr>
+              <tr><td>19</td><td>15:30</td><td>2017</td><td>Porto – Desetka</td><td>3:2</td></tr>
+              <tr><td>20</td><td>15:55</td><td>2017</td><td>Berane – Ilarion</td><td>1:0</td></tr>
+              <tr><td>21</td><td>16:20</td><td>2016</td><td>Durmitor – AS</td><td>1:5</td></tr>
+              <tr><td>22</td><td>16:55</td><td>2017</td><td>Fudbalito – Desetka</td><td>3:0</td></tr>
+              <tr><td>23</td><td>17:20</td><td>2016</td><td>Durmitor – Akademik</td><td>1:3</td></tr>
+              <tr><td>24</td><td>17:45</td><td>2017</td><td>AS – Desetka</td><td>2:1</td></tr>
+              <tr><td>25</td><td>18:10</td><td>2016</td><td>AS – Akademik</td><td>4:2</td></tr>
+              <tr><td>26</td><td>18:35</td><td>2018</td><td>pauza</td><td></td></tr>
+              <tr><td>27</td><td>19:00</td><td>2015</td><td>Kerver – Akademik</td><td>0:3</td></tr>
+              <tr><td>28</td><td>19:25</td><td>2018</td><td>Kerver – Porto</td><td>4:1</td></tr>
+              <tr><td>29</td><td>19:50</td><td>2015</td><td>Buducnost – Kerver</td><td>3:0</td></tr>
+              <tr><td>30</td><td>20:15</td><td>2018</td><td>Bernabeu – Kerver</td><td>1:3</td></tr>
+              <tr><td>31</td><td>20:40</td><td>2015</td><td>Dadeks – Kerver</td><td>3:0</td></tr>
+            </tbody>
+          </table>
 
-      <!-- NEDELJA – DADEKS -->
-      <p style="margin:4px 0;"><strong>Teren Dadeks</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr><td>27</td><td>08:30</td><td>2016</td><td>As – Bernabeu</td><td>1-9</td></tr>
-          <tr><td>27</td><td>08:55</td><td>2016</td><td>Dadeks – Zupa</td><td>4:0</td></tr>
-          <tr><td>27</td><td>09:20</td><td>2016</td><td>Herceg Novi – Stari Aerodrom</td><td>1:0</td></tr>
-          <tr><td>27</td><td>10:10</td><td>2015</td><td>Dadeks – Danilograd</td><td>2:1</td></tr>
-          <tr><td>27</td><td>10:35</td><td>2015</td><td>Buducnost – Herceg Novi</td><td>0:2</td></tr>
-          <tr><td>27</td><td>11:00</td><td>2015</td><td>Bernabeu – Barsa</td><td>0:0(2:3)</td></tr>
-          <tr><td>27</td><td>11:25</td><td>2015</td><td>Zupa – Titan</td><td>0:5</td></tr>
-          
-        </tbody>
-      </table>
+          <p style="margin:8px 0 4px;"><strong>Teren Cros Park</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>08:00</td><td>2017</td><td>Cijevna – Ilarion</td><td>1:0</td></tr>
+              <tr><td>2</td><td>08:25</td><td>2018</td><td>Zlatna Lopta – Fenix</td><td>0:1</td></tr>
+              <tr><td>3</td><td>08:50</td><td>2017</td><td>Fudbalito – AS</td><td>2:0</td></tr>
+              <tr><td>4</td><td>09:15</td><td>2017</td><td>Zlatna Lopta – Bernabeu2</td><td>4:0</td></tr>
+              <tr><td>5</td><td>09:40</td><td>2017</td><td>Buducnost – Centar</td><td>3:1</td></tr>
+              <tr><td>6</td><td>10:05</td><td>2018</td><td>Fudbalito2 – Fenix</td><td>0:1</td></tr>
+              <tr><td>7</td><td>10:30</td><td>2017</td><td>Buducnost – Bernabeu2</td><td>2:0</td></tr>
+              <tr><td>8</td><td>10:55</td><td>2015</td><td>Buducnost – Desetka</td><td>2:0</td></tr>
+              <tr><td>9</td><td>11:20</td><td>2018</td><td>Fudbalito1 – Karioke</td><td>3:3</td></tr>
+              <tr><td>10</td><td>11:45</td><td>2017</td><td>Dadeks – Karioke</td><td>11:0</td></tr>
+              <tr><td>11</td><td>12:10</td><td>2018</td><td>Fudbalito1 – Akademija Berane</td><td>1:2</td></tr>
+              <tr><td>12</td><td>12:35</td><td>2018</td><td>Karioke – Stari Aerodrom</td><td>2:1</td></tr>
+              <tr><td>13</td><td>13:00</td><td>2016</td><td>As2 – Akademija Berane</td><td>0:6</td></tr>
+              <tr><td>14</td><td>13:25</td><td>2017</td><td>Karioke – Bernabeu1</td><td>0:0</td></tr>
+              <tr><td>15</td><td>13:50</td><td>2015</td><td>Buducnost – Akademik</td><td>1:0</td></tr>
+              <tr><td>16</td><td>16:10</td><td>2018</td><td>Karioke – Akademija Berane</td><td>1:5</td></tr>
+              <tr><td>17</td><td>16:35</td><td>2016</td><td>Akademija Berane – Bernabeu</td><td>5:0</td></tr>
+              <tr><td>18</td><td>17:00</td><td>2018</td><td>Akademija Berane – Stari Aerodrom</td><td>6:2</td></tr>
+              <tr><td>19</td><td>17:25</td><td>2016</td><td>Barsa – Akademija Berane</td><td>0:3</td></tr>
+              <tr><td>20</td><td>17:50</td><td>2015</td><td>Dadeks – Desetka</td><td>3:1</td></tr>
+              <tr><td>21</td><td>18:15</td><td>2016</td><td>Stari Aerodrom – Akademija Berane</td><td>1:4</td></tr>
+              <tr><td>22</td><td>18:40</td><td>2016</td><td>Barsa – As2</td><td>0:3</td></tr>
+              <tr><td>23</td><td>19:05</td><td>2015</td><td>Barsa – Porto</td><td>2:1</td></tr>
+              <tr><td>24</td><td>19:25</td><td>2015</td><td>Zupa – Danilovgrad2</td><td>2:0</td></tr>
+              <tr><td>25</td><td>19:50</td><td>2015</td><td>Berane – Bernabeu</td><td>2:4</td></tr>
+              <tr><td>26</td><td>20:15</td><td>2018</td><td>Bernabeu – Zupa</td><td>0:2</td></tr>
+              <tr><td>27</td><td>20:40</td><td>2015</td><td>Akademik – Deseta</td><td>0:1</td></tr>
+            </tbody>
+          </table>
 
-      <!-- NEDELJA – CROS PARK -->
-      <p style="margin:8px 0 4px;"><strong>Teren Cros Park</strong></p>
-      <table class="schedule-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Vrijeme</th>
-            <th>Godište</th>
-            <th>Par</th>
-            <th>Rezultat</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>08:00</td><td>2017</td><td>Zlatna Lopta – Centar</td><td>0:2</td></tr>
-          <tr><td>2</td><td>08:30</td><td>2017</td><td>Dadeks – Cijevna</td><td>4:0</td></tr>
-          <tr><td>2</td><td>08:55</td><td>2017</td><td>Bernabeu – Danilovgrad</td><td>0:1</td></tr>
-          <tr><td>2</td><td>09:20</td><td>2017</td><td>Fudbalito – Buducnost</td><td>0:0(3:2)</td></tr>
-          <tr><td>2</td><td>09:45</td><td>2017</td><td>Zlatna Lopta – Stari Aerodrom</td><td>0:3</td></tr>
-          <tr><td>2</td><td>10:10</td><td>2018</td><td>Jezero – Porto</td><td>3:0</td></tr>
-          <tr><td>2</td><td>10:35</td><td>2018</td><td>Fudbalito3 – Kerver</td><td>3:1</td></tr>
-          <tr><td>2</td><td>11:00</td><td>2018</td><td>Zlatna Lopta – Fudbalito1</td><td>2:1</td></tr>
-          <tr><td>2</td><td>11:25</td><td>2018</td><td>Arena – Akademija Berane</td><td></td></tr>
-        </tbody>
-      </table>
+          <!-- NEDELJA -->
+          <h3 style="margin-top:16px;">Nedelja</h3>
 
-    </div>
-  </div>
-</section>
+          <p style="margin:4px 0;"><strong>Teren Dadeks</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>27</td><td>08:30</td><td>2016</td><td>As – Bernabeu</td><td>1-9</td></tr>
+              <tr><td>27</td><td>08:55</td><td>2016</td><td>Dadeks – Zupa</td><td>4:0</td></tr>
+              <tr><td>27</td><td>09:20</td><td>2016</td><td>Herceg Novi – Stari Aerodrom</td><td>1:0</td></tr>
+              <tr><td>27</td><td>10:10</td><td>2015</td><td>Dadeks – Danilograd</td><td>2:1</td></tr>
+              <tr><td>27</td><td>10:35</td><td>2015</td><td>Buducnost – Herceg Novi</td><td>0:2</td></tr>
+              <tr><td>27</td><td>11:00</td><td>2015</td><td>Bernabeu – Barsa</td><td>0:0(2:3)</td></tr>
+              <tr><td>27</td><td>11:25</td><td>2015</td><td>Zupa – Titan</td><td>0:5</td></tr>
+            </tbody>
+          </table>
 
+          <p style="margin:8px 0 4px;"><strong>Teren Cros Park</strong></p>
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Vrijeme</th><th>Godište</th><th>Par</th><th>Rezultat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>08:00</td><td>2017</td><td>Zlatna Lopta – Centar</td><td>0:2</td></tr>
+              <tr><td>2</td><td>08:30</td><td>2017</td><td>Dadeks – Cijevna</td><td>4:0</td></tr>
+              <tr><td>2</td><td>08:55</td><td>2017</td><td>Bernabeu – Danilovgrad</td><td>0:1</td></tr>
+              <tr><td>2</td><td>09:20</td><td>2017</td><td>Fudbalito – Buducnost</td><td>0:0(3:2)</td></tr>
+              <tr><td>2</td><td>09:45</td><td>2017</td><td>Zlatna Lopta – Stari Aerodrom</td><td>0:3</td></tr>
+              <tr><td>2</td><td>10:10</td><td>2018</td><td>Jezero – Porto</td><td>3:0</td></tr>
+              <tr><td>2</td><td>10:35</td><td>2018</td><td>Fudbalito3 – Kerver</td><td>3:1</td></tr>
+              <tr><td>2</td><td>11:00</td><td>2018</td><td>Zlatna Lopta – Fudbalito1</td><td>2:1</td></tr>
+              <tr><td>2</td><td>11:25</td><td>2018</td><td>Arena – Akademija Berane</td><td></td></tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </section>
 
     <!-- LIVE SCORE -->
     <section class="tab-content" id="live">
       <div class="card">
         <h2>Live score</h2>
-        <p class="hint">
-          Rezultati se automatski osvježavaju svakih 2 sekunde (CSV iz Google Sheets).
-        </p>
+        <p class="hint">Rezultati se automatski osvježavaju svakih 2 sekunde (CSV iz Google Sheets).</p>
 
         <div id="live-status">
           <div id="status-dot"></div>
@@ -757,37 +692,44 @@
     </section>
 
     <section class="card sponsor-card">
-  <a href="https://sansabet.com" target="_blank" class="sansa-banner">
-    <span class="sansa-main">ŠANSABET</span><span class="sansa-dot">.com</span>
-    <span class="sansa-since">SINCE 1998</span>
-  </a>
-</section>
+      <a href="https://sansabet.com" target="_blank" class="sansa-banner">
+        <span class="sansa-main">ŠANSABET</span><span class="sansa-dot">.com</span>
+        <span class="sansa-since">SINCE 1998</span>
+      </a>
+    </section>
+  </div>
 
+  <!-- MODAL (JEDNOM) -->
+  <div id="matchModal" style="
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.6); padding:16px; z-index:9999;">
+    <div style="
+      width:min(560px, 100%); background:#0b1222; border:1px solid #1f2937;
+      border-radius:16px; padding:14px; box-shadow:0 20px 60px rgba(0,0,0,.5);">
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+        <h3 id="modalTitle" style="margin:0; color:#38bdf8;">Utakmica</h3>
+        <button id="closeModal" class="tab-btn" style="flex:0 0 auto; padding:8px 12px;">Zatvori</button>
+      </div>
+      <div id="modalBody" style="margin-top:10px; line-height:1.55;"></div>
+    </div>
+  </div>
 
   <script>
     // ------------------------------
     // TIMOVI – LINKOVI PO GODIŠTU
     // ------------------------------
     const GEN_URLS = {
-      "2015":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
-      "2016":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
-      "2017":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
-      "2018":
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false",
+      "2015": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=988009385&single=true&widget=true&headers=false",
+      "2016": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=663500479&single=true&widget=true&headers=false",
+      "2017": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=954938894&single=true&widget=true&headers=false",
+      "2018": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQnO8M50g_PHsE59zwQvGuhAywll0EBlj0pM65Z_XZ60WRgS0mEDKoF7t_QPFix2m3mEkSX1YwTptO6/pubhtml?gid=419575061&single=true&widget=true&headers=false",
     };
 
     function changeGenerationTeams(gen) {
       const txt = document.getElementById("selected-gen-text");
-      if (txt) {
-        txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
-      }
+      if (txt) txt.innerHTML = "Odabrano godište: <strong>" + gen + "</strong>";
       const iframe = document.getElementById("teams-iframe");
-      if (iframe) {
-        iframe.src = GEN_URLS[gen];
-      }
+      if (iframe) iframe.src = GEN_URLS[gen];
     }
 
     // ------------------------------
@@ -841,13 +783,11 @@
     function calculateStandings(year, matches) {
       const groups = GROUPS_DATA[year];
       const standings = {};
-
       if (!groups) return standings;
 
       Object.entries(groups).forEach(([grp, teams]) => {
         standings[grp] = teams.map(t => ({
-          team: t,
-          gp: 0, w: 0, d: 0, l: 0,
+          team: t, gp: 0, w: 0, d: 0, l: 0,
           gf: 0, ga: 0, gd: 0, pts: 0
         }));
       });
@@ -903,9 +843,7 @@
       if (!container) return;
 
       const txt = document.getElementById("selected-table-gen-text");
-      if (txt) {
-        txt.innerHTML = "Odabrano godište: <strong>" + year + "</strong>";
-      }
+      if (txt) txt.innerHTML = "Odabrano godište: <strong>" + year + "</strong>";
 
       container.innerHTML = "<p class='hint'>Učitavanje...</p>";
 
@@ -950,25 +888,22 @@
     }
 
     // ------------------------------
-    // TABOVI  (samo za BUTTON-e, ne za "Grupe" link)
+    // TABOVI (samo za BUTTON-e)
     // ------------------------------
     function setupTabs() {
       document.querySelectorAll("button.tab-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           const targetId = btn.dataset.target;
 
-          document
-            .querySelectorAll("button.tab-btn")
+          document.querySelectorAll("button.tab-btn")
             .forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
 
-          document
-            .querySelectorAll(".tab-content")
+          document.querySelectorAll(".tab-content")
             .forEach((sec) => sec.classList.remove("active"));
+
           const target = document.getElementById(targetId);
-          if (target) {
-            target.classList.add("active");
-          }
+          if (target) target.classList.add("active");
         });
       });
     }
@@ -979,7 +914,7 @@
     const LIVE_SCORE_CSV_URL =
       "https://docs.google.com/spreadsheets/d/1M5G6aIGTfSoQmwjMCkt0m1iETAGXBi_MkOpY6TGvM1M/export?format=csv&gid=1224715353";
 
-    const REFRESH_MS = 2000; // 2 sekunde
+    const REFRESH_MS = 2000;
 
     const tableBody = document.getElementById("live-tbody");
     const statusDot = document.getElementById("status-dot");
@@ -1011,15 +946,11 @@
 
         const matchKey = utakmica + "|" + domacin + "|" + gost;
 
-        if (
-          previousScores[matchKey] !== undefined &&
-          previousScores[matchKey] !== rezultat &&
-          rezultat !== ""
-        ) {
+        if (previousScores[matchKey] !== undefined &&
+            previousScores[matchKey] !== rezultat &&
+            rezultat !== "") {
           tr.classList.add("goal-flash");
-          setTimeout(() => {
-            tr.classList.remove("goal-flash");
-          }, 4000);
+          setTimeout(() => tr.classList.remove("goal-flash"), 4000);
         }
 
         previousScores[matchKey] = rezultat;
@@ -1037,9 +968,7 @@
       });
 
       statusDot.style.background = "#22c55e";
-      statusText.textContent =
-        "Posljednje osvježavanje: " +
-        new Date().toLocaleTimeString("sr-RS");
+      statusText.textContent = "Posljednje osvježavanje: " + new Date().toLocaleTimeString("sr-RS");
     }
 
     async function loadLiveScore() {
@@ -1065,6 +994,166 @@
     }
 
     // ------------------------------
+    // RASPORED: filtriranje po ekipi (iz TVOJIH tabela)
+    // ------------------------------
+    function normalizeTeamName(s) {
+      return (s || "")
+        .replace(/\s+/g, " ")
+        .replace(/–/g, "-")
+        .trim()
+        .toLowerCase();
+    }
+
+    function splitPairText(pairText) {
+      const txt = (pairText || "").replace(/\s+/g, " ").trim();
+      if (!txt) return null;
+      if (normalizeTeamName(txt).includes("pauza")) return null;
+
+      const parts = txt.split(/–|-/).map(x => x.trim()).filter(Boolean);
+      if (parts.length < 2) return null;
+
+      return { home: parts[0], away: parts[1] };
+    }
+
+    function collectScheduleFromTables() {
+      const rasporedSection = document.getElementById("raspored");
+      if (!rasporedSection) return [];
+
+      const tables = rasporedSection.querySelectorAll("table.schedule-table");
+      const items = [];
+
+      tables.forEach(table => {
+        let teren = "";
+        let prev = table.previousElementSibling;
+        while (prev) {
+          if (prev.tagName === "P" && prev.querySelector("strong")) {
+            teren = prev.textContent.replace(/\s+/g, " ").trim();
+            break;
+          }
+          prev = prev.previousElementSibling;
+        }
+        teren = teren || "Teren";
+
+        const rows = table.querySelectorAll("tbody tr");
+        rows.forEach(tr => {
+          const tds = tr.querySelectorAll("td");
+          if (tds.length < 5) return;
+
+          const vrijeme = (tds[1].textContent || "").trim();
+          const godiste = (tds[2].textContent || "").trim();
+          const par = (tds[3].textContent || "").trim();
+          const rezultat = (tds[4].textContent || "").trim();
+
+          const pair = splitPairText(par);
+          if (!pair) return;
+
+          items.push({
+            teren,
+            vrijeme,
+            godiste,
+            domacin: pair.home,
+            gost: pair.away,
+            par,
+            rezultat
+          });
+        });
+      });
+
+      return items;
+    }
+
+    function buildTeamsListFromSchedule(scheduleItems) {
+      const set = new Set();
+      scheduleItems.forEach(m => {
+        if (m.domacin) set.add(m.domacin);
+        if (m.gost) set.add(m.gost);
+      });
+      return Array.from(set).sort((a, b) => a.localeCompare(b));
+    }
+
+    function openScheduleModal(m, teamName) {
+      const modal = document.getElementById("matchModal");
+      const title = document.getElementById("modalTitle");
+      const body = document.getElementById("modalBody");
+      if (!modal || !title || !body) return;
+
+      title.textContent = m.par;
+
+      const teamKey = normalizeTeamName(teamName);
+      const protivnik = normalizeTeamName(m.domacin) === teamKey ? m.gost : m.domacin;
+
+      body.innerHTML = `
+        <div style="padding:10px; border:1px solid #1f2937; border-radius:12px; background:#020617;">
+          <div><strong>Ekipa:</strong> ${teamName}</div>
+          <div><strong>Protiv:</strong> ${protivnik}</div>
+          <div><strong>Godište:</strong> ${m.godiste || "—"}</div>
+          <div><strong>Vrijeme:</strong> ${m.vrijeme || "—"}</div>
+          <div><strong>Teren:</strong> ${m.teren || "—"}</div>
+          <div style="margin-top:8px;"><strong>Rezultat:</strong> ${m.rezultat || "—"}</div>
+        </div>
+      `;
+
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("matchModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    function renderTeamSchedule(teamName, scheduleItems) {
+      const out = document.getElementById("teamScheduleResults");
+      const info = document.getElementById("teamFilterInfo");
+      if (!out) return;
+
+      if (!teamName) {
+        out.innerHTML = `<p class="hint">Izaberi ekipu da vidiš termine (vrijeme + teren).</p>`;
+        if (info) info.textContent = "";
+        return;
+      }
+
+      const teamKey = normalizeTeamName(teamName);
+
+      const list = scheduleItems
+        .filter(m =>
+          normalizeTeamName(m.domacin) === teamKey ||
+          normalizeTeamName(m.gost) === teamKey
+        )
+        .sort((a, b) => {
+          const A = `${a.godiste}-${a.vrijeme || "99:99"}-${a.teren}-${a.par}`;
+          const B = `${b.godiste}-${b.vrijeme || "99:99"}-${b.teren}-${b.par}`;
+          return A.localeCompare(B);
+        });
+
+      if (info) info.textContent = `Pronađeno: ${list.length} utakmica`;
+
+      if (!list.length) {
+        out.innerHTML = `<p class="hint">Nema termina za: <strong>${teamName}</strong></p>`;
+        return;
+      }
+
+      out.innerHTML = list.map((m, i) => {
+        const protivnik = normalizeTeamName(m.domacin) === teamKey ? m.gost : m.domacin;
+        const rez = m.rezultat || "—";
+        return `
+          <button class="tab-btn" style="width:100%; margin:6px 0; border-radius:12px; text-align:left;"
+            data-team-match="${i}">
+            <strong>${teamName}</strong> vs <strong>${protivnik}</strong>
+            <span class="hint" style="float:right;">${rez}</span><br/>
+            <span class="hint">Godište ${m.godiste || "—"} • Vrijeme: <strong>${m.vrijeme || "—"}</strong> • ${m.teren}</span>
+          </button>
+        `;
+      }).join("");
+
+      out.querySelectorAll("button[data-team-match]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.getAttribute("data-team-match"));
+          openScheduleModal(list[idx], teamName);
+        });
+      });
+    }
+
+    // ------------------------------
     // INIT
     // ------------------------------
     document.addEventListener("DOMContentLoaded", () => {
@@ -1080,144 +1169,30 @@
 
       loadLiveScore();
       setInterval(loadLiveScore, REFRESH_MS);
+
+      // RASPORED FILTER INIT
+      const scheduleItems = collectScheduleFromTables();
+      const teamSel = document.getElementById("teamFilterSelect");
+
+      if (teamSel) {
+        const teams = buildTeamsListFromSchedule(scheduleItems);
+        teamSel.innerHTML =
+          `<option value="">— izaberi ekipu —</option>` +
+          teams.map(t => `<option value="${t}">${t}</option>`).join("");
+
+        teamSel.addEventListener("change", (e) => {
+          renderTeamSchedule(e.target.value, scheduleItems);
+        });
+
+        renderTeamSchedule("", scheduleItems);
+      }
+
+      // modal close
+      document.getElementById("closeModal")?.addEventListener("click", closeModal);
+      document.getElementById("matchModal")?.addEventListener("click", (e) => {
+        if (e.target.id === "matchModal") closeModal();
+      });
     });
   </script>
 </body>
 </html>
-<div class="card">
-  <h2>Raspored utakmica</h2>
-  <p class="hint">Klikni na utakmicu da vidiš detalje.</p>
-
-  <label for="filterTeam">Filtriraj po ekipi</label>
-  <select id="filterTeam">
-    <option value="">— sve ekipe —</option>
-  </select>
-
-  <div id="scheduleList" style="margin-top:10px;"></div>
-</div>
-
-<!-- MODAL -->
-<div id="matchModal" style="
-  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
-  background:rgba(0,0,0,.6); padding:16px; z-index:9999;">
-  <div style="
-    width:min(520px, 100%); background:#0b1222; border:1px solid #1f2937;
-    border-radius:16px; padding:14px; box-shadow:0 20px 60px rgba(0,0,0,.5);">
-    <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
-      <h3 id="modalTitle" style="margin:0; color:#38bdf8;">Utakmica</h3>
-      <button id="closeModal" class="btn-secondary" style="width:auto; padding:8px 12px;">Zatvori</button>
-    </div>
-    <div id="modalBody" style="margin-top:10px; line-height:1.5;"></div>
-  </div>
-</div>
-<div class="card">
-  <h2>Raspored utakmica</h2>
-  <p class="hint">Klikni na utakmicu da vidiš detalje.</p>
-
-  <label for="filterTeam">Filtriraj po ekipi</label>
-  <select id="filterTeam">
-    <option value="">— sve ekipe —</option>
-  </select>
-
-  <div id="scheduleList" style="margin-top:10px;"></div>
-</div>
-
-<!-- MODAL -->
-<div id="matchModal" style="
-  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
-  background:rgba(0,0,0,.6); padding:16px; z-index:9999;">
-  <div style="
-    width:min(520px, 100%); background:#0b1222; border:1px solid #1f2937;
-    border-radius:16px; padding:14px; box-shadow:0 20px 60px rgba(0,0,0,.5);">
-    <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
-      <h3 id="modalTitle" style="margin:0; color:#38bdf8;">Utakmica</h3>
-      <button id="closeModal" class="btn-secondary" style="width:auto; padding:8px 12px;">Zatvori</button>
-    </div>
-    <div id="modalBody" style="margin-top:10px; line-height:1.5;"></div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
