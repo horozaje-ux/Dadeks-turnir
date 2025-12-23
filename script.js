@@ -63,3 +63,123 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+let ALL_MATCHES = [];
+
+async function loadMatches() {
+  const res = await fetch("matches.json?v=" + Date.now());
+  ALL_MATCHES = await res.json();
+}
+
+// Izvuci sve ekipe iz GROUPS_DATA
+function getAllTeamsFromGroups() {
+  const set = new Set();
+  Object.values(GROUPS_DATA).forEach(yearObj => {
+    Object.values(yearObj).forEach(teams => teams.forEach(t => set.add(t)));
+  });
+  return Array.from(set).sort((a,b)=>a.localeCompare(b));
+}
+
+function fillTeamFilter() {
+  const sel = document.getElementById("filterTeam");
+  const teams = getAllTeamsFromGroups();
+  sel.innerHTML = `<option value="">— sve ekipe —</option>` + teams.map(t =>
+    `<option value="${t}">${t}</option>`
+  ).join("");
+
+  sel.addEventListener("change", () => renderSchedule(sel.value));
+}
+
+function renderSchedule(teamFilter = "") {
+  const box = document.getElementById("scheduleList");
+  if (!box) return;
+
+  let list = [...ALL_MATCHES];
+
+  if (teamFilter) {
+    list = list.filter(m => m.domacin === teamFilter || m.gost === teamFilter);
+  }
+
+  // Sort (ako ima datum/vrijeme)
+  list.sort((a,b) => {
+    const da = (a.datum || "") + " " + (a.vrijeme || "");
+    const db = (b.datum || "") + " " + (b.vrijeme || "");
+    return da.localeCompare(db);
+  });
+
+  if (!list.length) {
+    box.innerHTML = `<p class="hint">Nema utakmica za izabrani filter.</p>`;
+    return;
+  }
+
+  box.innerHTML = list.map((m, i) => {
+    const vrijeme = m.vrijeme || "—";
+    const teren = m.teren || "—";
+    const datum = m.datum || "";
+    const score = (Number.isFinite(m.golDom) && Number.isFinite(m.golGost)) ? `${m.golDom}:${m.golGost}` : "-";
+
+    // kartica kao dugme (lak klik na mob)
+    return `
+      <button class="btn-secondary" style="width:100%; text-align:left; margin:6px 0;"
+        data-idx="${i}">
+        <strong>${m.domacin}</strong> – <strong>${m.gost}</strong>
+        <span class="hint" style="float:right;">${score}</span><br/>
+        <span class="hint">${datum ? datum + " • " : ""}Godište ${m.godiste} • Grupa ${m.grupa} • ${vrijeme} • ${teren}</span>
+      </button>
+    `;
+  }).join("");
+
+  // klik handler
+  [...box.querySelectorAll("button[data-idx]")].forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.getAttribute("data-idx"));
+      // POZOR: idx je u trenutnom prikazu, zato izvuci opet iz trenutno filtrirane liste
+      const current = (teamFilter ? ALL_MATCHES.filter(m => m.domacin === teamFilter || m.gost === teamFilter) : [...ALL_MATCHES])
+        .sort((a,b) => (((a.datum||"")+" "+(a.vrijeme||"")).localeCompare((b.datum||"")+" "+(b.vrijeme||""))));
+
+      openModal(current[idx]);
+    });
+  });
+}
+
+function openModal(m) {
+  const modal = document.getElementById("matchModal");
+  const title = document.getElementById("modalTitle");
+  const body = document.getElementById("modalBody");
+
+  const vrijeme = m.vrijeme || "—";
+  const teren = m.teren || "—";
+  const datum = m.datum || "—";
+  const score = (Number.isFinite(m.golDom) && Number.isFinite(m.golGost)) ? `${m.golDom}:${m.golGost}` : "-";
+
+  title.textContent = `${m.domacin} – ${m.gost}`;
+
+  body.innerHTML = `
+    <div style="padding:10px; border:1px solid #1f2937; border-radius:12px; background:#020617;">
+      <div><strong>Godište:</strong> ${m.godiste}</div>
+      <div><strong>Grupa:</strong> ${m.grupa}</div>
+      <div><strong>Datum:</strong> ${datum}</div>
+      <div><strong>Vrijeme:</strong> ${vrijeme}</div>
+      <div><strong>Teren:</strong> ${teren}</div>
+      <div><strong>Rezultat:</strong> ${score}</div>
+    </div>
+  `;
+
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("matchModal").style.display = "none";
+}
+
+document.getElementById("closeModal").addEventListener("click", closeModal);
+document.getElementById("matchModal").addEventListener("click", (e) => {
+  if (e.target.id === "matchModal") closeModal();
+});
+
+// INIT
+(async function initSchedule() {
+  await loadMatches();
+  fillTeamFilter();
+  renderSchedule("");
+})();
+
