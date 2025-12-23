@@ -87,12 +87,8 @@
       margin-right: 8px;
       margin-top: 4px;
     }
-    .btn-primary:hover {
-      filter: brightness(1.1);
-    }
-    .btn-secondary:hover {
-      background: #1f2937;
-    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-secondary:hover { background: #1f2937; }
 
     table {
       width: 100%;
@@ -104,13 +100,10 @@
       border-bottom: 1px solid #1f2937;
       padding: 4px 6px;
       text-align: center;
+      white-space: nowrap;
     }
-    th {
-      background: rgba(15, 23, 42, 0.9);
-    }
-    tbody tr:nth-child(even) {
-      background: rgba(15, 23, 42, 0.55);
-    }
+    th { background: rgba(15, 23, 42, 0.9); }
+    tbody tr:nth-child(even) { background: rgba(15, 23, 42, 0.55); }
 
     textarea {
       width: 100%;
@@ -130,9 +123,7 @@
       margin-top: 6px;
       color: #22c55e;
     }
-    .status.error {
-      color: #f97316;
-    }
+    .status.error { color: #f97316; }
 
     @media (max-width: 640px) {
       .page { padding: 10px; }
@@ -150,14 +141,14 @@
   <div class="page">
     <h1>DGA – ADMIN</h1>
     <p class="hint" style="text-align:center;">
-      Unos rezultata za Dadeks turnir – generišeš JSON za <strong>matches.json</strong>.
+      Unos rezultata + rasporeda (teren/vrijeme) – generišeš JSON za <strong>matches.json</strong>.
     </p>
 
-    <!-- FORMA ZA JEDNU UTAKMICU -->
+    <!-- FORMA -->
     <div class="card">
       <h2>Unos utakmice</h2>
       <p class="hint">
-        Izaberi godište, grupu i timove, upiši golove, klikni <strong>Dodaj utakmicu</strong>.
+        Izaberi godište, grupu i timove, upiši golove, odaberi teren i vrijeme, klikni <strong>Dodaj utakmicu</strong>.
         Na dnu će se praviti JSON koji lijepiš u <code>matches.json</code>.
       </p>
 
@@ -206,18 +197,33 @@
           <label for="golGost">Golovi gosta</label>
           <input id="golGost" type="number" min="0" value="0" />
         </div>
+        <div class="col-3">
+          <label for="teren">Teren</label>
+          <select id="teren">
+            <option value="Teren 1">Teren 1</option>
+            <option value="Teren 2">Teren 2</option>
+            <option value="Teren 3">Teren 3</option>
+          </select>
+        </div>
       </div>
 
-      <button class="btn-primary" id="add-match-btn">Dodaj utakmicu</button>
-      <button class="btn-secondary" id="clear-matches-btn">Obriši sve unesene utakmice</button>
+      <div class="row">
+        <div class="col-3">
+          <label for="vrijeme">Vrijeme</label>
+          <input id="vrijeme" type="time" value="08:00" />
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" id="add-match-btn">Dodaj utakmicu</button>
+      <button type="button" class="btn-secondary" id="clear-matches-btn">Obriši sve unesene utakmice</button>
       <p id="form-status" class="status"></p>
     </div>
 
-    <!-- LISTA UNESENIH UTAKMICA -->
+    <!-- LISTA -->
     <div class="card">
       <h2>Unesene utakmice (pregled)</h2>
       <p class="hint">
-        Provjeri da li je sve tačno (godište, grupa, timovi, golovi). Ovo je samo pregled – stvarni fajl je dole u JSON polju.
+        Ovo je pregled – stvarni fajl je dole u JSON polju.
       </p>
 
       <div style="overflow-x:auto;">
@@ -231,10 +237,12 @@
               <th>Gol D</th>
               <th>Gol G</th>
               <th>Gost</th>
+              <th>Vrijeme</th>
+              <th>Teren</th>
             </tr>
           </thead>
           <tbody id="matches-tbody">
-            <tr><td colspan="7" class="hint">Nema još unesenih utakmica.</td></tr>
+            <tr><td colspan="9" class="hint">Nema još unesenih utakmica.</td></tr>
           </tbody>
         </table>
       </div>
@@ -245,12 +253,12 @@
       <h2>JSON za <code>matches.json</code></h2>
       <p class="hint">
         Ovo kopiraš kompletno u <strong>matches.json</strong> na GitHub-u (zamijeniš stari sadržaj)
-        ili koristiš <strong>Download</strong> pa uploaduješ fajl.
+        ili koristiš <strong>Skini</strong> pa uploaduješ fajl.
       </p>
 
       <textarea id="json-output">[]</textarea>
-      <button class="btn-primary" id="copy-json-btn">Kopiraj JSON</button>
-      <button class="btn-secondary" id="download-json-btn">Skini kao matches.json</button>
+      <button type="button" class="btn-primary" id="copy-json-btn">Kopiraj JSON</button>
+      <button type="button" class="btn-secondary" id="download-json-btn">Skini kao matches.json</button>
       <p id="json-status" class="status"></p>
     </div>
   </div>
@@ -292,6 +300,8 @@
     const gostSelect = document.getElementById("gostSelect");
     const golDomEl = document.getElementById("golDom");
     const golGostEl = document.getElementById("golGost");
+    const terenEl = document.getElementById("teren");
+    const vrijemeEl = document.getElementById("vrijeme");
 
     const formStatusEl = document.getElementById("form-status");
     const matchesTbody = document.getElementById("matches-tbody");
@@ -301,9 +311,7 @@
     function showFormStatus(msg, isError = false) {
       formStatusEl.textContent = msg;
       formStatusEl.classList.toggle("error", isError);
-      if (msg) {
-        setTimeout(() => { formStatusEl.textContent = ""; }, 4000);
-      }
+      if (msg) setTimeout(() => { formStatusEl.textContent = ""; }, 3500);
     }
 
     function getTeamsForCurrentSelection() {
@@ -315,7 +323,6 @@
 
     function refreshTeamSelects() {
       const teams = getTeamsForCurrentSelection();
-
       domacinSelect.innerHTML = "";
       gostSelect.innerHTML = "";
 
@@ -343,7 +350,7 @@
 
     function updateMatchesTable() {
       if (!matches.length) {
-        matchesTbody.innerHTML = '<tr><td colspan="7" class="hint">Nema još unesenih utakmica.</td></tr>';
+        matchesTbody.innerHTML = '<tr><td colspan="9" class="hint">Nema još unesenih utakmica.</td></tr>';
         return;
       }
 
@@ -358,6 +365,8 @@
           <td>${m.golDom}</td>
           <td>${m.golGost}</td>
           <td>${m.gost}</td>
+          <td>${m.vrijeme || ""}</td>
+          <td>${m.teren || ""}</td>
         `;
         matchesTbody.appendChild(tr);
       });
@@ -367,6 +376,23 @@
       jsonOutput.value = JSON.stringify(matches, null, 2);
     }
 
+    // +25 min (da ti sam puni “vrijeme koje bilo”, ti ispraviš kasnije)
+    function bumpTimeBy25min() {
+      const val = vrijemeEl.value || "08:00";
+      const [hh, mm] = val.split(":").map(Number);
+      if (!Number.isFinite(hh) || !Number.isFinite(mm)) return;
+
+      let total = hh * 60 + mm + 25;
+      total = total % (24 * 60);
+      const nh = String(Math.floor(total / 60)).padStart(2, "0");
+      const nm = String(total % 60).padStart(2, "0");
+      vrijemeEl.value = `${nh}:${nm}`;
+    }
+
+    // --- VAŽNO: da se NE duplira ---
+    // 1) Dugmad su type="button"
+    // 2) Handler vežemo samo JEDNOM ovdje
+
     document.getElementById("add-match-btn").addEventListener("click", () => {
       const godiste = godisteEl.value.trim();
       const grupa = grupaEl.value.trim();
@@ -375,33 +401,23 @@
       const golDom = golDomEl.value;
       const golGost = golGostEl.value;
 
-      if (!godiste || !grupa) {
-        showFormStatus("Izaberi godište i grupu.", true);
-        return;
-      }
+      const teren = terenEl.value;
+      const vrijeme = vrijemeEl.value;
 
-      if (!domacin || !gost) {
-        showFormStatus("Izaberi oba tima (domaćin i gost).", true);
-        return;
-      }
-
-      if (domacin === gost) {
-        showFormStatus("Domaćin i gost ne mogu biti isti tim.", true);
-        return;
-      }
-
-      if (golDom === "" || golGost === "") {
-        showFormStatus("Unesi golove (0 ako nema golova).", true);
-        return;
-      }
+      if (!godiste || !grupa) return showFormStatus("Izaberi godište i grupu.", true);
+      if (!domacin || !gost) return showFormStatus("Izaberi oba tima (domaćin i gost).", true);
+      if (domacin === gost) return showFormStatus("Domaćin i gost ne mogu biti isti tim.", true);
+      if (golDom === "" || golGost === "") return showFormStatus("Unesi golove (0 ako nema).", true);
 
       const match = {
-        godiste: godiste,
-        grupa: grupa,
-        domacin: domacin,
-        gost: gost,
+        godiste,
+        grupa,
+        domacin,
+        gost,
         golDom: Number(golDom),
-        golGost: Number(golGost)
+        golGost: Number(golGost),
+        teren: teren || "Teren 1",
+        vrijeme: vrijeme || "08:00"
       };
 
       matches.push(match);
@@ -411,14 +427,12 @@
       golDomEl.value = 0;
       golGostEl.value = 0;
 
+      bumpTimeBy25min();
       showFormStatus("Utakmica dodata.");
     });
 
     document.getElementById("clear-matches-btn").addEventListener("click", () => {
-      if (!matches.length) {
-        showFormStatus("Nema šta da obrišeš.", true);
-        return;
-      }
+      if (!matches.length) return showFormStatus("Nema šta da obrišeš.", true);
       if (!confirm("Sigurno želiš da obrišeš sve unesene utakmice?")) return;
       matches.length = 0;
       updateMatchesTable();
@@ -435,7 +449,7 @@
         jsonStatusEl.textContent = "Nije uspjelo kopiranje. Kopiraj ručno.";
         jsonStatusEl.classList.add("error");
       }
-      setTimeout(() => { jsonStatusEl.textContent = ""; }, 4000);
+      setTimeout(() => { jsonStatusEl.textContent = ""; }, 3500);
     });
 
     document.getElementById("download-json-btn").addEventListener("click", () => {
@@ -450,14 +464,13 @@
       URL.revokeObjectURL(url);
       jsonStatusEl.textContent = "Preuzet fajl matches.json (lokalno).";
       jsonStatusEl.classList.remove("error");
-      setTimeout(() => { jsonStatusEl.textContent = ""; }, 4000);
+      setTimeout(() => { jsonStatusEl.textContent = ""; }, 3500);
     });
 
-    // promjena godišta ili grupe -> osvježi timove
     godisteEl.addEventListener("change", refreshTeamSelects);
     grupaEl.addEventListener("change", refreshTeamSelects);
 
-    // inicijalno stanje
+    // init
     refreshTeamSelects();
     updateMatchesTable();
     updateJsonOutput();
