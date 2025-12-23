@@ -182,4 +182,110 @@ document.getElementById("matchModal").addEventListener("click", (e) => {
   fillTeamFilter();
   renderSchedule("");
 })();
+let ALL_MATCHES = [];
+
+async function loadMatches() {
+  const res = await fetch("matches.json?v=" + Date.now());
+  ALL_MATCHES = await res.json();
+}
+
+// Izvući sve timove koji se pojavljuju u matches.json
+function getTeamsFromMatches() {
+  const set = new Set();
+  ALL_MATCHES.forEach(m => {
+    if (m.domacin) set.add(m.domacin);
+    if (m.gost) set.add(m.gost);
+  });
+  return Array.from(set).sort((a,b)=>a.localeCompare(b));
+}
+
+function fillTeamFilter() {
+  const sel = document.getElementById("filterTeam");
+  const teams = getTeamsFromMatches();
+  sel.innerHTML = `<option value="">— sve ekipe —</option>` + teams.map(t =>
+    `<option value="${t}">${t}</option>`
+  ).join("");
+
+  sel.addEventListener("change", () => renderSchedule(sel.value));
+}
+
+function renderSchedule(teamFilter = "") {
+  const box = document.getElementById("scheduleList");
+  if (!box) return;
+
+  let list = [...ALL_MATCHES];
+
+  if (teamFilter) {
+    list = list.filter(m => m.domacin === teamFilter || m.gost === teamFilter);
+  }
+
+  // Sort stabilan: po godistu, pa po grupi, pa po domacinu
+  list.sort((a,b) => {
+    const A = `${a.godiste||""}-${a.grupa||""}-${a.domacin||""}-${a.gost||""}`;
+    const B = `${b.godiste||""}-${b.grupa||""}-${b.domacin||""}-${b.gost||""}`;
+    return A.localeCompare(B);
+  });
+
+  if (!list.length) {
+    box.innerHTML = `<p class="hint">Nema utakmica za izabrani filter.</p>`;
+    return;
+  }
+
+  box.innerHTML = list.map((m, i) => {
+    const score = `${m.golDom}:${m.golGost}`;
+    return `
+      <button class="btn-secondary" style="width:100%; text-align:left; margin:6px 0;"
+        data-idx="${i}">
+        <strong>${m.domacin}</strong> – <strong>${m.gost}</strong>
+        <span class="hint" style="float:right;">${score}</span><br/>
+        <span class="hint">Godište ${m.godiste} • Grupa ${m.grupa}</span>
+      </button>
+    `;
+  }).join("");
+
+  // Klik na utakmicu
+  [...box.querySelectorAll("button[data-idx]")].forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.getAttribute("data-idx"));
+      openModal(list[idx]); // BITNO: otvaramo iz "list" koja je filtrirana
+    });
+  });
+}
+
+function openModal(m) {
+  const modal = document.getElementById("matchModal");
+  const title = document.getElementById("modalTitle");
+  const body = document.getElementById("modalBody");
+
+  title.textContent = `${m.domacin} – ${m.gost}`;
+
+  body.innerHTML = `
+    <div style="padding:10px; border:1px solid #1f2937; border-radius:12px; background:#020617;">
+      <div><strong>Godište:</strong> ${m.godiste}</div>
+      <div><strong>Grupa:</strong> ${m.grupa}</div>
+      <div><strong>Domaćin:</strong> ${m.domacin}</div>
+      <div><strong>Gost:</strong> ${m.gost}</div>
+      <div style="margin-top:8px;"><strong>Rezultat:</strong> ${m.golDom}:${m.golGost}</div>
+    </div>
+  `;
+
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("matchModal").style.display = "none";
+}
+
+document.getElementById("closeModal").addEventListener("click", closeModal);
+document.getElementById("matchModal").addEventListener("click", (e) => {
+  if (e.target.id === "matchModal") closeModal();
+});
+
+// INIT
+(async function initSchedule() {
+  await loadMatches();
+  fillTeamFilter();
+  renderSchedule("");
+})();
+
 
