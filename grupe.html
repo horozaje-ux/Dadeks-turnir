@@ -56,9 +56,7 @@
       transition: 0.15s;
     }
 
-    .back-link:hover {
-      background: #0f172a;
-    }
+    .back-link:hover { background: #0f172a; }
 
     .years {
       display: flex;
@@ -142,10 +140,7 @@
       padding: 3px 0;
       border-bottom: 1px dashed #1f2937;
     }
-
-    .team-list li:last-child {
-      border-bottom: none;
-    }
+    .team-list li:last-child { border-bottom: none; }
 
     .knockout-grid {
       display: grid;
@@ -170,30 +165,114 @@
     }
 
     .fixture-list li {
-      display: flex;
-      flex-direction: column;
-      padding: 4px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #1f2937;
     }
-
-    .fixture-list li:last-child {
-      border-bottom: none;
-    }
+    .fixture-list li:last-child { border-bottom: none; }
 
     .fixture-label {
       color: #9ca3af;
       font-size: 0.76rem;
+      display: block;
+      margin-bottom: 4px;
     }
 
     .fixture-teams {
-      font-weight: 500;
+      font-weight: 700;
       color: #e5e7eb;
+      display: block;
+      margin-bottom: 8px;
+      line-height: 1.25;
     }
 
     .fixture-note {
       font-size: 0.75rem;
       color: #9ca3af;
+      margin-top: 6px;
+      display: block;
     }
+
+    /* INPUTI ZA REZULTATE */
+    .score-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .score-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 8px;
+      border: 1px solid #1f2937;
+      border-radius: 12px;
+      background: rgba(2,6,23,.55);
+    }
+
+    .score-box input {
+      width: 56px;
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .sep { color: #9ca3af; font-weight: 700; }
+
+    .small-hint {
+      font-size: 0.72rem;
+      color: #9ca3af;
+    }
+
+    .winner-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      background: rgba(34,197,94,.12);
+      color: #86efac;
+      font-size: 0.75rem;
+      width: fit-content;
+    }
+
+    .warn-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      background: rgba(250,204,21,.12);
+      color: #fde68a;
+      font-size: 0.75rem;
+      width: fit-content;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .btn-clear {
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.15s;
+    }
+    .btn-clear:hover { background:#0f172a; }
 
     /* sponsor traka */
     .sponsor-strip {
@@ -219,15 +298,16 @@
 
     @media (max-width: 640px) {
       .page { padding: 10px; }
+      .score-box input { width: 52px; }
     }
   </style>
 </head>
+
 <body>
   <div class="page">
     <header>
       <h1>Dadeks turnir – Grupe i nokaut</h1>
       <p>Pregled grupa i završnice po godištima</p>
-
       <a href="index.html" class="back-link">← Nazad na Dadeks turnir 2025</a>
     </header>
 
@@ -260,7 +340,9 @@
   </div>
 
   <script>
-    // SVE EKIPE PO GODIŠTU / GRUPI
+    // =========================
+    // PODACI: EKIPE PO GRUPAMA
+    // =========================
     const GROUPS_DATA = {
       "2015": {
         "A": ["Dadeks", "Buducnost", "Akademik Nk", "Desetka Bar", "Fa Kerver 19"],
@@ -291,26 +373,29 @@
     let currentYear = "2015";
     let allMatches = [];
 
-    // UČITAVANJE matches.json
+    // =========================
+    // LOAD matches.json (za grupnu tabelu)
+    // =========================
     async function loadMatches() {
       try {
         const resp = await fetch("matches.json?cache=" + Date.now());
         if (!resp.ok) throw new Error("HTTP " + resp.status);
         const data = await resp.json();
-        allMatches = data;
+        allMatches = Array.isArray(data) ? data : [];
       } catch (err) {
         console.error("Greška pri učitavanju matches.json:", err);
         allMatches = [];
       }
     }
 
-    // RAČUNANJE TABELA IZ REZULTATA
+    // =========================
+    // STANDINGS IZ matches.json
+    // =========================
     function calculateStandings(year) {
       const groups = GROUPS_DATA[year];
       if (!groups) return {};
 
       const standings = {};
-      // inicijalizacija
       Object.entries(groups).forEach(([grp, teams]) => {
         standings[grp] = teams.map(name => ({
           team: name,
@@ -349,7 +434,6 @@
         }
       });
 
-      // sortiranje
       Object.keys(standings).forEach(grp => {
         standings[grp].sort((a, b) =>
           b.pts - a.pts ||
@@ -362,7 +446,9 @@
       return standings;
     }
 
+    // =========================
     // RENDER GRUPA
+    // =========================
     function renderGroups(year) {
       const container = document.getElementById("groups-container");
       const groups = GROUPS_DATA[year];
@@ -373,7 +459,7 @@
 
       let html = "";
       Object.entries(groups).forEach(([grp, teams]) => {
-        const labelTeams = teams.length + " ekipa" + (teams.length > 1 ? "" : "a");
+        const labelTeams = teams.length + " ekipa";
         html += `
           <div class="card">
             <div class="group-header">
@@ -389,102 +475,259 @@
       container.innerHTML = html;
     }
 
-    // RENDER NOKAUT FAZE – koristi redosled iz grupa dok nema rezultata
-function renderKnockout(year) {
-  const container = document.getElementById("knockout-container");
-  const standings = calculateStandings(year);
+    // =========================
+    // LOCAL STORAGE – NOKAUT REZULTATI (po godištu)
+    // =========================
+    const LS_KEY = "dadeks_bracket_v1";
 
-  // helper: uzmi tim sa pozicije (1,2,...) iz grupe
-  // ako niko nema odigranu utakmicu -> koristi redosled iz GROUPS_DATA
-  function teamFromGroup(groupLetter, pos) {
-    const table = standings[groupLetter] || [];
-
-    if (table.length && table.every(t => t.gp === 0)) {
-      // niko nije igrao – uzmi iz originalne liste timova
-      const list = (GROUPS_DATA[year] && GROUPS_DATA[year][groupLetter]) || [];
-      return list[pos - 1] || `Pozicija ${pos} u grupi ${groupLetter}`;
+    function loadBracketStore() {
+      try {
+        const raw = localStorage.getItem(LS_KEY);
+        const obj = raw ? JSON.parse(raw) : {};
+        return (obj && typeof obj === "object") ? obj : {};
+      } catch {
+        return {};
+      }
     }
 
-    // ima odigranih utakmica – koristi tabelu
-    return table[pos - 1]?.team || `Pozicija ${pos} u grupi ${groupLetter}`;
-  }
+    function saveBracketStore(store) {
+      try {
+        localStorage.setItem(LS_KEY, JSON.stringify(store));
+      } catch {}
+    }
 
-  const A1 = teamFromGroup("A", 1);
-  const A2 = teamFromGroup("A", 2);
-  const B1 = teamFromGroup("B", 1);
-  const B2 = teamFromGroup("B", 2);
-  const C1 = teamFromGroup("C", 1);
-  const C2 = teamFromGroup("C", 2);
-  const D1 = teamFromGroup("D", 1);
-  const D2 = teamFromGroup("D", 2);
+    function getYearBracket(year) {
+      const store = loadBracketStore();
+      if (!store[year]) store[year] = {};
+      return store[year];
+    }
 
-  const qf1 = `${A1} – ${C2}`;
-  const qf2 = `${A2} – ${C1}`;
-  const qf3 = `${B1} – ${D2}`;
-  const qf4 = `${B2} – ${D1}`;
+    function setMatchScore(year, matchKey, data) {
+      const store = loadBracketStore();
+      if (!store[year]) store[year] = {};
+      store[year][matchKey] = { ...(store[year][matchKey] || {}), ...data };
+      saveBracketStore(store);
+    }
 
-  container.innerHTML = `
-    <div class="card knockout-card">
-      <h3>Četvrtfinale</h3>
-      <ul class="fixture-list">
-        <li>
-          <span class="fixture-label">A1 – C2</span>
-          <span class="fixture-teams">${qf1}</span>
-          <span class="fixture-note">Prvi iz grupe A vs drugi iz grupe C</span>
-        </li>
-        <li>
-          <span class="fixture-label">A2 – C1</span>
-          <span class="fixture-teams">${qf2}</span>
-          <span class="fixture-note">Drugi iz grupe A vs prvi iz grupe C</span>
-        </li>
-        <li>
-          <span class="fixture-label">B1 – D2</span>
-          <span class="fixture-teams">${qf3}</span>
-          <span class="fixture-note">Prvi iz grupe B vs drugi iz grupe D</span>
-        </li>
-        <li>
-          <span class="fixture-label">B2 – D1</span>
-          <span class="fixture-teams">${qf4}</span>
-          <span class="fixture-note">Drugi iz grupe B vs prvi iz grupe D</span>
-        </li>
-      </ul>
-    </div>
+    function clearYearBracket(year) {
+      const store = loadBracketStore();
+      delete store[year];
+      saveBracketStore(store);
+    }
 
-    <div class="card knockout-card">
-      <h3>Polufinale</h3>
-      <ul class="fixture-list">
-        <li>
-          <span class="fixture-label">P1: A1C2 – B1D2</span>
-          <span class="fixture-note">Pobjednici 1. i 3. četvrtfinala</span>
-        </li>
-        <li>
-          <span class="fixture-label">P2: A2C1 – B2D1</span>
-          <span class="fixture-note">Pobjednici 2. i 4. četvrtfinala</span>
-        </li>
-      </ul>
-    </div>
+    // =========================
+    // HELPERI – winner/loser
+    // =========================
+    function toNum(v) {
+      if (v === "" || v === null || v === undefined) return null;
+      const n = Number(v);
+      return Number.isFinite(n) ? n : null;
+    }
 
-    <div class="card knockout-card">
-      <h3>Finale</h3>
-      <ul class="fixture-list">
-        <li>
-          <span class="fixture-label">P1 – P2</span>
-          <span class="fixture-note">Pobjednici polufinala</span>
-        </li>
-      </ul>
+    // odlučuje pobjednika: prvo golovi, pa penali ako je neriješeno
+    function decideWinner(home, away, gh, ga, ph, pa) {
+      if (gh === null || ga === null) return { winner: null, loser: null, note: "Upiši rezultat." };
 
-      <h3 style="margin-top:12px;">Utakmica za 3. mjesto</h3>
-      <ul class="fixture-list">
-        <li>
-          <span class="fixture-label">P1 (poraženi) – P2 (poraženi)</span>
-          <span class="fixture-note">Poraženi u polufinalu</span>
-        </li>
-      </ul>
-    </div>
-  `;
-}
+      if (gh > ga) return { winner: home, loser: away, note: "Pobjednik: " + home };
+      if (ga > gh) return { winner: away, loser: home, note: "Pobjednik: " + away };
 
+      // neriješeno → penali
+      if (ph === null || pa === null) return { winner: null, loser: null, note: "Neriješeno – upiši penale." };
+      if (ph > pa) return { winner: home, loser: away, note: "Pobjednik (pen): " + home };
+      if (pa > ph) return { winner: away, loser: home, note: "Pobjednik (pen): " + away };
+
+      return { winner: null, loser: null, note: "Penali isti – provjeri." };
+    }
+
+    // uzmi tim sa pozicije iz grupe (ako nema utakmica – uzmi redosled iz GROUPS_DATA)
+    function teamFromGroup(year, standings, groupLetter, pos) {
+      const table = standings[groupLetter] || [];
+
+      if (table.length && table.every(t => t.gp === 0)) {
+        const list = (GROUPS_DATA[year] && GROUPS_DATA[year][groupLetter]) || [];
+        return list[pos - 1] || `Pozicija ${pos} u grupi ${groupLetter}`;
+      }
+
+      return table[pos - 1]?.team || `Pozicija ${pos} u grupi ${groupLetter}`;
+    }
+
+    // =========================
+    // RENDER NOKAUT – sa inputima + auto SF/Finale
+    // =========================
+    function renderKnockout(year) {
+      const container = document.getElementById("knockout-container");
+      const standings = calculateStandings(year);
+      const bracket = getYearBracket(year);
+
+      // QF timovi (iz grupa)
+      const A1 = teamFromGroup(year, standings, "A", 1);
+      const A2 = teamFromGroup(year, standings, "A", 2);
+      const B1 = teamFromGroup(year, standings, "B", 1);
+      const B2 = teamFromGroup(year, standings, "B", 2);
+      const C1 = teamFromGroup(year, standings, "C", 1);
+      const C2 = teamFromGroup(year, standings, "C", 2);
+      const D1 = teamFromGroup(year, standings, "D", 1);
+      const D2 = teamFromGroup(year, standings, "D", 2);
+
+      const qf = {
+        qf1: { label: "A1 – C2", home: A1, away: C2, note: "Prvi iz grupe A vs drugi iz grupe C" },
+        qf2: { label: "A2 – C1", home: A2, away: C1, note: "Drugi iz grupe A vs prvi iz grupe C" },
+        qf3: { label: "B1 – D2", home: B1, away: D2, note: "Prvi iz grupe B vs drugi iz grupe D" },
+        qf4: { label: "B2 – D1", home: B2, away: D1, note: "Drugi iz grupe B vs prvi iz grupe D" },
+      };
+
+      // pročitaj rezultate QF iz storage
+      function getScore(key) {
+        const d = bracket[key] || {};
+        return {
+          gh: toNum(d.gh),
+          ga: toNum(d.ga),
+          ph: toNum(d.ph),
+          pa: toNum(d.pa),
+        };
+      }
+
+      const qfRes = {};
+      Object.keys(qf).forEach(k => {
+        const s = getScore(k);
+        qfRes[k] = decideWinner(qf[k].home, qf[k].away, s.gh, s.ga, s.ph, s.pa);
+      });
+
+      // SF parovi (pobjednici QF1 vs QF3, QF2 vs QF4)
+      const sf1_home = qfRes.qf1.winner || "Pobjednik " + qf.qf1.label;
+      const sf1_away = qfRes.qf3.winner || "Pobjednik " + qf.qf3.label;
+      const sf2_home = qfRes.qf2.winner || "Pobjednik " + qf.qf2.label;
+      const sf2_away = qfRes.qf4.winner || "Pobjednik " + qf.qf4.label;
+
+      const sf = {
+        sf1: { label: "P1", home: sf1_home, away: sf1_away, note: "Pobjednici 1. i 3. četvrtfinala" },
+        sf2: { label: "P2", home: sf2_home, away: sf2_away, note: "Pobjednici 2. i 4. četvrtfinala" },
+      };
+
+      const sfRes = {};
+      Object.keys(sf).forEach(k => {
+        const s = getScore(k);
+        sfRes[k] = decideWinner(sf[k].home, sf[k].away, s.gh, s.ga, s.ph, s.pa);
+      });
+
+      // Finale + 3. mjesto
+      const f_home = sfRes.sf1.winner || "Pobjednik P1";
+      const f_away = sfRes.sf2.winner || "Pobjednik P2";
+      const t3_home = sfRes.sf1.loser || "Poraženi P1";
+      const t3_away = sfRes.sf2.loser || "Poraženi P2";
+
+      // HTML generator za jednu utakmicu sa inputima
+      function matchLi(key, label, home, away, note) {
+        const s = getScore(key);
+        const res = decideWinner(home, away, s.gh, s.ga, s.ph, s.pa);
+
+        const winChip = res.winner
+          ? `<div class="winner-chip">✅ ${res.note}</div>`
+          : `<div class="warn-chip">⚠️ ${res.note}</div>`;
+
+        return `
+          <li>
+            <span class="fixture-label">${label}</span>
+            <span class="fixture-teams">${home} – ${away}</span>
+
+            <div class="score-row">
+              <div class="score-box" title="Golovi">
+                <input inputmode="numeric" type="number" min="0" id="${key}-gh" placeholder="0" value="${s.gh ?? ""}">
+                <span class="sep">:</span>
+                <input inputmode="numeric" type="number" min="0" id="${key}-ga" placeholder="0" value="${s.ga ?? ""}">
+              </div>
+
+              <div class="score-box" title="Penali (samo ako je neriješeno)">
+                <span class="small-hint">Pen.</span>
+                <input inputmode="numeric" type="number" min="0" id="${key}-ph" placeholder="-" value="${s.ph ?? ""}">
+                <span class="sep">:</span>
+                <input inputmode="numeric" type="number" min="0" id="${key}-pa" placeholder="-" value="${s.pa ?? ""}">
+              </div>
+            </div>
+
+            ${winChip}
+            <span class="fixture-note">${note || ""}</span>
+          </li>
+        `;
+      }
+
+      container.innerHTML = `
+        <div class="card knockout-card">
+          <h3>Četvrtfinale</h3>
+          <ul class="fixture-list">
+            ${matchLi("qf1", qf.qf1.label, qf.qf1.home, qf.qf1.away, qf.qf1.note)}
+            ${matchLi("qf2", qf.qf2.label, qf.qf2.home, qf.qf2.away, qf.qf2.note)}
+            ${matchLi("qf3", qf.qf3.label, qf.qf3.home, qf.qf3.away, qf.qf3.note)}
+            ${matchLi("qf4", qf.qf4.label, qf.qf4.home, qf.qf4.away, qf.qf4.note)}
+          </ul>
+
+          <div class="btn-row">
+            <button class="btn-clear" id="clear-bracket">Obriši nokaut rezultate (ovo godište)</button>
+          </div>
+        </div>
+
+        <div class="card knockout-card">
+          <h3>Polufinale</h3>
+          <ul class="fixture-list">
+            ${matchLi("sf1", "P1: (QF1) – (QF3)", sf.sf1.home, sf.sf1.away, sf.sf1.note)}
+            ${matchLi("sf2", "P2: (QF2) – (QF4)", sf.sf2.home, sf.sf2.away, sf.sf2.note)}
+          </ul>
+        </div>
+
+        <div class="card knockout-card">
+          <h3>Finale</h3>
+          <ul class="fixture-list">
+            <li>
+              <span class="fixture-label">Finale: P1 – P2</span>
+              <span class="fixture-teams">${f_home} – ${f_away}</span>
+              <span class="fixture-note">Automatski se popunjava iz polufinala</span>
+            </li>
+          </ul>
+
+          <h3 style="margin-top:12px;">Utakmica za 3. mjesto</h3>
+          <ul class="fixture-list">
+            <li>
+              <span class="fixture-label">3. mjesto: (poraženi P1) – (poraženi P2)</span>
+              <span class="fixture-teams">${t3_home} – ${t3_away}</span>
+              <span class="fixture-note">Automatski se popunjava iz polufinala</span>
+            </li>
+          </ul>
+        </div>
+      `;
+
+      // Bind input events → snimi u localStorage → rerender knockout
+      function bindMatchInputs(keys) {
+        keys.forEach(key => {
+          ["gh","ga","ph","pa"].forEach(field => {
+            const id = `${key}-${field}`;
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            el.addEventListener("input", () => {
+              setMatchScore(year, key, {
+                [field]: el.value
+              });
+              renderKnockout(year);
+            });
+          });
+        });
+      }
+
+      bindMatchInputs(["qf1","qf2","qf3","qf4","sf1","sf2"]);
+
+      // Clear button
+      const clearBtn = document.getElementById("clear-bracket");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          clearYearBracket(year);
+          renderKnockout(year);
+        });
+      }
+    }
+
+    // =========================
     // PROMJENA GODIŠTA
+    // =========================
     function setYear(year) {
       currentYear = year;
       document.getElementById("year-label").textContent = year + ". godište";
@@ -497,15 +740,16 @@ function renderKnockout(year) {
       renderKnockout(year);
     }
 
+    // =========================
     // INIT
+    // =========================
     document.addEventListener("DOMContentLoaded", async () => {
-      // klik na godine
       document.querySelectorAll(".year-btn").forEach(btn => {
         btn.addEventListener("click", () => setYear(btn.dataset.year));
       });
 
-      await loadMatches();       // učitamo rezultate
-      setYear("2015");           // podrazumijevano
+      await loadMatches();
+      setYear("2015");
     });
   </script>
 </body>
